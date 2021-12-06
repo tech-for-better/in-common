@@ -29,7 +29,7 @@ export default function Event() {
     <>
       <h1>Hello</h1>
       {records.map((record) => (
-        <p>
+        <p key={record.id}>
           Activity: {record.fields.Activity}, Status: {record.fields.Status}
         </p>
       ))}
