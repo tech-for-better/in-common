@@ -6,6 +6,11 @@ import {
   signOut,
 } from "@firebase/auth";
 import { useState } from "react";
+import { Card } from "@mui/material";
+import { TextField } from "@mui/material";
+import { Container, Box } from "@mui/material";
+import { Button } from "@mui/material";
+import { Typography } from "@mui/material";
 
 export default function Test() {
   //current user state
@@ -57,6 +62,8 @@ export default function Test() {
     }
   }
 
+  console.log(signUpEmail);
+
   // Sign out function to log out
 
   async function logOut() {
@@ -69,47 +76,118 @@ export default function Test() {
   }
 
   return (
-    <div>
-      <form>
-        <h2>Sign Up</h2>
-        <label htmlFor="email">Email</label>
-        <input type="email" onChange={(e) => setSignUpEmail(e.target.value)} />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          onChange={(e) => setSignUpPassword(e.target.value)}
-        />
-        <button
-          type="submit"
-          onClick={(e) => {
-            e.preventDefault();
-            signUp();
-          }}
-        >
-          Submit
-        </button>
-      </form>
+    <Container component="main" maxWidth="xs">
+      <Card
+        sx={{
+          minWidth: 275,
+          marginTop: 8,
+          padding: 5,
+          borderRadius: 3,
 
-      <form>
-        <h2>Log In</h2>
-        <label htmlFor="email">Email</label>
-        <input type="email" onChange={(e) => setLogInEmail(e.target.value)} />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          onChange={(e) => setLogInPassword(e.target.value)}
-        />
-        <button
-          type="submit"
-          onClick={(e) => {
-            e.preventDefault();
-            logIn();
-          }}
-        >
-          Submit
-        </button>
-      </form>
+          mt: 5,
+        }}
+      >
+        <form>
+          <Typography component="h1" variant="h5" sx={{ mb: 3 }}>
+            Sign up
+          </Typography>
 
+          <Box sx={{ mb: 2 }}>
+            <label hidden htmlFor="email">
+              Email
+            </label>
+            <TextField
+              variant="outlined"
+              id="filled-email-input"
+              label="Email"
+              type="email"
+              autoComplete="current-email"
+              onChange={(e) => setSignUpEmail(e.target.value)}
+              fullWidth
+            />
+          </Box>
+          <Box sx={{ mb: 2 }}>
+            <label hidden htmlFor="password">
+              Password
+            </label>
+            <TextField
+              id="filled-password-input"
+              label="Password"
+              type="password"
+              autoComplete="current-password"
+              onChange={(e) => setSignUpPassword(e.target.value)}
+              fullWidth
+            />
+          </Box>
+          <Button
+            variant="outlined"
+            sx={{ padding: 1.85 }}
+            onClick={(e) => {
+              e.preventDefault();
+              signUp();
+            }}
+            fullWidth
+          >
+            Sign up
+          </Button>
+        </form>
+      </Card>
+
+      <Card
+        sx={{
+          minWidth: 275,
+          padding: 5,
+          borderRadius: 3,
+
+          mt: 5,
+        }}
+      >
+        <form>
+          <Typography component="h1" variant="h5" sx={{ mb: 3 }}>
+            Log in
+          </Typography>
+
+          <label hidden htmlFor="email">
+            Email
+          </label>
+          <Box sx={{ mb: 2 }}>
+            <TextField
+              variant="outlined"
+              id="filled-email-input"
+              label="Email"
+              type="email"
+              autoComplete="current-email"
+              onChange={(e) => setLogInEmail(e.target.value)}
+              fullWidth
+            />
+          </Box>
+          <label hidden htmlFor="password">
+            Password
+          </label>
+          <Box sx={{ mb: 2 }}>
+            <TextField
+              id="filled-password-input"
+              label="Password"
+              type="password"
+              autoComplete="current-password"
+              onChange={(e) => setLogInPassword(e.target.value)}
+              fullWidth
+              helperText="Incorrect entry."
+            />
+          </Box>
+          <Button
+            variant="outlined"
+            sx={{ padding: 1.85 }}
+            onClick={(e) => {
+              e.preventDefault();
+              logIn();
+            }}
+            fullWidth
+          >
+            Log in
+          </Button>
+        </form>
+      </Card>
       <h2>{user?.email ? `${user?.email} logged in` : "no one logged in"}</h2>
       <button
         onClick={(e) => {
@@ -120,6 +198,6 @@ export default function Test() {
       >
         log out
       </button>
-    </div>
+    </Container>
   );
 }
