@@ -12,8 +12,11 @@ import { Container, Box } from '@mui/material';
 import { Button } from '@mui/material';
 import { Typography } from '@mui/material';
 
-export default function SignUpComponent() {
-  const [user, setUser] = useState({});
+///importing the confirmation file
+import Confirmation from './confirmation';
+
+export default function SignUpComponent({ user, setUser }) {
+  console.log('user access from sign-up -->', user);
 
   //auth state listener
 
@@ -52,11 +55,7 @@ export default function SignUpComponent() {
 
   return (
     <>
-      {user
-        ? console.log(
-            'you are signed out already (return of the SignUpComponent)'
-          )
-        : console.log('did not sign in')}
+      {/* {user ? <Confirmation /> : console.log('did not sign in')} */}
       <Container component="main" maxWidth="xs">
         <Card
           sx={{
