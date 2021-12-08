@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }) {
 
   onAuthStateChanged(auth, (currentUser) => setUser(currentUser));
 
-  return <Component {...pageProps} user={user} />;
+  return <Component {...pageProps} user={user} approved={approved} />;
 }
 
 export default MyApp;
