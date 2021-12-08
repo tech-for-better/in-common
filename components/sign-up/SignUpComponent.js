@@ -1,15 +1,15 @@
-import { auth } from "../../firebase";
-import { createUserWithEmailAndPassword } from "@firebase/auth";
-import { useState } from "react";
-import { Card } from "@mui/material";
-import { TextField } from "@mui/material";
-import { Container, Box } from "@mui/material";
-import { Button } from "@mui/material";
-import { Typography } from "@mui/material";
+import { auth } from '../../firebase';
+import { createUserWithEmailAndPassword } from '@firebase/auth';
+import { useState } from 'react';
+import { Card } from '@mui/material';
+import { TextField } from '@mui/material';
+import { Container, Box } from '@mui/material';
+import { Button } from '@mui/material';
+import { Typography } from '@mui/material';
 
 export default function SignUpComponent({ user }) {
-  const [signUpEmail, setSignUpEmail] = useState("");
-  const [signUpPassword, setSignUpPassword] = useState("");
+  const [signUpEmail, setSignUpEmail] = useState('');
+  const [signUpPassword, setSignUpPassword] = useState('');
 
   async function signUp() {
     try {
