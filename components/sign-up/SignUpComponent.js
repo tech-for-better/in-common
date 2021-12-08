@@ -13,7 +13,6 @@ import { Button } from '@mui/material';
 import { Typography } from '@mui/material';
 
 ///importing the confirmation file
-import Confirmation from './confirmation';
 
 export default function SignUpComponent({ user, setUser }) {
   console.log('user access from sign-up -->', user);
