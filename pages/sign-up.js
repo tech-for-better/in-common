@@ -1,7 +1,7 @@
-import SignUpComponent from '../components/sign-up/SignUpComponent';
-import Confirmation from '../components/sign-up/Confirmation';
+import SignUpComponent from "../components/Signup/SignUpComponent";
+import Confirmation from "../components/Signup/Confirmation";
 
-import { useState } from 'react';
+import { useState } from "react";
 export default function Signup() {
   const [user, setUser] = useState({});
   return (
