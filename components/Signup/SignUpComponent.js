@@ -82,16 +82,16 @@ export default function SignUpComponent({ user, setUser }) {
               <FormControl fullWidth>
                 <InputLabel
                   hidden
-                  id="organization-type"
-                  htmlFor="Organization Type"
+                  id="organisation-type"
+                  htmlFor="Organisation Type"
                 >
-                  Organization Type
+                  Organisation Type
                 </InputLabel>
                 <Select
-                  labelId="organization-type-label"
-                  id="rganization-type"
+                  labelId="organisation-type-label"
+                  id="rganisation-type"
                   value={type}
-                  label="Organization Type"
+                  label="Organisation Type"
                   onChange={(e) => setType(e.target.value)}
                 >
                   <MenuItem value={"School"}>School</MenuItem>
@@ -101,28 +101,28 @@ export default function SignUpComponent({ user, setUser }) {
             </Box>
 
             <Box sx={{ mb: 2 }}>
-              <label hidden htmlFor="Organization Name">
-                Organization Name
+              <label hidden htmlFor="Organisation Name">
+                Organisation Name
               </label>
               <TextField
                 variant="outlined"
-                id="filled-organization-name-input"
-                label="Organization Name"
-                autoComplete="current-organization-name"
+                id="filled-organisation-name-input"
+                label="Organisation Name"
+                autoComplete="current-organisation-name"
                 onChange={(e) => setSignUpEmail(e.target.value)}
                 fullWidth
               />
             </Box>
 
             <Box sx={{ mb: 2 }}>
-              <label hidden htmlFor="Organization Address">
-                Organization Address
+              <label hidden htmlFor="Organisation Address">
+                Organisation Address
               </label>
               <TextField
                 variant="outlined"
-                id="filled-organization-address-input"
-                label="Organization Address"
-                autoComplete="current-organization-address"
+                id="filled-organisation-address-input"
+                label="Organisation Address"
+                autoComplete="current-organisation-address"
                 onChange={(e) => setSignUpEmail(e.target.value)}
                 fullWidth
               />
