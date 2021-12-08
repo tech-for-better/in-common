@@ -8,7 +8,7 @@ export default function Signup() {
     <>
       {/* {<SignUpComponent user={user} setUser={setUser} />} */}
       {user?.email ? (
-        <Confirmation />
+        <Confirmation user={user} setUser={setUser} />
       ) : (
         <SignUpComponent user={user} setUser={setUser} />
       )}
