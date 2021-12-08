@@ -8,7 +8,6 @@ export default function Confirmation({ user, setUser }) {
   async function logOut() {
     try {
       await signOut(auth);
-      console.log('signed out!');
     } catch (error) {
       console.log(error);
     }
@@ -24,7 +23,6 @@ export default function Confirmation({ user, setUser }) {
       <button
         onClick={(e) => {
           e.preventDefault();
-          console.log('logging out');
           logOut();
         }}
       >
