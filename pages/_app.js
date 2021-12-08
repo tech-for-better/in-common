@@ -5,6 +5,7 @@ import { onAuthStateChanged } from "@firebase/auth";
 
 function MyApp({ Component, pageProps }) {
   const [user, setUser] = useState({});
+  const [approved, setApproved] = useState(false);
 
   onAuthStateChanged(auth, (currentUser) => setUser(currentUser));
 
