@@ -12,13 +12,13 @@ import { Container, Box } from "@mui/material";
 import { Button } from "@mui/material";
 import { Typography } from "@mui/material";
 
-export default function Test() {
+export default function Test({ user }) {
   //current user state
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState({});
 
   //auth state listener
 
-  onAuthStateChanged(auth, (currentUser) => setUser(currentUser));
+  // onAuthStateChanged(auth, (currentUser) => setUser(currentUser));
 
   // signup
 
@@ -61,8 +61,6 @@ export default function Test() {
       console.log(error);
     }
   }
-
-  console.log(signUpEmail);
 
   // Sign out function to log out
 
