@@ -1,11 +1,11 @@
-import { auth } from "../../firebase";
+import { auth } from '../../firebase';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
-} from "@firebase/auth";
-import { useState } from "react";
+} from '@firebase/auth';
+import { useState } from 'react';
 import {
   Card,
   TextField,
@@ -17,22 +17,43 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
-} from "@mui/material";
+} from '@mui/material';
 
-///importing the confirmation file
+import { base } from '../../lib/init-airtable';
 
-export default function SignUpComponent({ user, setUser }) {
-  console.log("user access from sign-up -->", user);
+export default function SignUpComponent({ user }) {
+  const [signUpEmail, setSignUpEmail] = useState('');
+  const [signUpPassword, setSignUpPassword] = useState('');
+  const [type, setType] = useState('');
+  const [orgName, setOrgName] = useState('');
+  const [orgAddress, setOrgAddress] = useState('');
+  const [contactName, setContactName] = useState('');
+  const [contactNumber, setContactNumber] = useState('');
 
-  //auth state listener
-
-  onAuthStateChanged(auth, (currentUser) => setUser(currentUser));
-
-  // signup for states
-
-  const [signUpEmail, setSignUpEmail] = useState("");
-  const [signUpPassword, setSignUpPassword] = useState("");
-  const [type, setType] = useState("");
+  const makeAirtableAccount = async (uid) => {
+    const field = {
+      UID: uid,
+      Email: signUpEmail,
+      Type: type,
+      'Organisation Name': orgName,
+      'Organisation Address': orgAddress,
+      'Primary Contact Name': contactName,
+      'Primary Contact Number': contactNumber,
+    };
+    const tableAccounts = base('Accounts');
+    const entry = await tableAccounts.create(
+      [{ fields: field }],
+      function (err, records) {
+        if (err) {
+          console.error(err);
+          return;
+        }
+        records.forEach(function (record) {
+          console.log(record.getId());
+        });
+      }
+    );
+  };
 
   async function signUp() {
     try {
@@ -41,23 +62,12 @@ export default function SignUpComponent({ user, setUser }) {
         signUpEmail,
         signUpPassword
       );
-      // console.log("signUp fct", user.user.uid);
-      alert("you are signed up");
+      await makeAirtableAccount(user.user.uid);
     } catch (error) {
       console.log(error);
-      alert("sorry we could not sign you up");
+      alert('sorry we could not sign you up');
     }
   }
-  async function logOut() {
-    try {
-      await signOut(auth);
-      console.log("signed out!");
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  //   console.log('logOut value -->', logOut());
 
   return (
     <>
@@ -89,13 +99,13 @@ export default function SignUpComponent({ user, setUser }) {
                 </InputLabel>
                 <Select
                   labelId="organisation-type-label"
-                  id="rganisation-type"
+                  id="organisation-type"
                   value={type}
                   label="Organisation Type"
                   onChange={(e) => setType(e.target.value)}
                 >
-                  <MenuItem value={"School"}>School</MenuItem>
-                  <MenuItem value={"RetirementHome"}>Retirement Home</MenuItem>
+                  <MenuItem value={'School'}>School</MenuItem>
+                  <MenuItem value={'Retirement Home'}>Retirement Home</MenuItem>
                 </Select>
               </FormControl>
             </Box>
@@ -109,7 +119,7 @@ export default function SignUpComponent({ user, setUser }) {
                 id="filled-organisation-name-input"
                 label="Organisation Name"
                 autoComplete="current-organisation-name"
-                onChange={(e) => setSignUpEmail(e.target.value)}
+                onChange={(e) => setOrgName(e.target.value)}
                 fullWidth
               />
             </Box>
@@ -123,7 +133,7 @@ export default function SignUpComponent({ user, setUser }) {
                 id="filled-organisation-address-input"
                 label="Organisation Address"
                 autoComplete="current-organisation-address"
-                onChange={(e) => setSignUpEmail(e.target.value)}
+                onChange={(e) => setOrgAddress(e.target.value)}
                 fullWidth
               />
             </Box>
@@ -137,7 +147,7 @@ export default function SignUpComponent({ user, setUser }) {
                 id="filled-primary-contact-name-input"
                 label="Primary Contact Name"
                 autoComplete="current-primary-contact-name"
-                onChange={(e) => setSignUpEmail(e.target.value)}
+                onChange={(e) => setContactName(e.target.value)}
                 fullWidth
               />
             </Box>
@@ -151,7 +161,7 @@ export default function SignUpComponent({ user, setUser }) {
                 id="filled-primary-contact-number-input"
                 label="Primary Contact Number"
                 autoComplete="current-primary-contact-number"
-                onChange={(e) => setSignUpEmail(e.target.value)}
+                onChange={(e) => setContactNumber(e.target.value)}
                 fullWidth
               />
             </Box>

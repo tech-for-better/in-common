@@ -2,9 +2,7 @@ import { Container, Box, Alert } from '@mui/material';
 import { auth } from '../../firebase';
 import { signOut } from '@firebase/auth';
 
-export default function Confirmation({ user, setUser }) {
-
-
+export default function Confirmation({ user }) {
   async function logOut() {
     try {
       await signOut(auth);
