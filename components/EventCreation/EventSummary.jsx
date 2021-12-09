@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 
 export default function EventSummary({
   stage,
-  setStagem,
+  setStage,
   newEvent,
   setNewEvent,
 }) {

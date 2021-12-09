@@ -7,56 +7,57 @@ import DateTimePicker from '@mui/lab/DateTimePicker';
 import { useState } from 'react';
 
 export default function EventDate({ stage, setStage, newEvent, setNewEvent }) {
-  const handleChange = (e) => {
-    setNewEvent((oldEvent) => ({
-      ...oldEvent,
-      date: value,
-    }));
-  };
-
   const [value, setValue] = useState(new Date());
-  const [elementCount, setElementCount] = useState(1);
 
-  // const DatePicker = (i) => {
-  //   return (
-  //     <LocalizationProvider dateAdapter={AdapterDateFns} fullWidth>
-  //       <DateTimePicker
-  //         renderInput={(props) => <TextField {...props} />}
-  //         label="DateTimePicker"
-  //         value={value[i]}
-  //         inputFormat="dd/MM/yyyy hh:mm a"
-  //         onChange={(newValue) => {
-  //           setValue((oldValue) => [newValue]);
-  //         }}
-  //       />
-  //     </LocalizationProvider>
-  //   );
-  // };
+  function addDate() {
+    if (newEvent.date) {
+      if (!newEvent.date.includes(value)) {
+        setNewEvent((currentEvent) => {
+          return { ...currentEvent, date: [...currentEvent.date, value] };
+        });
+      } else {
+        alert('date already added');
+      }
+    } else {
+      setNewEvent((currentEvent) => {
+        return { ...currentEvent, date: [value] };
+      });
+    }
+  }
+
+  function deleteDate(dateToDelete) {
+    const newArray = newEvent.date.filter((date) => date !== dateToDelete);
+    setNewEvent((currentEvent) => {
+      return { ...currentEvent, date: newArray };
+    });
+  }
 
   return (
     <>
       <p>Event Date</p>
       <p>{`Step ${stage} of 4`}</p>
 
-      <Button
-        variant="outlined"
-        onClick={() => setElementCount(elementCount + 1)}
-      >
+      {newEvent.date
+        ? newEvent.date.map((date) => (
+            <>
+              <p key={date}>{`${date}`}</p>
+              <button onClick={() => deleteDate(date)}>delete</button>
+            </>
+          ))
+        : null}
+
+      <Button variant="outlined" onClick={() => addDate()}>
         Add Date
       </Button>
-
-      {/* {[...Array(elementCount)].map((_, i) => (
-        <DatePicker key={i} />
-      ))} */}
 
       <LocalizationProvider dateAdapter={AdapterDateFns} fullWidth>
         <DateTimePicker
           renderInput={(props) => <TextField {...props} />}
           label="DateTimePicker"
-          value={value[0]}
+          value={value}
           inputFormat="dd/MM/yyyy hh:mm a"
           onChange={(newValue) => {
-            setValue((oldValue) => [newValue]);
+            setValue(newValue);
           }}
         />
       </LocalizationProvider>
@@ -65,13 +66,7 @@ export default function EventDate({ stage, setStage, newEvent, setNewEvent }) {
         Back
       </Button>
 
-      <Button
-        variant="outlined"
-        onClick={() => {
-          handleChange();
-          setStage(stage + 1);
-        }}
-      >
+      <Button variant="outlined" onClick={() => setStage(stage + 1)}>
         Next
       </Button>
     </>
