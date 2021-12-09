@@ -5,6 +5,10 @@ import {
   Select,
   MenuItem,
   Box,
+  Typography,
+  Card,
+  Container,
+  Stack,
 } from '@mui/material';
 
 export default function EventActivity({
@@ -20,30 +24,41 @@ export default function EventActivity({
   };
 
   return (
-    <>
-      <p>Event Activity</p>
-      <p>{`Step ${stage} of 4`}</p>
-      <Box sx={{ minWidth: 120 }}>
-        <FormControl fullWidth required>
-          <InputLabel id="activity-select-label">Activity</InputLabel>
-          <Select
-            labelId="activity-select-label"
-            id="activity-simple-select"
-            value={newEvent.activity}
-            label="Activity"
-            onChange={handleChange}
-          >
-            <MenuItem value={'Reading'}>Reading</MenuItem>
-            <MenuItem value={'Interview'}>Interview</MenuItem>
-          </Select>
-        </FormControl>
-      </Box>
-      <Button variant="outlined" onClick={() => setStage(stage - 1)}>
-        Back
-      </Button>
-      <Button variant="outlined" onClick={() => setStage(stage + 1)}>
-        Next
-      </Button>
-    </>
+    <Container component="main" maxWidth="xs">
+      <Card
+        sx={{
+          minWidth: 275,
+          padding: 5,
+          borderRadius: 3,
+          mt: 5,
+        }}
+      >
+        <Stack spacing={3}>
+          <Typography variant="h8">{`Step ${stage} of 4`}</Typography>
+          <Typography variant="h6">Event Activity</Typography>
+          <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth required>
+              <InputLabel id="activity-select-label">Activity</InputLabel>
+              <Select
+                labelId="activity-select-label"
+                id="activity-simple-select"
+                value={newEvent.activity}
+                label="Activity"
+                onChange={handleChange}
+              >
+                <MenuItem value={'Reading'}>Reading</MenuItem>
+                <MenuItem value={'Interview'}>Interview</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+          <Button variant="outlined" onClick={() => setStage(stage - 1)}>
+            Back
+          </Button>
+          <Button variant="outlined" onClick={() => setStage(stage + 1)}>
+            Next
+          </Button>
+        </Stack>
+      </Card>
+    </Container>
   );
 }

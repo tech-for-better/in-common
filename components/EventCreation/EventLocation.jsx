@@ -5,6 +5,10 @@ import {
   Select,
   MenuItem,
   Box,
+  Card,
+  Container,
+  Stack,
+  Typography,
 } from '@mui/material';
 
 export default function EventLocation({
@@ -18,27 +22,42 @@ export default function EventLocation({
   };
 
   return (
-    <>
-      <p>Event Location</p>
-      <p>{`Step ${stage} of 4`}</p>
-      <Box sx={{ minWidth: 120 }}>
-        <FormControl fullWidth required>
-          <InputLabel id="demo-simple-select-label">Location</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={newEvent.location}
-            label="Location"
-            onChange={handleChange}
+    <Container component="main" maxWidth="xs">
+      <Card
+        sx={{
+          minWidth: 275,
+          padding: 5,
+          borderRadius: 3,
+          mt: 5,
+        }}
+      >
+        <Stack spacing={3}>
+          <Typography variant="h8">{`Step ${stage} of 4`}</Typography>
+          <Typography variant="h6">Event Location</Typography>
+          <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth required>
+              <InputLabel id="demo-simple-select-label">Location</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={newEvent.location}
+                label="Location"
+                onChange={handleChange}
+              >
+                <MenuItem value={'School'}>School</MenuItem>
+                <MenuItem value={'Retirement Home'}>Retirement Home</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+          <Button
+            fullWidth
+            variant="outlined"
+            onClick={() => setStage(stage + 1)}
           >
-            <MenuItem value={'School'}>School</MenuItem>
-            <MenuItem value={'Retirement Home'}>Retirement Home</MenuItem>
-          </Select>
-        </FormControl>
-      </Box>
-      <Button variant="outlined" onClick={() => setStage(stage + 1)}>
-        Next
-      </Button>
-    </>
+            Next
+          </Button>
+        </Stack>
+      </Card>
+    </Container>
   );
 }
