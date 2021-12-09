@@ -1,9 +1,9 @@
-import EventManagement from '../components/EventManagement/EventManagement';
+import Event from '../components/Events/Event';
 
 export default function EventsPage({ user }) {
   return (
     <>
-      <EventManagement user={user} />{' '}
+      <Event user={user} />{' '}
     </>
   );
 }
