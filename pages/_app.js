@@ -10,16 +10,16 @@ function MyApp({ Component, pageProps }) {
 
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
-    if (currentUser) {
-      base('Accounts')
-        .select({
-          filterByFormula: `UID = "${currentUser.uid}"`,
-        })
-        .firstPage((err, records) => {
-          if (err) return console.log('Airtable error :', err);
-          if (records) return setApproved(records[0].fields.Approval);
-        });
-    }
+    // if (currentUser) {
+    //   base('Accounts')
+    //     .select({
+    //       filterByFormula: `UID = "${currentUser.uid}"`,
+    //     })
+    //     .firstPage((err, records) => {
+    //       if (err) return console.log('Airtable error :', err);
+    //       if (records) return setApproved(records[0].fields.Approval);
+    //     });
+    // }
   });
 
   return <Component {...pageProps} user={user} approved={approved} />;
