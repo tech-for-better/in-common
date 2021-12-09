@@ -1,4 +1,5 @@
 import { base } from '../../lib/init-airtable';
+import { Container, Box, Alert } from '@mui/material';
 import { useState, useEffect } from 'react';
 
 const tableEvents = base('Events');
@@ -32,9 +33,12 @@ export default function Events({ user }) {
     <div>
       <h1>Hello</h1>
       {myEvents.map((record) => (
-        <p key={record.id}>
-          Activity: {record.fields.Activity}, Status: {record.fields.Status}
-        </p>
+        <Container maxWidth="xs" key={record.id}>
+          <div>
+            Activity: {record.fields.Activity}, Status: {record.fields.Status},
+            Recipient: {record.fields.Recipient}, sender: {record.fields.Sender}
+          </div>
+        </Container>
       ))}
     </div>
   );
