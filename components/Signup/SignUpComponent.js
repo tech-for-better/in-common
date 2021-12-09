@@ -41,6 +41,7 @@ export default function SignUpComponent({ user }) {
       'Primary Contact Number': contactNumber,
     };
     const tableAccounts = base('Accounts');
+
     const entry = await tableAccounts.create(
       [{ fields: field }],
       function (err, records) {
