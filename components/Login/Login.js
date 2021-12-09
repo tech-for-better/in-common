@@ -1,15 +1,18 @@
-import { useState, useEffect } from "react";
-import { auth } from "../../firebase";
-import { signInWithEmailAndPassword } from "@firebase/auth";
-import { Card } from "@mui/material";
-import { TextField } from "@mui/material";
-import { Box } from "@mui/material";
-import { Button } from "@mui/material";
-import { Typography } from "@mui/material";
+import { useState, useEffect } from 'react';
+import { auth } from '../../firebase';
+import { signInWithEmailAndPassword } from '@firebase/auth';
+import {
+  Container,
+  Typography,
+  Button,
+  Box,
+  TextField,
+  Card,
+} from '@mui/material';
 
 export default function Login({ user }) {
-  const [logInEmail, setLogInEmail] = useState("");
-  const [logInPassword, setLogInPassword] = useState("");
+  const [logInEmail, setLogInEmail] = useState('');
+  const [logInPassword, setLogInPassword] = useState('');
 
   async function logIn() {
     try {
@@ -20,7 +23,7 @@ export default function Login({ user }) {
   }
 
   return (
-    <div>
+    <Container component="main" maxWidth="xs">
       <Card
         sx={{
           minWidth: 275,
@@ -59,7 +62,6 @@ export default function Login({ user }) {
               autoComplete="current-password"
               onChange={(e) => setLogInPassword(e.target.value)}
               fullWidth
-              helperText="Incorrect entry."
             />
           </Box>
           <Button
@@ -75,7 +77,7 @@ export default function Login({ user }) {
           </Button>
         </form>
       </Card>
-      <h2>{user?.email ? `${user?.email} logged in` : "no one logged in"}</h2>
-    </div>
+      {/* <h2>{user?.email ? `${user?.email} logged in` : 'no one logged in'}</h2> */}
+    </Container>
   );
 }
