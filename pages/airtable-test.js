@@ -7,9 +7,9 @@ import {
   getIds,
   updateThisRecord,
   deleteRecord,
-} from "../lib/model";
-import styles from "../styles/Home.module.css";
-import { useEffect, useState } from "react";
+} from '../lib/model';
+import styles from '../styles/Home.module.css';
+import { useEffect, useState } from 'react';
 
 const getRecords = async () => {
   const records = await getSchedule();
@@ -23,7 +23,7 @@ export default function Event() {
   useEffect(() => {
     getRecords().then((data) => setRecords(data));
   }, []);
-  console.log("useState Records: ", records);
+  console.log('useState Records: ', records);
 
   return (
     <>
