@@ -24,7 +24,7 @@ export default function EventActivity({
       <p>Event Activity</p>
       <p>{`Step ${stage} of 4`}</p>
       <Box sx={{ minWidth: 120 }}>
-        <FormControl fullWidth>
+        <FormControl fullWidth required>
           <InputLabel id="activity-select-label">Activity</InputLabel>
           <Select
             labelId="activity-select-label"

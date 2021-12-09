@@ -22,13 +22,13 @@ export default function EventLocation({
       <p>Event Location</p>
       <p>{`Step ${stage} of 4`}</p>
       <Box sx={{ minWidth: 120 }}>
-        <FormControl fullWidth>
+        <FormControl fullWidth required>
           <InputLabel id="demo-simple-select-label">Location</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={newEvent.location}
-            label="Age"
+            label="Location"
             onChange={handleChange}
           >
             <MenuItem value={'School'}>School</MenuItem>

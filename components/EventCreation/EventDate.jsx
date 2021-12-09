@@ -1,28 +1,27 @@
 import { Button } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import DateTimePicker from '@mui/lab/DateTimePicker';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DateTimePicker from '@mui/lab/DateTimePicker';
 
 import { useState } from 'react';
 
 export default function EventDate({ stage, setStage, newEvent, setNewEvent }) {
-  const [value, setValue] = useState(new Date('2014-08-18T21:11:54'));
-
-  const handleChange = (newValue) => {
-    setValue(newValue);
-  };
+  const [value, setValue] = useState(new Date());
 
   return (
     <>
       <p>Event Date</p>
       <p>{`Step ${stage} of 4`}</p>
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <LocalizationProvider dateAdapter={AdapterDateFns} fullWidth>
         <DateTimePicker
-          label="Date&Time picker"
+          renderInput={(props) => <TextField {...props} />}
+          label="DateTimePicker"
           value={value}
-          onChange={handleChange}
-          renderInput={(params) => <TextField {...params} />}
+          inputFormat="dd/MM/yyyy hh:mm a"
+          onChange={(newValue) => {
+            setValue(newValue);
+          }}
         />
       </LocalizationProvider>
       <Button variant="outlined" onClick={() => setStage(stage - 1)}>
