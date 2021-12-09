@@ -1,6 +1,12 @@
 import { Button } from '@mui/material';
 
-export default function EventSummary({ stage, setStage }) {
+export default function EventSummary({
+  stage,
+  setStagem,
+  newEvent,
+  setNewEvent,
+}) {
+  console.log({ newEvent });
   return (
     <>
       <p>Event Summary</p>
