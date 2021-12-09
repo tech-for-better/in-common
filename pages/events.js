@@ -1,6 +1,6 @@
 import Events from '../components/Events/Events';
 
-export default function Events({ user }) {
+export default function EventsPage({ user }) {
   return (
     <>
       <Events user={user} />{' '}
