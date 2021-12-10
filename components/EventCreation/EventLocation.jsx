@@ -52,6 +52,7 @@ export default function EventLocation({
           <Button
             fullWidth
             variant="outlined"
+            sx={{ padding: 1.85 }}
             onClick={() => setStage(stage + 1)}
           >
             Next

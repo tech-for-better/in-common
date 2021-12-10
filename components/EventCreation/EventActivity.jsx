@@ -51,10 +51,18 @@ export default function EventActivity({
               </Select>
             </FormControl>
           </Box>
-          <Button variant="outlined" onClick={() => setStage(stage - 1)}>
+          <Button
+            sx={{ padding: 1.85 }}
+            variant="outlined"
+            onClick={() => setStage(stage - 1)}
+          >
             Back
           </Button>
-          <Button variant="outlined" onClick={() => setStage(stage + 1)}>
+          <Button
+            sx={{ padding: 1.85 }}
+            variant="outlined"
+            onClick={() => setStage(stage + 1)}
+          >
             Next
           </Button>
         </Stack>

@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
+import moment from 'moment';
 
 import { useState } from 'react';
 
@@ -49,21 +50,20 @@ export default function EventDate({ stage, setStage, newEvent, setNewEvent }) {
           {newEvent.date
             ? newEvent.date.map((date) => (
                 <>
-                  <p key={date}>{`${date}`}</p>
-                  <button onClick={() => deleteDate(date)}>delete</button>
+                  <p key={date}>{`${moment(date).format('LLL')}`}</p>
+                  <Button onClick={() => deleteDate(date)} variant="outlined">
+                    delete
+                  </Button>
                 </>
               ))
             : null}
-
-          <Button variant="outlined" onClick={() => addDate()}>
-            Add Date
-          </Button>
 
           <LocalizationProvider dateAdapter={AdapterDateFns} fullWidth>
             <DateTimePicker
               renderInput={(props) => <TextField {...props} />}
               label="DateTimePicker"
               value={value}
+              format="DD-MM-YY"
               inputFormat="dd/MM/yyyy hh:mm a"
               onChange={(newValue) => {
                 setValue(newValue);
@@ -71,11 +71,27 @@ export default function EventDate({ stage, setStage, newEvent, setNewEvent }) {
             />
           </LocalizationProvider>
 
-          <Button variant="outlined" onClick={() => setStage(stage - 1)}>
+          <Button
+            sx={{ padding: 1.85 }}
+            variant="contained"
+            onClick={() => addDate()}
+          >
+            Add Date
+          </Button>
+
+          <Button
+            sx={{ padding: 1.85 }}
+            variant="outlined"
+            onClick={() => setStage(stage - 1)}
+          >
             Back
           </Button>
 
-          <Button variant="outlined" onClick={() => setStage(stage + 1)}>
+          <Button
+            sx={{ padding: 1.85 }}
+            variant="outlined"
+            onClick={() => setStage(stage + 1)}
+          >
             Next
           </Button>
         </Stack>
