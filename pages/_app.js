@@ -3,6 +3,12 @@ import { useState, useEffect } from 'react';
 import { auth } from '../firebase';
 import { onAuthStateChanged } from '@firebase/auth';
 import { base } from '../lib/init-airtable';
+import { Router } from 'next/router';
+import '/styles/nprogress.css';
+import nProgress from 'nprogress';
+Router.events.on('routeChangeStart', nProgress.start);
+Router.events.on('routeChangeError', nProgress.done);
+Router.events.on('routeChangeComplete', nProgress.done);
 
 function MyApp({ Component, pageProps }) {
   const [user, setUser] = useState({});

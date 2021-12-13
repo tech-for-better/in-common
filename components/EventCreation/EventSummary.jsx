@@ -7,6 +7,7 @@ import {
   TextField,
 } from '@mui/material';
 import moment from 'moment';
+import Link from 'next/link';
 
 import { useState, useEffect } from 'react';
 
@@ -67,6 +68,9 @@ export default function EventSummary({
           >
             Back
           </Button>
+          <Link href="/events">
+            <a>Blog Post</a>
+          </Link>
         </Stack>
       </Card>
     </Container>
