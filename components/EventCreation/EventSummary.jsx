@@ -8,6 +8,8 @@ import {
 } from '@mui/material';
 import moment from 'moment';
 
+import { useState, useEffect } from 'react';
+
 export default function EventSummary({
   stage,
   setStage,
@@ -18,6 +20,9 @@ export default function EventSummary({
   const handleChange = (e) => {
     setNewEvent((oldEvent) => ({ ...oldEvent, notes: e.target.value }));
   };
+
+  const [loading, setLoading] = useState(false);
+
   return (
     <Container component="main" maxWidth="xs">
       <Card
@@ -53,7 +58,7 @@ export default function EventSummary({
               console.log({ newEvent });
             }}
           >
-            Send Event Request
+            {loading ? 'Sending...' : 'Send Event Request'}
           </Button>
           <Button
             sx={{ padding: 1.85 }}
