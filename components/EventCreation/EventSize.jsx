@@ -41,13 +41,13 @@ export default function EventSize({ stage, setStage, newEvent, setNewEvent }) {
                 label="Number of people"
                 onChange={handleChange}
               >
-                <MenuItem value={'1-5'}>1-5</MenuItem>
-                <MenuItem value={'5-10'}>5-10</MenuItem>
-                <MenuItem value={'10-15'}>10-15</MenuItem>
-                <MenuItem value={'15-10'}>15-20</MenuItem>
-                <MenuItem value={'20-25'}>20-25</MenuItem>
-                <MenuItem value={'25-30'}>25-30</MenuItem>
-                <MenuItem value={'30-35'}>30-35</MenuItem>
+                <MenuItem value={'1-5'}>1 - 5</MenuItem>
+                <MenuItem value={'5-10'}>5 - 10</MenuItem>
+                <MenuItem value={'10-15'}>10 - 15</MenuItem>
+                <MenuItem value={'15-10'}>15 - 20</MenuItem>
+                <MenuItem value={'20-25'}>20 - 25</MenuItem>
+                <MenuItem value={'25-30'}>25 - 30</MenuItem>
+                <MenuItem value={'30-35'}>30 - 35</MenuItem>
               </Select>
             </FormControl>
           </Box>
@@ -58,6 +58,13 @@ export default function EventSize({ stage, setStage, newEvent, setNewEvent }) {
             onClick={() => setStage(stage + 1)}
           >
             Next
+          </Button>
+          <Button
+            sx={{ padding: 1.85 }}
+            variant="outlined"
+            onClick={() => setStage(stage - 1)}
+          >
+            Back
           </Button>
         </Stack>
       </Card>
