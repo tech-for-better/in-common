@@ -3,6 +3,7 @@ import EventActivity from '../components/EventCreation/EventActivity';
 import EventDate from '../components/EventCreation/EventDate';
 import EventLocation from '../components/EventCreation/EventLocation';
 import EventSummary from '../components/EventCreation/EventSummary';
+import EventSize from '../components/EventCreation/EventSize';
 
 export default function Events({ user }) {
   const [stage, setStage] = useState(1);
@@ -28,7 +29,7 @@ export default function Events({ user }) {
     );
   if (stage === 3)
     return (
-      <EventDate
+      <EventSize
         setStage={setStage}
         stage={stage}
         setNewEvent={setNewEvent}
@@ -36,6 +37,15 @@ export default function Events({ user }) {
       />
     );
   if (stage === 4)
+    return (
+      <EventDate
+        setStage={setStage}
+        stage={stage}
+        setNewEvent={setNewEvent}
+        newEvent={newEvent}
+      />
+    );
+  if (stage === 5)
     return (
       <EventSummary
         setStage={setStage}
