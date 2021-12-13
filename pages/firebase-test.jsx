@@ -1,16 +1,17 @@
-import { auth } from "../firebase";
+import { auth } from '../firebase';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
-} from "@firebase/auth";
-import { useState } from "react";
-import { Card } from "@mui/material";
-import { TextField } from "@mui/material";
-import { Container, Box } from "@mui/material";
-import { Button } from "@mui/material";
-import { Typography } from "@mui/material";
+  sendPasswordResetEmail,
+} from '@firebase/auth';
+import { useState } from 'react';
+import { Card, inputAdornmentClasses } from '@mui/material';
+import { TextField } from '@mui/material';
+import { Container, Box } from '@mui/material';
+import { Button } from '@mui/material';
+import { Typography } from '@mui/material';
 
 export default function Test({ user }) {
   //current user state
@@ -24,8 +25,8 @@ export default function Test({ user }) {
 
   // signup for states
 
-  const [signUpEmail, setSignUpEmail] = useState("");
-  const [signUpPassword, setSignUpPassword] = useState("");
+  const [signUpEmail, setSignUpEmail] = useState('');
+  const [signUpPassword, setSignUpPassword] = useState('');
 
   // signup function
 
@@ -45,8 +46,8 @@ export default function Test({ user }) {
 
   // login form states
 
-  const [logInEmail, setLogInEmail] = useState("");
-  const [logInPassword, setLogInPassword] = useState("");
+  const [logInEmail, setLogInEmail] = useState('');
+  const [logInPassword, setLogInPassword] = useState('');
 
   // login function
 
@@ -67,9 +68,28 @@ export default function Test({ user }) {
   async function logOut() {
     try {
       await signOut(auth);
-      console.log("signed out!");
+      console.log('signed out!');
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  // reset password
+
+  // reset password state
+
+  const [resetPasswordEmail, setResetPasswordEmail] = useState('');
+
+  // reset password function
+
+  async function resetPassword(auth, email) {
+    try {
+      await sendPasswordResetEmail(auth, email);
+      console.log('reset email sent');
+      alert('Reset password email sent! Check your junk/spam folder');
+    } catch (error) {
+      console.log(error);
+      alert('There was an error sending your password reset email');
     }
   }
 
@@ -186,11 +206,57 @@ export default function Test({ user }) {
           </Button>
         </form>
       </Card>
-      <h2>{user?.email ? `${user?.email} logged in` : "no one logged in"}</h2>
+
+      <Card
+        sx={{
+          minWidth: 275,
+          padding: 5,
+          borderRadius: 3,
+          mt: 5,
+        }}
+      >
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            resetPassword(auth, resetPasswordEmail);
+            e.target.reset();
+          }}
+        >
+          <Typography component="h1" variant="h5" sx={{ mb: 3 }}>
+            Reset password
+          </Typography>
+
+          <label hidden htmlFor="resetPasswordEmail">
+            Email
+          </label>
+          <Box sx={{ mb: 2 }}>
+            <TextField
+              variant="outlined"
+              id="resetPasswordEmail"
+              name="resetPasswordEmail"
+              label="Email"
+              type="email"
+              autoComplete="current-email"
+              onChange={(e) => setResetPasswordEmail(e.target.value)}
+              fullWidth
+            />
+          </Box>
+          <Button
+            variant="outlined"
+            sx={{ padding: 1.85 }}
+            type="submit"
+            fullWidth
+          >
+            Send password reset email
+          </Button>
+        </form>
+      </Card>
+
+      <h2>{user?.email ? `${user?.email} logged in` : 'no one logged in'}</h2>
       <button
         onClick={(e) => {
           e.preventDefault();
-          console.log("logging out");
+          console.log('logging out');
           logOut();
         }}
       >
