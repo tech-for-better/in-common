@@ -10,6 +10,7 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
+import { useState, useEffect } from 'react';
 
 export default function EventSize({
   stage,
@@ -18,6 +19,12 @@ export default function EventSize({
   setNewEvent,
   stages,
 }) {
+  const [disabled, setDisabled] = useState('true');
+
+  useEffect(() => {
+    newEvent.size ? setDisabled('') : setDisabled('true');
+  }, [newEvent.size]);
+
   const handleChange = (e) => {
     setNewEvent((oldEvent) => ({ ...oldEvent, size: e.target.value }));
   };
@@ -60,6 +67,7 @@ export default function EventSize({
             variant="outlined"
             sx={{ padding: 1.85 }}
             onClick={() => setStage(stage + 1)}
+            disabled={disabled}
           >
             Next
           </Button>

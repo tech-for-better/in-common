@@ -10,6 +10,7 @@ import {
   Container,
   Stack,
 } from '@mui/material';
+import { useState, useEffect } from 'react';
 
 export default function EventActivity({
   stage,
@@ -18,7 +19,11 @@ export default function EventActivity({
   setNewEvent,
   stages,
 }) {
-  console.log({ newEvent });
+  const [disabled, setDisabled] = useState('true');
+
+  useEffect(() => {
+    newEvent.activity ? setDisabled('') : setDisabled('true');
+  }, [newEvent.activity]);
 
   const handleChange = (e) => {
     setNewEvent((oldEvent) => ({ ...oldEvent, activity: e.target.value }));
@@ -56,6 +61,7 @@ export default function EventActivity({
             sx={{ padding: 1.85 }}
             variant="outlined"
             onClick={() => setStage(stage + 1)}
+            disabled={disabled}
           >
             Next
           </Button>

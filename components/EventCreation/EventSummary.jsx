@@ -53,7 +53,7 @@ export default function EventSummary({
               console.log({ newEvent });
             }}
           >
-            Submit
+            Send Event Request
           </Button>
           <Button
             sx={{ padding: 1.85 }}

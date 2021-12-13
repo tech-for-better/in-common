@@ -15,14 +15,17 @@ export default function EventDate({
   stages,
 }) {
   const [value, setValue] = useState(new Date());
+
   const [disabled, setDisabled] = useState('true');
 
   useEffect(() => {
-    !newEvent.date ? setDisabled('true') : setDisabled('');
-  }, []);
+    console.log(newEvent.date);
+    newEvent.date && newEvent.date.length > 0
+      ? setDisabled('')
+      : setDisabled('true');
+  }, [newEvent.date]);
 
   function addDate() {
-    setDisabled('');
     if (newEvent.date) {
       if (!newEvent.date.includes(value)) {
         setNewEvent((currentEvent) => {
@@ -43,7 +46,6 @@ export default function EventDate({
     setNewEvent((currentEvent) => {
       return { ...currentEvent, date: newArray };
     });
-    !newArray.length ? setDisabled('true') : setDisabled('');
   }
 
   return (

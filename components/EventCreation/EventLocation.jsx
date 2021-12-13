@@ -11,7 +11,7 @@ import {
   Typography,
 } from '@mui/material';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function EventLocation({
   stage,
@@ -22,8 +22,11 @@ export default function EventLocation({
 }) {
   const [disabled, setDisabled] = useState('true');
 
+  useEffect(() => {
+    newEvent.location ? setDisabled('') : setDisabled('true');
+  }, [newEvent.location]);
+
   const handleChange = (e) => {
-    setDisabled('');
     setNewEvent((oldEvent) => ({ ...oldEvent, location: e.target.value }));
   };
 
