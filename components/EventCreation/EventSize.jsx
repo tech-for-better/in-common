@@ -11,7 +11,13 @@ import {
   Typography,
 } from '@mui/material';
 
-export default function EventSize({ stage, setStage, newEvent, setNewEvent }) {
+export default function EventSize({
+  stage,
+  setStage,
+  newEvent,
+  setNewEvent,
+  stages,
+}) {
   const handleChange = (e) => {
     setNewEvent((oldEvent) => ({ ...oldEvent, size: e.target.value }));
   };
@@ -27,16 +33,14 @@ export default function EventSize({ stage, setStage, newEvent, setNewEvent }) {
         }}
       >
         <Stack spacing={3}>
-          <Typography variant="h8">{`Step ${stage} of 4`}</Typography>
+          <Typography variant="h8">{`Step ${stage} of ${stages}`}</Typography>
           <Typography variant="h6">Group size</Typography>
           <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth required>
-              <InputLabel id="demo-simple-select-label">
-                Number of people
-              </InputLabel>
+              <InputLabel id="size-select-label">Number of people</InputLabel>
               <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
+                labelId="size-select-label"
+                id="size-select"
                 value={newEvent.size}
                 label="Number of people"
                 onChange={handleChange}

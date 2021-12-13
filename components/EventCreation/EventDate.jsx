@@ -7,7 +7,13 @@ import moment from 'moment';
 
 import { useState } from 'react';
 
-export default function EventDate({ stage, setStage, newEvent, setNewEvent }) {
+export default function EventDate({
+  stage,
+  setStage,
+  newEvent,
+  setNewEvent,
+  stages,
+}) {
   const [value, setValue] = useState(new Date());
 
   function addDate() {
@@ -44,7 +50,7 @@ export default function EventDate({ stage, setStage, newEvent, setNewEvent }) {
         }}
       >
         <Stack spacing={3}>
-          <Typography variant="h8">{`Step ${stage} of 4`}</Typography>
+          <Typography variant="h8">{`Step ${stage} of ${stages}`}</Typography>
           <Typography variant="h6">Event Date</Typography>
 
           {newEvent.date

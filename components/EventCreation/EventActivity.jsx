@@ -16,6 +16,7 @@ export default function EventActivity({
   setStage,
   newEvent,
   setNewEvent,
+  stages,
 }) {
   console.log({ newEvent });
 
@@ -34,14 +35,14 @@ export default function EventActivity({
         }}
       >
         <Stack spacing={3}>
-          <Typography variant="h8">{`Step ${stage} of 4`}</Typography>
+          <Typography variant="h8">{`Step ${stage} of ${stages}`}</Typography>
           <Typography variant="h6">Event Activity</Typography>
           <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth required>
               <InputLabel id="activity-select-label">Activity</InputLabel>
               <Select
                 labelId="activity-select-label"
-                id="activity-simple-select"
+                id="activity-select"
                 value={newEvent.activity}
                 label="Activity"
                 onChange={handleChange}

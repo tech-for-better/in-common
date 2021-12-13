@@ -16,6 +16,7 @@ export default function EventLocation({
   setStage,
   newEvent,
   setNewEvent,
+  stages,
 }) {
   const handleChange = (e) => {
     setNewEvent((oldEvent) => ({ ...oldEvent, location: e.target.value }));
@@ -32,14 +33,14 @@ export default function EventLocation({
         }}
       >
         <Stack spacing={3}>
-          <Typography variant="h8">{`Step ${stage} of 4`}</Typography>
+          <Typography variant="h8">{`Step ${stage} of ${stages}`}</Typography>
           <Typography variant="h6">Event Location</Typography>
           <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth required>
-              <InputLabel id="demo-simple-select-label">Location</InputLabel>
+              <InputLabel id="location-select-label">Location</InputLabel>
               <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
+                labelId="location-select-label"
+                id="location-select"
                 value={newEvent.location}
                 label="Location"
                 onChange={handleChange}
