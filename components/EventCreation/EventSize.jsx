@@ -41,7 +41,7 @@ export default function EventSize({ stage, setStage, newEvent, setNewEvent }) {
                 label="Number of people"
                 onChange={handleChange}
               >
-                <MenuItem value={'1-5'}>0-5</MenuItem>
+                <MenuItem value={'1-5'}>1-5</MenuItem>
                 <MenuItem value={'5-10'}>5-10</MenuItem>
                 <MenuItem value={'10-15'}>10-15</MenuItem>
                 <MenuItem value={'15-10'}>15-20</MenuItem>
