@@ -11,6 +11,9 @@ import {
   Stack,
 } from '@mui/material';
 import { useState, useEffect } from 'react';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import NavigateBefore from '@mui/icons-material/NavigateBefore';
 
 export default function EventActivity({
   stage,
@@ -62,6 +65,7 @@ export default function EventActivity({
             variant="outlined"
             onClick={() => setStage(stage + 1)}
             disabled={disabled}
+            endIcon={<NavigateNextIcon />}
           >
             Next
           </Button>
@@ -69,6 +73,7 @@ export default function EventActivity({
             sx={{ padding: 1.85 }}
             variant="outlined"
             onClick={() => setStage(stage - 1)}
+            startIcon={<NavigateBefore />}
           >
             Back
           </Button>

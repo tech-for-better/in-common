@@ -1,6 +1,6 @@
 /* Make clicks pass-through */
 #nprogress {
-  --primary-color: #83b9ff;
+  --primary-color: #68acff;
   pointer-events: none;
 }
 

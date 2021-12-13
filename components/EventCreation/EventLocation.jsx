@@ -10,6 +10,7 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
+import MenuDropDown from '../Menu/MenuDropDown';
 
 import { useState, useEffect } from 'react';
 
@@ -31,45 +32,48 @@ export default function EventLocation({
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Card
-        sx={{
-          minWidth: 275,
-          padding: 5,
-          borderRadius: 3,
-          mt: 5,
-        }}
-      >
-        <Stack spacing={3}>
-          <Typography variant="h8">{`Step ${stage} of ${stages}`}</Typography>
-          <Typography variant="h6">Event Location</Typography>
-          <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth required>
-              <InputLabel id="location-select-label">Location</InputLabel>
-              <Select
-                labelId="location-select-label"
-                id="location-select"
-                value={newEvent.location}
-                label="Location"
-                onChange={handleChange}
-              >
-                <MenuItem value={'School'}>School</MenuItem>
-                <MenuItem value={'Retirement Home'}>Retirement Home</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
+    <>
+      <MenuDropDown />
+      <Container component="main" maxWidth="xs">
+        <Card
+          sx={{
+            minWidth: 275,
+            padding: 5,
+            borderRadius: 3,
+            mt: 5,
+          }}
+        >
+          <Stack spacing={3}>
+            <Typography variant="h8">{`Step ${stage} of ${stages}`}</Typography>
+            <Typography variant="h6">Event Location</Typography>
+            <Box sx={{ minWidth: 120 }}>
+              <FormControl fullWidth required>
+                <InputLabel id="location-select-label">Location</InputLabel>
+                <Select
+                  labelId="location-select-label"
+                  id="location-select"
+                  value={newEvent.location}
+                  label="Location"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={'School'}>School</MenuItem>
+                  <MenuItem value={'Retirement Home'}>Retirement Home</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
 
-          <Button
-            fullWidth
-            disabled={disabled}
-            variant="outlined"
-            sx={{ padding: 1.85 }}
-            onClick={() => setStage(stage + 1)}
-          >
-            Next
-          </Button>
-        </Stack>
-      </Card>
-    </Container>
+            <Button
+              fullWidth
+              disabled={disabled}
+              variant="outlined"
+              sx={{ padding: 1.85 }}
+              onClick={() => setStage(stage + 1)}
+            >
+              Next
+            </Button>
+          </Stack>
+        </Card>
+      </Container>
+    </>
   );
 }
