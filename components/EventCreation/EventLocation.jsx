@@ -11,6 +11,8 @@ import {
   Typography,
 } from '@mui/material';
 
+import { useState } from 'react';
+
 export default function EventLocation({
   stage,
   setStage,
@@ -18,7 +20,10 @@ export default function EventLocation({
   setNewEvent,
   stages,
 }) {
+  const [disabled, setDisabled] = useState('true');
+
   const handleChange = (e) => {
+    setDisabled('');
     setNewEvent((oldEvent) => ({ ...oldEvent, location: e.target.value }));
   };
 
@@ -50,8 +55,10 @@ export default function EventLocation({
               </Select>
             </FormControl>
           </Box>
+
           <Button
             fullWidth
+            disabled={disabled}
             variant="outlined"
             sx={{ padding: 1.85 }}
             onClick={() => setStage(stage + 1)}

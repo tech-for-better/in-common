@@ -48,19 +48,19 @@ export default function EventSummary({
           <Button
             sx={{ padding: 1.85 }}
             variant="outlined"
-            onClick={() => setStage(stage - 1)}
-          >
-            Back
-          </Button>
-          <Button
-            sx={{ padding: 1.85 }}
-            variant="outlined"
             onClick={() => {
               console.log('submit');
               console.log({ newEvent });
             }}
           >
             Submit
+          </Button>
+          <Button
+            sx={{ padding: 1.85 }}
+            variant="outlined"
+            onClick={() => setStage(stage - 1)}
+          >
+            Back
           </Button>
         </Stack>
       </Card>

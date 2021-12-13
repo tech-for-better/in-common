@@ -5,7 +5,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
 import moment from 'moment';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function EventDate({
   stage,
@@ -15,8 +15,14 @@ export default function EventDate({
   stages,
 }) {
   const [value, setValue] = useState(new Date());
+  const [disabled, setDisabled] = useState('true');
+
+  useEffect(() => {
+    !newEvent.date ? setDisabled('true') : setDisabled('');
+  }, []);
 
   function addDate() {
+    setDisabled('');
     if (newEvent.date) {
       if (!newEvent.date.includes(value)) {
         setNewEvent((currentEvent) => {
@@ -37,6 +43,7 @@ export default function EventDate({
     setNewEvent((currentEvent) => {
       return { ...currentEvent, date: newArray };
     });
+    !newArray.length ? setDisabled('true') : setDisabled('');
   }
 
   return (
@@ -88,17 +95,17 @@ export default function EventDate({
           <Button
             sx={{ padding: 1.85 }}
             variant="outlined"
-            onClick={() => setStage(stage - 1)}
-          >
-            Back
-          </Button>
-
-          <Button
-            sx={{ padding: 1.85 }}
-            variant="outlined"
+            disabled={disabled}
             onClick={() => setStage(stage + 1)}
           >
             Next
+          </Button>
+          <Button
+            sx={{ padding: 1.85 }}
+            variant="outlined"
+            onClick={() => setStage(stage - 1)}
+          >
+            Back
           </Button>
         </Stack>
       </Card>

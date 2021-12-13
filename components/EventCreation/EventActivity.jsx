@@ -55,16 +55,16 @@ export default function EventActivity({
           <Button
             sx={{ padding: 1.85 }}
             variant="outlined"
-            onClick={() => setStage(stage - 1)}
+            onClick={() => setStage(stage + 1)}
           >
-            Back
+            Next
           </Button>
           <Button
             sx={{ padding: 1.85 }}
             variant="outlined"
-            onClick={() => setStage(stage + 1)}
+            onClick={() => setStage(stage - 1)}
           >
-            Next
+            Back
           </Button>
         </Stack>
       </Card>
