@@ -1,36 +1,46 @@
-import React from 'react';
-import Avatar from '@mui/material/Avatar';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
 import Link from 'next/link';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import { Container, Button, TextField, Card, IconButton } from '@mui/material';
 
 const Navigation = () => {
   return (
-    <AppBar
-      style={{ backgroundColor: '#1060E2', color: 'white' }}
-      position="sticky"
-      sx={{
-        padding: 1.5,
-        mb: 2,
-      }}
+    <Container
+      component="main"
+      maxWidth="xs"
+      style={{ background: '#EBEFFF', color: 'white' }}
     >
-      <Toolbar>
-        <Typography
-          sx={{ flexGrow: 1, fontFamily: 'Montserrat', fontSize: 28, ml: 4 }}
-        >
-          <Link href="/">
-            <a>InCommon</a>
-          </Link>
-        </Typography>
+      <Card sx={{ mb: 3, padding: 5 }}>
+        <h2 style={{ color: '#36426C' }}>Control Panel</h2>
+        <p style={{ color: '#36426C' }}>
+          What would you like to do? Use the options below to organise an event
+          and much more.
+        </p>
+      </Card>
+      <Card sx={{ mb: 3 }}>
         <IconButton>
-          <Link href="/sign-up">
-            <Avatar sx={{ mb: 2, width: 56, height: 56 }} />
-          </Link>
+          <Link href="/"> Home</Link>
         </IconButton>
-      </Toolbar>
-    </AppBar>
+      </Card>
+
+      <Card sx={{ mb: 3 }}>
+        <IconButton>
+          <Link href="/">create event</Link>
+        </IconButton>
+      </Card>
+
+      <Card sx={{ mb: 3 }}>
+        <IconButton>
+          <Link href="/events"> Mange Events</Link>
+        </IconButton>
+      </Card>
+
+      <Card sx={{ mb: 3 }}>
+        <IconButton>
+          <Link href="*"> Edit Profile</Link>
+        </IconButton>
+      </Card>
+    </Container>
   );
 };
 

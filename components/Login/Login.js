@@ -10,8 +10,6 @@ import {
   Card,
 } from '@mui/material';
 
-import Navigation from '../Navigation/Navigation';
-
 export default function Login({ user }) {
   const [logInEmail, setLogInEmail] = useState('');
   const [logInPassword, setLogInPassword] = useState('');
@@ -26,7 +24,6 @@ export default function Login({ user }) {
 
   return (
     <Container component="main" maxWidth="xs">
-      <Navigation></Navigation>
       <Card
         sx={{
           minWidth: 275,
@@ -36,7 +33,7 @@ export default function Login({ user }) {
         }}
       >
         <form>
-          <Typography component="h1" variant="h5" sx={{ mb: 3 }}>
+          <Typography component="h1" variant="h5" sx={{ mb: 3, mt: 3 }}>
             Log in
           </Typography>
 
