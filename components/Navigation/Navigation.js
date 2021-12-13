@@ -21,12 +21,12 @@ const Navigation = () => {
           sx={{ flexGrow: 1, fontFamily: 'Montserrat', fontSize: 28, ml: 4 }}
         >
           <Link href="/">
-            <a>FAC-tube</a>
+            <a>InCommon</a>
           </Link>
         </Typography>
         <IconButton>
           <Link href="/sign-up">
-            <Avatar src={avatar_url} sx={{ mb: 2, width: 56, height: 56 }} />
+            <Avatar sx={{ mb: 2, width: 56, height: 56 }} />
           </Link>
         </IconButton>
       </Toolbar>

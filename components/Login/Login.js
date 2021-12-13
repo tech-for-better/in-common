@@ -10,6 +10,8 @@ import {
   Card,
 } from '@mui/material';
 
+import Navigation from '../Navigation/Navigation';
+
 export default function Login({ user }) {
   const [logInEmail, setLogInEmail] = useState('');
   const [logInPassword, setLogInPassword] = useState('');
@@ -24,6 +26,7 @@ export default function Login({ user }) {
 
   return (
     <Container component="main" maxWidth="xs">
+      <Navigation></Navigation>
       <Card
         sx={{
           minWidth: 275,
