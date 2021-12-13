@@ -5,10 +5,25 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
 import moment from 'moment';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-export default function EventDate({ stage, setStage, newEvent, setNewEvent }) {
+export default function EventDate({
+  stage,
+  setStage,
+  newEvent,
+  setNewEvent,
+  stages,
+}) {
   const [value, setValue] = useState(new Date());
+
+  const [disabled, setDisabled] = useState('true');
+
+  useEffect(() => {
+    console.log(newEvent.date);
+    newEvent.date && newEvent.date.length > 0
+      ? setDisabled('')
+      : setDisabled('true');
+  }, [newEvent.date]);
 
   function addDate() {
     if (newEvent.date) {
@@ -44,7 +59,7 @@ export default function EventDate({ stage, setStage, newEvent, setNewEvent }) {
         }}
       >
         <Stack spacing={3}>
-          <Typography variant="h8">{`Step ${stage} of 4`}</Typography>
+          <Typography variant="h8">{`Step ${stage} of ${stages}`}</Typography>
           <Typography variant="h6">Event Date</Typography>
 
           {newEvent.date
@@ -82,17 +97,17 @@ export default function EventDate({ stage, setStage, newEvent, setNewEvent }) {
           <Button
             sx={{ padding: 1.85 }}
             variant="outlined"
-            onClick={() => setStage(stage - 1)}
-          >
-            Back
-          </Button>
-
-          <Button
-            sx={{ padding: 1.85 }}
-            variant="outlined"
+            disabled={disabled}
             onClick={() => setStage(stage + 1)}
           >
             Next
+          </Button>
+          <Button
+            sx={{ padding: 1.85 }}
+            variant="outlined"
+            onClick={() => setStage(stage - 1)}
+          >
+            Back
           </Button>
         </Stack>
       </Card>

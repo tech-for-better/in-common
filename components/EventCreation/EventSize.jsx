@@ -5,17 +5,14 @@ import {
   Select,
   MenuItem,
   Box,
-  Typography,
   Card,
   Container,
   Stack,
+  Typography,
 } from '@mui/material';
 import { useState, useEffect } from 'react';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
-import NavigateBefore from '@mui/icons-material/NavigateBefore';
 
-export default function EventActivity({
+export default function EventSize({
   stage,
   setStage,
   newEvent,
@@ -25,11 +22,11 @@ export default function EventActivity({
   const [disabled, setDisabled] = useState('true');
 
   useEffect(() => {
-    newEvent.activity ? setDisabled('') : setDisabled('true');
-  }, [newEvent.activity]);
+    newEvent.size ? setDisabled('') : setDisabled('true');
+  }, [newEvent.size]);
 
   const handleChange = (e) => {
-    setNewEvent((oldEvent) => ({ ...oldEvent, activity: e.target.value }));
+    setNewEvent((oldEvent) => ({ ...oldEvent, size: e.target.value }));
   };
 
   return (
@@ -44,28 +41,33 @@ export default function EventActivity({
       >
         <Stack spacing={3}>
           <Typography variant="h8">{`Step ${stage} of ${stages}`}</Typography>
-          <Typography variant="h6">Event Activity</Typography>
+          <Typography variant="h6">Group size</Typography>
           <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth required>
-              <InputLabel id="activity-select-label">Activity</InputLabel>
+              <InputLabel id="size-select-label">Number of people</InputLabel>
               <Select
-                labelId="activity-select-label"
-                id="activity-select"
-                value={newEvent.activity}
-                label="Activity"
+                labelId="size-select-label"
+                id="size-select"
+                value={newEvent.size}
+                label="Number of people"
                 onChange={handleChange}
               >
-                <MenuItem value={'Reading'}>Reading</MenuItem>
-                <MenuItem value={'Interview'}>Interview</MenuItem>
+                <MenuItem value={'1-5'}>1 - 5</MenuItem>
+                <MenuItem value={'5-10'}>5 - 10</MenuItem>
+                <MenuItem value={'10-15'}>10 - 15</MenuItem>
+                <MenuItem value={'15-10'}>15 - 20</MenuItem>
+                <MenuItem value={'20-25'}>20 - 25</MenuItem>
+                <MenuItem value={'25-30'}>25 - 30</MenuItem>
+                <MenuItem value={'30-35'}>30 - 35</MenuItem>
               </Select>
             </FormControl>
           </Box>
           <Button
-            sx={{ padding: 1.85 }}
+            fullWidth
             variant="outlined"
+            sx={{ padding: 1.85 }}
             onClick={() => setStage(stage + 1)}
             disabled={disabled}
-            endIcon={<NavigateNextIcon />}
           >
             Next
           </Button>
@@ -73,7 +75,6 @@ export default function EventActivity({
             sx={{ padding: 1.85 }}
             variant="outlined"
             onClick={() => setStage(stage - 1)}
-            startIcon={<NavigateBefore />}
           >
             Back
           </Button>
