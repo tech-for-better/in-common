@@ -1,15 +1,21 @@
 # In-Common
 
+We are building a `web-app` for **InCommon**, an organisation that helps connect groups of young people with their older neighbours in retirement homes to learn and build friendships together.
+
 # Table of contents
 
 - [In-Common](#in-common)
 - [Table of contents](#table-of-contents)
 - [Team](#team)
-- [What is In-Common?](#what-is-in-common)
+- [What is the application?](#what-is-the-application)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
     - [Dependencies](#dependencies)
 - [Database Schema](#database-schema)
+    - [Airtable: Database & Admin Control](#airtable-database--admin-control)
+      - [Accounts](#accounts)
+      - [Activity Ideas](#activity-ideas)
+      - [Events](#events)
 - [Installation](#installation)
 - [Key Learnings](#key-learnings)
 - [Additional Features](#additional-features)
@@ -19,9 +25,17 @@
 
 # Team
 
-# What is In-Common?
+- [Adriana](https://github.com/aaadriana) :star:
+- [Cemal](https://github.com/cemalokten) :star:
+- [Barbara](https://github.com/0bubbles0) :star:
+- [Alex](https://github.com/lopezelpesado) :star:
+- [Mohamed](https://github.com/Alisyad9) :star:
+
+# What is the application?
 
 [(Back to top)](#table-of-contents)
+
+The `web-app` will enable **InCommon** participants (Schools & Retirement homes) to organise events with each other, in the process removing InCommon from the planning process. The `web-app` aims to create a tool with the sole purpose of event planning, moving the correspondence away from email where invites can be lost or forgotten,
 
 # Features
 
@@ -33,15 +47,56 @@ What can you do?
 
 [(Back to top)](#table-of-contents)
 
+![](https://i.imgur.com/CrRaEI1.png)
+
 ### Dependencies
+
+- date-io/date-fns
+- emotion/react"
+- emotion/styled
+- mui/material
+- nprogress
+- react-dom
+- airtable
+- firebase
 
 # Database Schema
 
 [(Back to top)](#table-of-contents)
 
+### Airtable: Database & Admin Control
+
+#### Accounts
+
+![](https://i.imgur.com/El1jSXR.png)
+
+#### Activity Ideas
+
+![](https://i.imgur.com/39QtUcW.png)
+
+#### Events
+
+![](https://i.imgur.com/5GyOHD5.png)
+
 # Installation
 
 [(Back to top)](#table-of-contents)
+
+[(Back to top)](#table-of-contents)
+
+To use this project please follow the steps below
+
+- clone this repo on your device using the command `git clone`
+- `cd` into the `nn-Common` folder
+- Run `npm install` to install dependencies
+- Create a `.env.local` file in the root folder. It should contain the following:
+
+```
+NEXT_PUBLIC_AIRTABLE_API_KEY=Airtable API Key
+NEXT_PUBLIC_AIRTABLE_BASE_ID= Airtable Base ID
+```
+
+- Run `npm run dev` to run the app
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
