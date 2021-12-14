@@ -33,10 +33,6 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details. -->
 
-# **Apprenticeship project report**
-
-The following sections are required. Your report is supposed to demonstrate a certain set of knowledge, skills and behaviours. These are listed alongside the relevant questions as quotes.
-
 ## **Introduction**
 
 - **What are you building?**
@@ -48,8 +44,12 @@ The following sections are required. Your report is supposed to demonstrate a ce
 
 ## **Project scope**
 
-- What are you *not* building?
+- What are you _not_ building?
+- [ ] We are not building anything discussed beyond the meetings with the product owners
+
 - How did you decide what features were important?
+- [ ] The minimum viable product (MVP) is the most important aspect of the project which was discussed with the product owners
+- [ ] Orginasing events, creating events, participants getting email verifications and InCommon receiving email when a new user has registered
 
 ## **Project plan**
 
@@ -59,7 +59,7 @@ The following sections are required. Your report is supposed to demonstrate a ce
 
 We used the Kanban board to layout our sprint highlighting User Story, Stretch, Tech Spike and estimation (es).
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ef262b86-2707-4dc4-be49-e1825902c375/Untitled.png)
+![Untitled](https://www.notion.so/In-common-Project-b888c43f436645d2998ef3fbc1a4347a#70898d3196734757aa648cce4f11505d)
 
 Each issues in the kanban board has got tasks. They can tick each one of them off
 
@@ -139,9 +139,11 @@ Tech Spikes
   - Can set columns to auto-formatted Text, Date, Labels, Link to other other Tables...
   - Can view & edit values from here
 - **Airtable API**:
+
   - Handle Tables from webpage: Display, Add, Update, Delete
   - **Limits**: The API is limited to 5 requests per second per base. If you exceed this rate, you will receive a 429 status code and will need to wait 30 seconds before subsequent requests will succeed.
   - **Set up**:
+
   ```jsx
   $ npm install airtable
 
