@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { auth } from '../firebase';
 import { onAuthStateChanged } from '@firebase/auth';
 import { Router } from 'next/router';
+import Header from '../components/Header/Header';
 import '/styles/nprogress.css';
 import nProgress from 'nprogress';
 Router.events.on('routeChangeStart', nProgress.start);
@@ -17,6 +18,7 @@ function MyApp({ Component, pageProps }) {
     setUser(currentUser);
   });
 
+
   useEffect(() => {
     if (user) {
       fetch(`/api/approvalByUid?uid=${user.uid}`)
@@ -25,7 +27,14 @@ function MyApp({ Component, pageProps }) {
     }
   }, [user]);
 
-  return <Component {...pageProps} user={user} approved={approved} />;
+
+  return (
+    <>
+      <Header user={user} />
+      <Component {...pageProps} user={user} approved={approved} />
+    </>
+  );
+
 }
 
 export default MyApp;
