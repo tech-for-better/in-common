@@ -12,29 +12,27 @@ Router.events.on('routeChangeComplete', nProgress.done);
 
 function MyApp({ Component, pageProps }) {
   const [user, setUser] = useState(null);
-  const [approved, setApproved] = useState(false);
+  // const [approved, setApproved] = useState(false);
 
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
   });
 
+  // useEffect(() => {
+  //   if (user) {
+  //     fetch(`/api/approvalByUid?uid=${user.uid}`)
+  //       .then((data) => data.json())
+  //       .then((json) => setApproved(json.approval));
+  //   }
+  // }, [user]);
 
-  useEffect(() => {
-    if (user) {
-      fetch(`/api/approvalByUid?uid=${user.uid}`)
-        .then((data) => data.json())
-        .then((json) => setApproved(json.approval));
-    }
-  }, [user]);
-
-
+  console.log(user);
   return (
     <>
       <Header user={user} />
-      <Component {...pageProps} user={user} approved={approved} />
+      <Component {...pageProps} user={user} />
     </>
   );
-
 }
 
 export default MyApp;
