@@ -87,7 +87,7 @@ What can you do?
 To use this project please follow the steps below
 
 - clone this repo on your device using the command `git clone`
-- `cd` into the `nn-Common` folder
+- `cd` into the `in-Common` folder
 - Run `npm install` to install dependencies
 - Create a `.env.local` file in the root folder. It should contain the following:
 
