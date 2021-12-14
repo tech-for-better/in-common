@@ -23,15 +23,6 @@ export default function EventSummary({
   };
 
   const [loading, setLoading] = useState(false);
-  // const [airtableUser, setAirtableUser] = useState({});
-
-  // useEffect(() => {
-  //   if (user) {
-  //     fetch(`/api/userByUid?uid=${user.uid}`)
-  //       .then((data) => data.json())
-  //       .then((json) => setAirtableUser(json.airtableuser));
-  //   }
-  // }, []);
 
   async function addEvent() {
     try {
@@ -43,6 +34,7 @@ export default function EventSummary({
 
       const data = {
         Activity: newEvent.activity,
+        Status: 'Sent',
         'Group Size': newEvent.size,
         Notes: newEvent.notes,
         'Suggested Dates': JSON.stringify(newEvent.date),
