@@ -55,7 +55,7 @@ export default function EventSize({
                 <MenuItem value={'1-5'}>1 - 5</MenuItem>
                 <MenuItem value={'6-10'}>6 - 10</MenuItem>
                 <MenuItem value={'11-15'}>11 - 15</MenuItem>
-                <MenuItem value={'16-10'}>16 - 20</MenuItem>
+                <MenuItem value={'16-20'}>16 - 20</MenuItem>
                 <MenuItem value={'21-25'}>21 - 25</MenuItem>
                 <MenuItem value={'26-30'}>26 - 30</MenuItem>
                 <MenuItem value={'31-35'}>31 - 35</MenuItem>
