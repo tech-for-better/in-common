@@ -1,14 +1,18 @@
 import SignUpComponent from '../components/Signup/SignUpComponent';
-import Confirmation from '../components/Signup/Confirmation';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
-export default function Signup({ user }) {
+export default function Signup({ user, approved }) {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user && !approved) router.push('/approval');
+    if (user && approved) router.push('/dashboard');
+  }, [user, approved, router]);
+
   return (
     <>
-      {user?.email ? (
-        <Confirmation user={user} />
-      ) : (
-        <SignUpComponent user={user} />
-      )}
+      <SignUpComponent user={user} />
     </>
   );
 }

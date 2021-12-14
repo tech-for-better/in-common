@@ -18,7 +18,6 @@ function MyApp({ Component, pageProps }) {
     setUser(currentUser);
   });
 
-
   useEffect(() => {
     if (user) {
       fetch(`/api/approvalByUid?uid=${user.uid}`)
@@ -27,14 +26,12 @@ function MyApp({ Component, pageProps }) {
     }
   }, [user]);
 
-
   return (
     <>
       <Header user={user} />
       <Component {...pageProps} user={user} approved={approved} />
     </>
   );
-
 }
 
 export default MyApp;

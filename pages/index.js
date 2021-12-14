@@ -1,10 +1,15 @@
-import * as React from 'react';
-import ApprovalSplash from '../components/ApprovalSplash/ApprovalSplash';
-import Dashboard from '../components/Dashboard/Dashboard';
-import Login from '../components/Login/Login';
+import Loading from '../components/Loading/Loading';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
-export default function Index(props) {
-  if (props.user && props.approved) return <Dashboard {...props} />;
-  if (props.user && !props.approved) return <ApprovalSplash />;
-  return <Login {...props} />;
+export default function Index({ user, approved }) {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user && !approved) router.push('/approval');
+    if (!user && !approved) router.push('/login');
+    if (user && approved) router.push('/dashboard');
+  }, [user, approved, router]);
+
+  return <Loading />;
 }

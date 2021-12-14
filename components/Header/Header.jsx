@@ -18,8 +18,7 @@ export default function Header({ user }) {
       <Box sx={{ width: 180 }}>
         <Image src={Logo} alt="InCommon Logo" objectFit={'contain'} />
       </Box>
-      {/* {user ? <MenuDropDown/> : <Box sx={{ width: 74 }} />} */}
-      <MenuDropDown />
+      {user ? <MenuDropDown /> : <Box sx={{ width: 74 }} />}
     </Box>
   );
 }
