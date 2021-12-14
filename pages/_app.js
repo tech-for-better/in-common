@@ -4,6 +4,7 @@ import { auth } from '../firebase';
 import { onAuthStateChanged } from '@firebase/auth';
 import { base } from '../lib/init-airtable';
 import { Router } from 'next/router';
+import Header from '../components/Header/Header';
 import '/styles/nprogress.css';
 import nProgress from 'nprogress';
 Router.events.on('routeChangeStart', nProgress.start);
@@ -28,7 +29,12 @@ function MyApp({ Component, pageProps }) {
     // }
   });
 
-  return <Component {...pageProps} user={user} approved={approved} />;
+  return (
+    <>
+      <Header user={user} />
+      <Component {...pageProps} user={user} approved={approved} />
+    </>
+  );
 }
 
 export default MyApp;

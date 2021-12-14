@@ -11,6 +11,7 @@ import {
   Typography,
 } from '@mui/material';
 import MenuDropDown from '../Menu/MenuDropDown';
+import Header from '../Header/Header';
 
 import { useState, useEffect } from 'react';
 
@@ -33,9 +34,9 @@ export default function EventLocation({
 
   return (
     <>
-      <MenuDropDown />
       <Container component="main" maxWidth="xs">
         <Card
+          elevation={1}
           sx={{
             minWidth: 275,
             padding: 5,
