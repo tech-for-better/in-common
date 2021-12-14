@@ -10,7 +10,7 @@ export default function EventsPage({ user }) {
       fetch(`/api/eventsByUid?uid=${user.uid}`)
         .then((data) => data.json())
         .then((json) => setEvents(json.eventlist));
-      /*
+      /*Notes:
          result.map(
           if(Recipient UID = me && Status = "Sent") {inbox}
           if(Sender UID = me && Status = "Sent") {outbox}
