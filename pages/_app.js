@@ -21,12 +21,15 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     try {
       if (user) {
-        fetch(`/api/approvalByUid?ui=${user.uid}`)
-          .then((data) => data.json())
+        fetch(`/api/approvalByUid?uid=${user.uid}`)
+          .then((data) => {
+            if (!data.ok) {
+              throw Error('Could not fetch the Data');
+            }
+            console.log(data);
+            return data.json();
+          })
           .then((json) => setApproved(json.approval));
-        // .then((data) => console.log(data));
-
-        // .catch((error) => console.log(error));
       }
     } catch (err) {
       console.log(err);

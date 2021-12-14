@@ -2,10 +2,6 @@ import { base } from '../../lib/init-airtable';
 
 export default function handler(req, res) {
   const uid = req.query.uid;
-  // console.log(uid);
-  // if (uid === undefined || uid.length === 0) {
-  //   throw new Error('user id does not exist');
-  // }
 
   base('Accounts')
     .select({
