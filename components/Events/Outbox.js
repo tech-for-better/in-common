@@ -1,3 +1,5 @@
+import { Container } from '@mui/material';
+
 export default function Outbox({ arr }) {
   return (
     <div>

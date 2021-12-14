@@ -46,7 +46,7 @@ export default function EventsPage({ user }) {
           });
         });
     }
-  }, []);
+  }, [user]);
 
   return (
     <>
