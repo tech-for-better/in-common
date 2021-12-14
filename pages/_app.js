@@ -18,15 +18,20 @@ function MyApp({ Component, pageProps }) {
     setUser(currentUser);
   });
 
-
   useEffect(() => {
-    if (user) {
-      fetch(`/api/approvalByUid?uid=${user.uid}`)
-        .then((data) => data.json())
-        .then((json) => setApproved(json.approval));
+    try {
+      if (user) {
+        fetch(`/api/approvalByUid?ui=${user.uid}`)
+          .then((data) => data.json())
+          .then((json) => setApproved(json.approval));
+        // .then((data) => console.log(data));
+
+        // .catch((error) => console.log(error));
+      }
+    } catch (err) {
+      console.log(err);
     }
   }, [user]);
-
 
   return (
     <>
@@ -34,7 +39,6 @@ function MyApp({ Component, pageProps }) {
       <Component {...pageProps} user={user} approved={approved} />
     </>
   );
-
 }
 
 export default MyApp;
