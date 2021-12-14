@@ -2,7 +2,6 @@ import '../styles/globals.css';
 import { useState, useEffect } from 'react';
 import { auth } from '../firebase';
 import { onAuthStateChanged } from '@firebase/auth';
-import { base } from '../lib/init-airtable';
 import { Router } from 'next/router';
 import '/styles/nprogress.css';
 import nProgress from 'nprogress';
@@ -20,25 +19,9 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     if (user) {
-      fetch(`/api/hello?uid=${user.uid}`)
+      fetch(`/api/approvalByUid?uid=${user.uid}`)
         .then((data) => data.json())
-        .then((json) => console.log(json));
-      // (async () => {
-      //   try {
-      //     base('Accounts')
-      //       .select({
-      //         filterByFormula: `UID = "${user.uid}"`,
-      //       })
-      //       .firstPage((err, records) => {
-      //         if (err) return console.log('Airtable error :', err);
-      //         if (records) {
-      //           setApproved(records[0].fields.Approval);
-      //         }
-      //       });
-      //   } catch (error) {
-      //     console.log(error);
-      //   }
-      // })();
+        .then((json) => setApproved(json.approval));
     }
   }, [user]);
 
