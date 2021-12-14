@@ -14,22 +14,25 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     if (user) {
-      (async () => {
-        try {
-          base('Accounts')
-            .select({
-              filterByFormula: `UID = "${user.uid}"`,
-            })
-            .firstPage((err, records) => {
-              if (err) return console.log('Airtable error :', err);
-              if (records) {
-                setApproved(records[0].fields.Approval);
-              }
-            });
-        } catch (error) {
-          console.log(error);
-        }
-      })();
+      fetch(`/api/hello?uid=${user.uid}`)
+        .then((data) => data.json())
+        .then((json) => console.log(json));
+      // (async () => {
+      //   try {
+      //     base('Accounts')
+      //       .select({
+      //         filterByFormula: `UID = "${user.uid}"`,
+      //       })
+      //       .firstPage((err, records) => {
+      //         if (err) return console.log('Airtable error :', err);
+      //         if (records) {
+      //           setApproved(records[0].fields.Approval);
+      //         }
+      //       });
+      //   } catch (error) {
+      //     console.log(error);
+      //   }
+      // })();
     }
   }, [user]);
 
