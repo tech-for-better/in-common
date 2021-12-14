@@ -53,6 +53,7 @@ export default function Events({ user }) {
   if (stage === 5)
     return (
       <EventSummary
+        user={user}
         stages={stages}
         setStage={setStage}
         stage={stage}
