@@ -1,4 +1,3 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { base } from '../../lib/init-airtable';
 
 export default function handler(req, res) {
