@@ -63,9 +63,9 @@ export default function EventDate({
           <Typography variant="h6">Event Date</Typography>
 
           {newEvent.date
-            ? newEvent.date.map((date) => (
+            ? newEvent.date.map((date, i) => (
                 <>
-                  <p key={date}>{`${moment(date).format('LLL')}`}</p>
+                  <p key={i}>{`${moment(date).format('LLL')}`}</p>
                   <Button onClick={() => deleteDate(date)} variant="outlined">
                     delete
                   </Button>

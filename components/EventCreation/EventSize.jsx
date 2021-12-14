@@ -53,12 +53,12 @@ export default function EventSize({
                 onChange={handleChange}
               >
                 <MenuItem value={'1-5'}>1 - 5</MenuItem>
-                <MenuItem value={'5-10'}>5 - 10</MenuItem>
-                <MenuItem value={'10-15'}>10 - 15</MenuItem>
-                <MenuItem value={'15-10'}>15 - 20</MenuItem>
-                <MenuItem value={'20-25'}>20 - 25</MenuItem>
-                <MenuItem value={'25-30'}>25 - 30</MenuItem>
-                <MenuItem value={'30-35'}>30 - 35</MenuItem>
+                <MenuItem value={'6-10'}>6 - 10</MenuItem>
+                <MenuItem value={'11-15'}>11 - 15</MenuItem>
+                <MenuItem value={'16-10'}>16 - 20</MenuItem>
+                <MenuItem value={'21-25'}>21 - 25</MenuItem>
+                <MenuItem value={'26-30'}>26 - 30</MenuItem>
+                <MenuItem value={'31-35'}>31 - 35</MenuItem>
               </Select>
             </FormControl>
           </Box>
