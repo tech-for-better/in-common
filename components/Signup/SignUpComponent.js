@@ -1,10 +1,5 @@
 import { auth } from '../../firebase';
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-} from '@firebase/auth';
+import { createUserWithEmailAndPassword } from '@firebase/auth';
 import { useState } from 'react';
 import {
   Card,
@@ -19,42 +14,14 @@ import {
   FormControl,
 } from '@mui/material';
 
-import { base } from '../../lib/init-airtable';
-
 export default function SignUpComponent({ user }) {
   const [signUpEmail, setSignUpEmail] = useState('');
   const [signUpPassword, setSignUpPassword] = useState('');
   const [type, setType] = useState('');
   const [orgName, setOrgName] = useState('');
-  const [orgAddress, setOrgAddress] = useState('');
+  const [contactEmail, setContactEmail] = useState('');
   const [contactName, setContactName] = useState('');
   const [contactNumber, setContactNumber] = useState('');
-
-  const makeAirtableAccount = async (uid) => {
-    const field = {
-      UID: uid,
-      Email: signUpEmail,
-      Type: type,
-      'Organisation Name': orgName,
-      'Organisation Address': orgAddress,
-      'Primary Contact Name': contactName,
-      'Primary Contact Number': contactNumber,
-    };
-    const tableAccounts = base('Accounts');
-
-    const entry = await tableAccounts.create(
-      [{ fields: field }],
-      function (err, records) {
-        if (err) {
-          console.error(err);
-          return;
-        }
-        records.forEach(function (record) {
-          console.log(record.getId());
-        });
-      }
-    );
-  };
 
   async function signUp() {
     try {
@@ -63,7 +30,26 @@ export default function SignUpComponent({ user }) {
         signUpEmail,
         signUpPassword
       );
-      await makeAirtableAccount(user.user.uid);
+
+      const data = {
+        UID: user.user.uid,
+        'Login Email': signUpEmail,
+        'Organisation Type': type,
+        'Organisation Name': orgName,
+        'Primary Contact Email': contactEmail,
+        'Primary Contact Name': contactName,
+        'Primary Contact Phone': contactNumber,
+      };
+
+      await fetch('/api/signUp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => response.json())
+        .then((data) => console.log(data));
     } catch (error) {
       console.log(error);
       alert('sorry we could not sign you up');
@@ -72,7 +58,6 @@ export default function SignUpComponent({ user }) {
 
   return (
     <>
-      {/* {user ? <Confirmation /> : console.log('did not sign in')} */}
       <Container component="main" maxWidth="xs">
         <Card
           sx={{
@@ -126,20 +111,6 @@ export default function SignUpComponent({ user }) {
             </Box>
 
             <Box sx={{ mb: 2 }}>
-              <label hidden htmlFor="Organisation Address">
-                Organisation Address
-              </label>
-              <TextField
-                variant="outlined"
-                id="filled-organisation-address-input"
-                label="Organisation Address"
-                autoComplete="current-organisation-address"
-                onChange={(e) => setOrgAddress(e.target.value)}
-                fullWidth
-              />
-            </Box>
-
-            <Box sx={{ mb: 2 }}>
               <label hidden htmlFor="Primary Contact Name">
                 Primary Contact Name
               </label>
@@ -149,6 +120,20 @@ export default function SignUpComponent({ user }) {
                 label="Primary Contact Name"
                 autoComplete="current-primary-contact-name"
                 onChange={(e) => setContactName(e.target.value)}
+                fullWidth
+              />
+            </Box>
+
+            <Box sx={{ mb: 2 }}>
+              <label hidden htmlFor="Organisation Address">
+                Primary Contact Email
+              </label>
+              <TextField
+                variant="outlined"
+                id="filled-organisation-email-input"
+                label="Primary Contact Email"
+                autoComplete="current-organisation-email"
+                onChange={(e) => setContactEmail(e.target.value)}
                 fullWidth
               />
             </Box>
@@ -169,12 +154,12 @@ export default function SignUpComponent({ user }) {
 
             <Box sx={{ mb: 2 }}>
               <label hidden htmlFor="email">
-                Email
+                Login Email
               </label>
               <TextField
                 variant="outlined"
                 id="filled-email-input"
-                label="Email"
+                label="Login Email"
                 type="email"
                 autoComplete="current-email"
                 onChange={(e) => setSignUpEmail(e.target.value)}
