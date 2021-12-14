@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 
 export default function Events({ arr }) {
+  // console.log(arr);
   return (
     <div>
       {!arr ? (
@@ -28,53 +29,36 @@ export default function Events({ arr }) {
                 mt: 5,
               }}
             >
-              <Card> Activity: {record.fields.Activity}</Card>
+              <p>
+                Event Requested by {record.fields['Sender Organisation Name']}{' '}
+                and Sent to {record.fields['Recipient Organisation Name']}
+              </p>
+              <p>
+                The suggested Activity is {record.fields.Activity} with a group
+                size of {record.fields['Group size']} people
+              </p>
+
               <Card
                 sx={{
                   marginTop: 2,
                 }}
               >
-                {' '}
-                Status: {record.fields.Status}
+                Please confirm a date and time below:
+                {record.fields['Suggested Dates']}
               </Card>
               <Card
                 sx={{
                   marginTop: 2,
                 }}
               >
-                {' '}
-                Recipient: {record.fields.Recipient}
+                The confirmed date is {record.fields['Confirmed Date']}
               </Card>
               <Card
                 sx={{
                   marginTop: 2,
                 }}
               >
-                {' '}
-                Sender: {record.fields.Sender}
-              </Card>
-              <Card
-                sx={{
-                  marginTop: 2,
-                }}
-              >
-                Date Suggestions: {record.fields['Date Suggestions']}{' '}
-              </Card>
-              <Card
-                sx={{
-                  marginTop: 2,
-                }}
-              >
-                {' '}
-                Duration: {record.fields.Duration}
-              </Card>
-              <Card
-                sx={{
-                  marginTop: 2,
-                }}
-              >
-                {' '}
-                Group Size: {record.fields['Group size']}
+                Additional Notes from your partner: {record.fields.Notes}
               </Card>
             </Card>
           </Container>

@@ -53,10 +53,10 @@ export default function EventSummary({
         body: JSON.stringify(data),
       })
         .then((response) => response.json())
-        .then((data) => console.log(data));
+        .then((data) => console.log(data)).then(setLoading(true))
     } catch (error) {
       console.log(error);
-      alert('We couldn"t send your event');
+      alert('We could not send your event');
     }
   }
 
