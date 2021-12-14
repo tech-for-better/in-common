@@ -11,22 +11,36 @@ Router.events.on('routeChangeError', nProgress.done);
 Router.events.on('routeChangeComplete', nProgress.done);
 
 function MyApp({ Component, pageProps }) {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
   const [approved, setApproved] = useState(false);
 
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
-    // if (currentUser) {
-    //   base('Accounts')
-    //     .select({
-    //       filterByFormula: `UID = "${currentUser.uid}"`,
-    //     })
-    //     .firstPage((err, records) => {
-    //       if (err) return console.log('Airtable error :', err);
-    //       if (records) return setApproved(records[0].fields.Approval);
-    //     });
-    // }
   });
+
+  useEffect(() => {
+    if (user) {
+      fetch(`/api/hello?uid=${user.uid}`)
+        .then((data) => data.json())
+        .then((json) => console.log(json));
+      // (async () => {
+      //   try {
+      //     base('Accounts')
+      //       .select({
+      //         filterByFormula: `UID = "${user.uid}"`,
+      //       })
+      //       .firstPage((err, records) => {
+      //         if (err) return console.log('Airtable error :', err);
+      //         if (records) {
+      //           setApproved(records[0].fields.Approval);
+      //         }
+      //       });
+      //   } catch (error) {
+      //     console.log(error);
+      //   }
+      // })();
+    }
+  }, [user]);
 
   return <Component {...pageProps} user={user} approved={approved} />;
 }
