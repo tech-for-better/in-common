@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { auth } from '../../firebase';
+
 import { styled, alpha } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
@@ -13,6 +15,16 @@ import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import LogoutIcon from '@mui/icons-material/Logout';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import MenuIcon from '@mui/icons-material/Menu';
+import { signOut } from '@firebase/auth';
+
+async function logOut() {
+  try {
+    await signOut(auth);
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -74,11 +86,16 @@ export default function MenuDropDown() {
         aria-controls="demo-customized-menu"
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
-        variant="outlined"
+        variant="text"
         disableElevation
         onClick={handleClick}
+        size="large"
+        sx={{
+          minWidth: 0,
+          minHeight: 0,
+        }}
       >
-        Menu
+        <MenuIcon fontSize="large" />
       </Button>
       <StyledMenu
         id="demo-customized-menu"
@@ -102,7 +119,14 @@ export default function MenuDropDown() {
           <HelpOutlineIcon />
           Help
         </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem
+          onClick={(e) => {
+            e.preventDefault();
+            logOut();
+            handleClose;
+          }}
+          disableRipple
+        >
           <LogoutIcon />
           Logout
         </MenuItem>

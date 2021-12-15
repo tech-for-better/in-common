@@ -55,8 +55,9 @@ export default function EventActivity({
                 label="Activity"
                 onChange={handleChange}
               >
-                <MenuItem value={'Reading'}>Reading</MenuItem>
-                <MenuItem value={'Interview'}>Interview</MenuItem>
+                <MenuItem value={'Intergenerational Event'}>
+                  Intergenerational Event
+                </MenuItem>
               </Select>
             </FormControl>
           </Box>

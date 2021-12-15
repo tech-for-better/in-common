@@ -16,12 +16,49 @@ export default function EventSummary({
   setNewEvent,
   newEvent,
   stages,
+  user,
 }) {
   const handleChange = (e) => {
     setNewEvent((oldEvent) => ({ ...oldEvent, notes: e.target.value }));
   };
 
   const [loading, setLoading] = useState(false);
+
+  async function addEvent() {
+    try {
+      const airtableUser = await fetch(`/api/userByUid?uid=${user.uid}`)
+        .then((data) => data.json())
+        .then((json) => json.airtableuser);
+
+      console.log(airtableUser);
+
+      const data = {
+        Activity: newEvent.activity,
+        Status: 'Sent',
+        'Group Size': newEvent.size,
+        Notes: newEvent.notes,
+        'Suggested Dates': JSON.stringify(newEvent.date),
+        'Sender UID': user.uid,
+        'Sender Organisation Name': airtableUser['Organisation Name'],
+        'Recipient UID': airtableUser['Partner UID'],
+        'Recipient Organisation Name':
+          airtableUser['Partner Organisation Name'],
+      };
+
+      await fetch('/api/createEvent', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => response.json())
+        .then((data) => console.log(data)).then(setLoading(true))
+    } catch (error) {
+      console.log(error);
+      alert('We could not send your event');
+    }
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -53,9 +90,11 @@ export default function EventSummary({
           <Button
             sx={{ padding: 1.85 }}
             variant="outlined"
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
+              addEvent();
               console.log('submit');
-              console.log({ newEvent });
+              console.log(user.uid);
             }}
           >
             {loading ? 'Sending...' : 'Send Event Request'}

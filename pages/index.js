@@ -1,10 +1,22 @@
 import * as React from 'react';
-import ApprovalSplash from '../components/ApprovalSplash/ApprovalSplash';
-import Dashboard from '../components/Dashboard/Dashboard';
+import Loading from '../components/Loading/Loading';
 import Login from '../components/Login/Login';
+import Events from '../components/Events/Events';
 
-export default function Index(props) {
-  if (props.user && props.approved) return <Dashboard {...props} />;
-  if (props.user && !props.approved) return <ApprovalSplash />;
-  return <Login {...props} />;
+export default function Index({ user, error, loading, root }) {
+  if (loading) {
+    return <Loading />;
+  }
+  if (error) {
+    return (
+      <div>
+        <p>Error: {error}</p>
+      </div>
+    );
+  }
+  if (user) {
+    return <Events user={user} />;
+  }
+
+  return <Login root={root} />;
 }

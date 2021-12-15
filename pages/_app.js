@@ -5,42 +5,42 @@ import { onAuthStateChanged } from '@firebase/auth';
 import { Router } from 'next/router';
 import Header from '../components/Header/Header';
 import '/styles/nprogress.css';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { red } from '@mui/material/colors';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
 import nProgress from 'nprogress';
 Router.events.on('routeChangeStart', nProgress.start);
 Router.events.on('routeChangeError', nProgress.done);
 Router.events.on('routeChangeComplete', nProgress.done);
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: red[500],
+    },
+  },
+});
+
+
 function MyApp({ Component, pageProps }) {
-  const [user, setUser] = useState(null);
-  const [approved, setApproved] = useState(false);
+  const [user, loading, error] = useAuthState(auth);
+  // const [approved, setApproved] = useState(false);
 
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
+  // useEffect(() => {
+  //   if (user) {
+  //     fetch(`/api/approvalByUid?uid=${user.uid}`)
+  //       .then((data) => data.json())
+  //       .then((json) => setApproved(json.approval));
+  //   }
+  // }, [user]);
 
-  useEffect(() => {
-    try {
-      if (user) {
-        fetch(`/api/approvalByUid?uid=${user.uid}`)
-          .then((data) => {
-            if (!data.ok) {
-              throw Error('Could not fetch the Data');
-            }
-            console.log(data);
-            return data.json();
-          })
-          .then((json) => setApproved(json.approval));
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }, [user]);
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Header user={user} />
-      <Component {...pageProps} user={user} approved={approved} />
-    </>
+      <Component {...pageProps} loading={loading} user={user} error={error} />
+    </ThemeProvider>
   );
 }
 
