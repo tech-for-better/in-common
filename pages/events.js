@@ -65,7 +65,7 @@ export default function EventsPage({ user }) {
           {/* <Events arr={outboxArr} /> */}
 
           <h2>Confirmed Events</h2>
-          <Events arr={confirmed} />
+          <Confirmed arr={confirmed} />
           {/* <Events arr={confirmedArr} /> */}
         </div>
       ) : (

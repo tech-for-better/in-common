@@ -53,6 +53,8 @@ export default function InboxItem({ record }) {
           The suggested Activity is {record.fields.Activity} with a group size
           of {record.fields['Group Size']} people
         </p>
+        <p>Notes:</p>
+        <p>{record.fields.Notes}</p>
         <Typography variant="h6">Please choose a date and time</Typography>
         <Box sx={{ minWidth: 120 }}>
           <FormControl fullWidth required>

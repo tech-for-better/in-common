@@ -45,6 +45,8 @@ export default function Outbox({ arr }) {
                   <p key={date}>{moment(date).format('Do MMMM YYYY, h:mma')}</p>
                 ))}
               </Box>
+              <p>Notes:</p>
+              <p>{record.fields.Notes}</p>
             </Card>
           </Container>
         ))
