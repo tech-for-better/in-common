@@ -8,19 +8,9 @@ import EventSize from '../components/EventCreation/EventSize';
 export default function Events({ user }) {
   const [stage, setStage] = useState(1);
   const [newEvent, setNewEvent] = useState({});
-  const stages = 5;
+  const stages = 4;
 
   if (stage === 1)
-    return (
-      <EventLocation
-        stages={stages}
-        setStage={setStage}
-        stage={stage}
-        setNewEvent={setNewEvent}
-        newEvent={newEvent}
-      />
-    );
-  if (stage === 2)
     return (
       <EventActivity
         stages={stages}
@@ -30,7 +20,7 @@ export default function Events({ user }) {
         newEvent={newEvent}
       />
     );
-  if (stage === 3)
+  if (stage === 2)
     return (
       <EventSize
         stages={stages}
@@ -40,7 +30,7 @@ export default function Events({ user }) {
         newEvent={newEvent}
       />
     );
-  if (stage === 4)
+  if (stage === 3)
     return (
       <EventDate
         stages={stages}
@@ -50,7 +40,7 @@ export default function Events({ user }) {
         newEvent={newEvent}
       />
     );
-  if (stage === 5)
+  if (stage === 4)
     return (
       <EventSummary
         user={user}
