@@ -1,4 +1,3 @@
-import moment from 'moment';
 import { base } from '../../lib/init-airtable';
 
 export default function handler(req, res) {

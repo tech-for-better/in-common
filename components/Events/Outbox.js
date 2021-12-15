@@ -1,21 +1,11 @@
-import {
-  Container,
-  Box,
-  Alert,
-  Card,
-  InputLabel,
-  FormControl,
-  MenuItem,
-  Select,
-  Typography,
-} from '@mui/material';
+import { Container, Box, Card, Typography } from '@mui/material';
 import moment from 'moment';
 
 export default function Outbox({ arr }) {
   return (
     <div>
-      {arr.length === 0 ? (
-        <p>No events yet</p>
+      {arr.length === 0 || !arr ? (
+        <p>Nothing in Outbox</p>
       ) : (
         arr.map((record) => (
           <Container maxWidth="xs" key={record.id}>
@@ -38,7 +28,7 @@ export default function Outbox({ arr }) {
                 size of {record.fields['Group Size']} people
               </p>
               <Typography variant="h6">
-                You suggested these dates and times
+                You suggested these dates and times:
               </Typography>
               <Box sx={{ minWidth: 120 }}>
                 {JSON.parse(record.fields['Suggested Dates']).map((date) => (

@@ -1,7 +1,6 @@
 import {
   Container,
   Box,
-  Alert,
   Card,
   InputLabel,
   FormControl,
@@ -15,7 +14,6 @@ import { useState } from 'react';
 
 export default function InboxItem({ record }) {
   const [confirmedDate, setConfirmedDate] = useState('');
-  console.log(confirmedDate);
 
   async function addConfirm() {
     const data = {
@@ -85,9 +83,7 @@ export default function InboxItem({ record }) {
                 window.location.reload(false);
               }}
             >
-              {' '}
               Confirm
-              {/* {loading ? 'Sending...' : 'Send Event Request'} */}
             </Button>
           </FormControl>
         </Box>

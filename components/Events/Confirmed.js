@@ -1,21 +1,11 @@
-import {
-  Container,
-  Box,
-  Alert,
-  Card,
-  InputLabel,
-  FormControl,
-  MenuItem,
-  Select,
-  Typography,
-} from '@mui/material';
+import { Container, Card, Typography } from '@mui/material';
 import moment from 'moment';
 
 export default function Confirmed({ arr }) {
   return (
     <div>
-      {arr.length === 0 ? (
-        <p>No events yet</p>
+      {arr.length === 0 || !arr ? (
+        <p>No confirmed events</p>
       ) : (
         arr.map((record) => (
           <Container maxWidth="xs" key={record.id}>
