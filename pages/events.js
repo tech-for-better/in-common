@@ -3,8 +3,9 @@ import { useState, useEffect } from 'react';
 import Inbox from '../components/Events/Inbox';
 import Outbox from '../components/Events/Outbox';
 import Confirmed from '../components/Events/Confirmed';
+import Loading from '../components/Loading/Loading';
 
-export default function EventsPage({ user }) {
+export default function EventsPage({ user, error, loading, root }) {
   const [inbox, setInbox] = useState([]);
   const [outbox, setOutbox] = useState([]);
   const [confirmed, setConfirmed] = useState([]);
@@ -38,24 +39,38 @@ export default function EventsPage({ user }) {
     }
   }, [user]);
 
-  return (
-    <>
-      {user ? (
-        <div>
-          <h1>All Events</h1>
+  if (loading) {
+    return <Loading />;
+  }
+  if (error) {
+    return (
+      <div>
+        <p>Error: {error}</p>
+      </div>
+    );
+  }
+  if (user) {
+    return (
+      <>
+        {user ? (
+          <div>
+            <h1>All Events</h1>
 
-          <h2>Inbox</h2>
-          <Inbox arr={inbox} />
+            <h2>Inbox</h2>
+            <Inbox arr={inbox} />
 
-          <h2>Outbox</h2>
-          <Outbox arr={outbox} />
+            <h2>Outbox</h2>
+            <Outbox arr={outbox} />
 
-          <h2>Confirmed Events</h2>
-          <Confirmed arr={confirmed} />
-        </div>
-      ) : (
-        <Login />
-      )}
-    </>
-  );
+            <h2>Confirmed Events</h2>
+            <Confirmed arr={confirmed} />
+          </div>
+        ) : (
+          <Login />
+        )}
+      </>
+    );
+  }
+
+  return <Login root={root} />;
 }
