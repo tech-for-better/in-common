@@ -3,8 +3,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 export default function Loading() {
   return (
-    <Box sx={{ width: '100%' }}>
-      <CircularProgress />
+    <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
+      <CircularProgress sx={{ color: '#f55e61' }} />
     </Box>
   );
 }

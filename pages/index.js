@@ -3,7 +3,7 @@ import Loading from '../components/Loading/Loading';
 import Login from '../components/Login/Login';
 import Events from '../components/Events/Events';
 
-export default function Index({ user, error, loading }) {
+export default function Index({ user, error, loading, root }) {
   if (loading) {
     return <Loading />;
   }
@@ -18,5 +18,5 @@ export default function Index({ user, error, loading }) {
     return <Events user={user} />;
   }
 
-  return <Login />;
+  return <Login root={root} />;
 }
