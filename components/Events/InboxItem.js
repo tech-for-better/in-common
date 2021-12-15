@@ -18,25 +18,18 @@ export default function InboxItem({ record }) {
   console.log(confirmedDate);
 
   async function addConfirm() {
-    try {
-      const data = {
-        recordId: record.id,
-        confirmedDate,
-      };
+    const data = {
+      recordId: record.id,
+      confirmedDate,
+    };
 
-      await fetch('/api/confirmEventDate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data));
-    } catch (error) {
-      console.log(error);
-      alert('We could not send your event');
-    }
+    await fetch('/api/confirmEventDate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
   }
 
   return (
@@ -76,10 +69,7 @@ export default function InboxItem({ record }) {
               }}
             >
               {JSON.parse(record.fields['Suggested Dates']).map((date) => (
-                <MenuItem
-                  key={moment(date).format('Do MMMM YYYY, h:mma')}
-                  value={moment(date).format('Do MMMM YYYY, h:mma')}
-                >
+                <MenuItem key={date} value={date}>
                   {moment(date).format('Do MMMM YYYY, h:mma')}
                 </MenuItem>
               ))}
@@ -87,8 +77,8 @@ export default function InboxItem({ record }) {
             <Button
               sx={{ padding: 1.85 }}
               variant="outlined"
-              onSubmit={(e) => {
-                e.preventDefault();
+              onClick={(e) => {
+                console.log('running confirm');
                 addConfirm();
               }}
             >
