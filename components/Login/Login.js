@@ -24,6 +24,7 @@ export default function Login() {
       await signInWithEmailAndPassword(auth, logInEmail, logInPassword);
     } catch (error) {
       console.log(error);
+      return alert('User does not exist!');
     }
   }
   async function resetPassword() {

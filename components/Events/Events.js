@@ -35,7 +35,7 @@ export default function Events({ arr }) {
               </p>
               <p>
                 The suggested Activity is {record.fields.Activity} with a group
-                size of {record.fields['Group size']} people
+                size of {record.fields['Group Size']} people
               </p>
 
               <Card

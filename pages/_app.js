@@ -22,6 +22,7 @@ const theme = createTheme({
   },
 });
 
+
 function MyApp({ Component, pageProps }) {
   const [user, loading, error] = useAuthState(auth);
   // const [approved, setApproved] = useState(false);
@@ -33,6 +34,7 @@ function MyApp({ Component, pageProps }) {
   //       .then((json) => setApproved(json.approval));
   //   }
   // }, [user]);
+
 
   return (
     <ThemeProvider theme={theme}>
