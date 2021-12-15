@@ -80,6 +80,7 @@ export default function InboxItem({ record }) {
               onClick={(e) => {
                 console.log('running confirm');
                 addConfirm();
+                window.location.reload(false);
               }}
             >
               {' '}
