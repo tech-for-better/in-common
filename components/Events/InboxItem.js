@@ -8,6 +8,7 @@ import {
   MenuItem,
   Select,
   Typography,
+  Button,
 } from '@mui/material';
 import moment from 'moment';
 import { useState } from 'react';
@@ -15,6 +16,29 @@ import { useState } from 'react';
 export default function InboxItem({ record }) {
   const [confirmedDate, setConfirmedDate] = useState('');
   console.log(confirmedDate);
+
+  async function addConfirm() {
+    try {
+      const data = {
+        recordId: record.id,
+        confirmedDate,
+      };
+
+      await fetch('/api/confirmEventDate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+    } catch (error) {
+      console.log(error);
+      alert('We could not send your event');
+    }
+  }
+
   return (
     <Container maxWidth="xs" key={record.id}>
       <Card
@@ -60,6 +84,18 @@ export default function InboxItem({ record }) {
                 </MenuItem>
               ))}
             </Select>
+            <Button
+              sx={{ padding: 1.85 }}
+              variant="outlined"
+              onSubmit={(e) => {
+                e.preventDefault();
+                addConfirm();
+              }}
+            >
+              {' '}
+              Confirm
+              {/* {loading ? 'Sending...' : 'Send Event Request'} */}
+            </Button>
           </FormControl>
         </Box>
       </Card>
