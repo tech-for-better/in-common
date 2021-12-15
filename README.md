@@ -42,7 +42,8 @@ The `web-app` will enable **InCommon** participants (Schools & Retirement homes)
 
 During the design week we used `Miro` for the project planning and the Wireframing/Usability testing we used `Figma`
 
-- [ ] This included but not limited to:
+Design included but not limited to:
+
 - [ ] User stories
 - [ ] Usability questions
 - [ ] Flow layout
