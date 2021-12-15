@@ -1,39 +1,12 @@
-import {
-  Container,
-  Box,
-  Alert,
-  Card,
-  InputLabel,
-  FormControl,
-  MenuItem,
-  Select,
-  Typography,
-} from '@mui/material';
+import InboxItem from './InboxItem';
 
 export default function Inbox({ arr }) {
-  // console.log(arr);
   return (
     <div>
-      {!arr ? (
-        <p>No events yet</p>
+      {arr.length === 0 || !arr ? (
+        <p>Nothing in Inbox</p>
       ) : (
-        arr.map((record) => (
-          <Container maxWidth="xs" key={record.id}>
-            <Card
-              sx={{
-                minWidth: 275,
-                marginTop: 8,
-                padding: 5,
-                borderRadius: 3,
-                backgroundColor: '#bbc3c7',
-                color: 'white',
-                mt: 5,
-              }}
-            >
-              {/* Placeholder */}
-            </Card>
-          </Container>
-        ))
+        arr.map((record) => <InboxItem record={record} key={record.id} />)
       )}
     </div>
   );
