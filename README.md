@@ -8,6 +8,7 @@ We are building a `web-app` for **InCommon**, an organisation that helps connect
 - [Table of contents](#table-of-contents)
 - [Team](#team)
 - [What is the application?](#what-is-the-application)
+- [Design](#design)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
     - [Dependencies](#dependencies)
@@ -36,6 +37,21 @@ We are building a `web-app` for **InCommon**, an organisation that helps connect
 [(Back to top)](#table-of-contents)
 
 The `web-app` will enable **InCommon** participants (Schools & Retirement homes) to organise events with each other, in the process removing InCommon from the planning process. The `web-app` aims to create a tool with the sole purpose of event planning, moving the correspondence away from email where invites can be lost or forgotten,
+
+# Design
+
+During the design week we used `Miro` for the project planning and the Wireframing/Usability testing we used `Figma`
+
+Design included but not limited to:
+
+- [ ] User stories
+- [ ] Usability questions
+- [ ] Flow layout
+- [ ] WireFraming research
+
+![](https://i.imgur.com/zXJACvP.png)
+
+![](https://i.imgur.com/tE8kGHe.gif)
 
 # Features
 
