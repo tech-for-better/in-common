@@ -2,6 +2,8 @@ import Events from '../components/Events/Events';
 import Login from '../components/Login/Login';
 import { useState, useEffect } from 'react';
 import Inbox from '../components/Events/Inbox';
+import Outbox from '../components/Events/Outbox';
+import Confirmed from '../components/Events/Confirmed';
 
 export default function EventsPage({ user }) {
   const [inbox, setInbox] = useState([]);
@@ -59,7 +61,7 @@ export default function EventsPage({ user }) {
           {/* <Events arr={inboxArr} /> */}
 
           <h2>Outbox</h2>
-          <Events arr={outbox} />
+          <Outbox arr={outbox} />
           {/* <Events arr={outboxArr} /> */}
 
           <h2>Confirmed Events</h2>
