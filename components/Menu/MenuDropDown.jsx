@@ -1,22 +1,17 @@
 import * as React from 'react';
 import { auth } from '../../firebase';
-
 import { styled, alpha } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import EditIcon from '@mui/icons-material/Edit';
 import Divider from '@mui/material/Divider';
-import ArchiveIcon from '@mui/icons-material/Archive';
-import FileCopyIcon from '@mui/icons-material/FileCopy';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import LogoutIcon from '@mui/icons-material/Logout';
-import DashboardIcon from '@mui/icons-material/Dashboard';
 import MenuIcon from '@mui/icons-material/Menu';
 import { signOut } from '@firebase/auth';
+import { useRouter } from 'next/router';
 
 async function logOut() {
   try {
@@ -70,6 +65,7 @@ const StyledMenu = styled((props) => (
 }));
 
 export default function MenuDropDown() {
+  const router = useRouter();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -104,13 +100,26 @@ export default function MenuDropDown() {
         }}
         anchorEl={anchorEl}
         open={open}
+        onClick={handleClose}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem
+          onClick={() => {
+            handleClose;
+            router.push('/create-event');
+          }}
+          disableRipple
+        >
           <EditIcon />
           Create Event
         </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem
+          onClick={() => {
+            handleClose;
+            router.push('/');
+          }}
+          disableRipple
+        >
           <EventAvailableIcon />
           Manage Events
         </MenuItem>
