@@ -50,7 +50,7 @@ export default function EventsPage({ user }) {
 
   return (
     <>
-      {user?.email ? (
+      {user ? (
         <div>
           <h1>All Events</h1>
 
