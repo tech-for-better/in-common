@@ -55,7 +55,7 @@ export default function EventsPage({ user }) {
           <h1>All Events</h1>
 
           <h2>Inbox</h2>
-          <Events arr={inbox} />
+          <Inbox arr={inbox} />
           {/* <Events arr={inboxArr} /> */}
 
           <h2>Outbox</h2>
