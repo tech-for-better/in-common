@@ -20,6 +20,8 @@ export default function Login() {
   const [resetPasswordEmail, setResetPasswordEmail] = useState('');
   const [forgotPasswordShow, setForgotPasswordShow] = useState(false);
   const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
+
   console.log({ error });
   async function logIn() {
     try {
@@ -33,8 +35,7 @@ export default function Login() {
   async function resetPassword() {
     try {
       await sendPasswordResetEmail(auth, resetPasswordEmail);
-      console.log('reset email sent');
-      alert('Reset password email sent! Check your junk/spam folder');
+      return setSuccess(true);
     } catch (error) {
       return console.log(error);
     }
@@ -69,6 +70,7 @@ export default function Login() {
                 onChange={(e) => {
                   setLogInEmail(e.target.value);
                   setError(false);
+                  setSuccess(false);
                 }}
                 fullWidth
               />
@@ -85,6 +87,7 @@ export default function Login() {
                 onChange={(e) => {
                   setLogInPassword(e.target.value);
                   setError(false);
+                  setSuccess(false);
                 }}
                 fullWidth
               />
@@ -115,6 +118,11 @@ export default function Login() {
           {error ? (
             <Alert severity="error" sx={{ padding: 1.85 }}>
               Email and/or password is incorrect
+            </Alert>
+          ) : null}
+          {success ? (
+            <Alert severity="success" sx={{ padding: 1.85 }}>
+              Password reset email sent
             </Alert>
           ) : null}
         </Card>
@@ -152,7 +160,10 @@ export default function Login() {
                 label="Email"
                 type="email"
                 autoComplete="current-email"
-                onChange={(e) => setResetPasswordEmail(e.target.value)}
+                onChange={(e) => {
+                  setError(false);
+                  setResetPasswordEmail(e.target.value);
+                }}
                 fullWidth
               />
             </Box>
