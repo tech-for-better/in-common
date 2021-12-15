@@ -11,6 +11,7 @@ import {
   Box,
   TextField,
   Card,
+  Alert,
 } from '@mui/material';
 
 export default function Login() {
@@ -18,13 +19,15 @@ export default function Login() {
   const [logInPassword, setLogInPassword] = useState('');
   const [resetPasswordEmail, setResetPasswordEmail] = useState('');
   const [forgotPasswordShow, setForgotPasswordShow] = useState(false);
-
+  const [error, setError] = useState(false);
+  console.log({ error });
   async function logIn() {
     try {
       await signInWithEmailAndPassword(auth, logInEmail, logInPassword);
     } catch (error) {
       console.log(error);
-      return alert('User does not exist!');
+      // setStatusBase({ msg: 'Success', key: Math.random() });
+      return setError(true);
     }
   }
   async function resetPassword() {
@@ -33,8 +36,7 @@ export default function Login() {
       console.log('reset email sent');
       alert('Reset password email sent! Check your junk/spam folder');
     } catch (error) {
-      console.log(error);
-      alert('There was an error sending your password reset email');
+      return console.log(error);
     }
   }
 
@@ -64,7 +66,10 @@ export default function Login() {
                 label="Email"
                 type="email"
                 autoComplete="current-email"
-                onChange={(e) => setLogInEmail(e.target.value)}
+                onChange={(e) => {
+                  setLogInEmail(e.target.value);
+                  setError(false);
+                }}
                 fullWidth
               />
             </Box>
@@ -77,7 +82,10 @@ export default function Login() {
                 label="Password"
                 type="password"
                 autoComplete="current-password"
-                onChange={(e) => setLogInPassword(e.target.value)}
+                onChange={(e) => {
+                  setLogInPassword(e.target.value);
+                  setError(false);
+                }}
                 fullWidth
               />
             </Box>
@@ -94,7 +102,7 @@ export default function Login() {
             </Button>
             <Button
               variant="outlined"
-              sx={{ padding: 1.85 }}
+              sx={{ padding: 1.85, mb: 2 }}
               onClick={(e) => {
                 e.preventDefault();
                 setForgotPasswordShow(true);
@@ -104,6 +112,11 @@ export default function Login() {
               Forgot password
             </Button>
           </form>
+          {error ? (
+            <Alert severity="error" sx={{ padding: 1.85 }}>
+              Email and/or password is incorrect
+            </Alert>
+          ) : null}
         </Card>
       )}
 
