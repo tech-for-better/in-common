@@ -15,6 +15,7 @@ import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import LogoutIcon from '@mui/icons-material/Logout';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import MenuIcon from '@mui/icons-material/Menu';
 import { signOut } from '@firebase/auth';
 
 async function logOut() {
@@ -85,11 +86,16 @@ export default function MenuDropDown() {
         aria-controls="demo-customized-menu"
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
-        variant="outlined"
+        variant="text"
         disableElevation
         onClick={handleClick}
+        size="large"
+        sx={{
+          minWidth: 0,
+          minHeight: 0,
+        }}
       >
-        Menu
+        <MenuIcon fontSize="large" />
       </Button>
       <StyledMenu
         id="demo-customized-menu"
