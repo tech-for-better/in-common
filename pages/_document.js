@@ -13,10 +13,6 @@ class MyDocument extends Document {
           <meta property="og:site_name" content={meta.title} />
           <meta property="og:description" content={meta.description} />
           <meta property="og:title" content={meta.title} />
-          <meta
-            name="viewport"
-            content="initial-scale=1.0, width=device-width"
-          />
         </Head>
         <body>
           <Main />
