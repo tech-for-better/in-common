@@ -10,8 +10,6 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import MenuDropDown from '../Menu/MenuDropDown';
-import Header from '../Header/Header';
 
 import { useState, useEffect } from 'react';
 
