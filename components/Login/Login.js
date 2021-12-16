@@ -11,30 +11,84 @@ import {
   Box,
   TextField,
   Card,
+  Alert,
+  Stack,
 } from '@mui/material';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+
+const validationSchemaLogin = yup.object({
+  email: yup
+    .string('Enter your email')
+    .email('Enter a valid email')
+    .required('Email is required'),
+  password: yup.string('Enter your password').required('Password is required'),
+});
+
+const validationSchemaForgotPassword = yup.object({
+  emailForgot: yup
+    .string('Enter your email')
+    .email('Enter a valid email')
+    .required('Email is required'),
+});
 
 export default function Login() {
-  const [logInEmail, setLogInEmail] = useState('');
-  const [logInPassword, setLogInPassword] = useState('');
-  const [resetPasswordEmail, setResetPasswordEmail] = useState('');
+  const [error, setError] = useState(false);
+  const [errorForgot, setErrorForgot] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [forgotPasswordShow, setForgotPasswordShow] = useState(false);
+  const [loadingForgot, setLoadingForgot] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const formikLogin = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: validationSchemaLogin,
+    onSubmit: (values) => {
+      setLoading(true);
+      logIn();
+    },
+  });
+
+  const formikForgotPassword = useFormik({
+    initialValues: {
+      emailForgot: '',
+    },
+    validationSchema: validationSchemaForgotPassword,
+    onSubmit: (values) => {
+      setLoadingForgot(true);
+      resetPassword();
+      setTimeout(() => {
+        setForgotPasswordShow(false);
+      }, 1000);
+    },
+  });
 
   async function logIn() {
     try {
-      await signInWithEmailAndPassword(auth, logInEmail, logInPassword);
+      await signInWithEmailAndPassword(
+        auth,
+        formikLogin.values.email,
+        formikLogin.values.password
+      );
+      setError(false);
     } catch (error) {
-      console.log(error);
-      return alert('User does not exist!');
+      setLoading(false);
+      return setError(true);
     }
   }
   async function resetPassword() {
     try {
-      await sendPasswordResetEmail(auth, resetPasswordEmail);
-      console.log('reset email sent');
-      alert('Reset password email sent! Check your junk/spam folder');
+      await sendPasswordResetEmail(
+        auth,
+        formikForgotPassword.values.emailForgot
+      );
+      return setSuccess(true);
     } catch (error) {
-      console.log(error);
-      alert('There was an error sending your password reset email');
+      setLoadingForgot(false);
+      return setErrorForgot(true);
     }
   }
 
@@ -49,61 +103,94 @@ export default function Login() {
             mt: 5,
           }}
         >
-          <form>
-            <Typography component="h1" variant="h5" sx={{ mb: 3 }}>
-              Log in
-            </Typography>
+          <form onSubmit={formikLogin.handleSubmit}>
+            <Stack spacing={3}>
+              <Typography component="h1" variant="h5">
+                Log in
+              </Typography>
 
-            <label hidden htmlFor="email">
-              Email
-            </label>
-            <Box sx={{ mb: 2 }}>
-              <TextField
+              <label hidden htmlFor="email">
+                Email
+              </label>
+              <Box>
+                <TextField
+                  fullWidth
+                  id="email"
+                  name="email"
+                  label="Email"
+                  value={formikLogin.values.email}
+                  onChange={(e) => {
+                    formikLogin.handleChange(e);
+                    setError(false);
+                    setSuccess(false);
+                  }}
+                  error={
+                    formikLogin.touched.email &&
+                    Boolean(formikLogin.errors.email)
+                  }
+                  helperText={
+                    formikLogin.touched.email && formikLogin.errors.email
+                  }
+                />
+              </Box>
+              <label hidden htmlFor="password">
+                Password
+              </label>
+              <Box>
+                <TextField
+                  fullWidth
+                  id="password"
+                  name="password"
+                  label="Password"
+                  type="password"
+                  value={formikLogin.values.password}
+                  onChange={(e) => {
+                    formikLogin.handleChange(e);
+                    setError(false);
+                    setSuccess(false);
+                  }}
+                  error={
+                    formikLogin.touched.password &&
+                    Boolean(formikLogin.errors.password)
+                  }
+                  helperText={
+                    formikLogin.touched.password && formikLogin.errors.password
+                  }
+                />
+              </Box>
+              <Button
                 variant="outlined"
-                id="filled-email-input"
-                label="Email"
-                type="email"
-                autoComplete="current-email"
-                onChange={(e) => setLogInEmail(e.target.value)}
+                sx={{ padding: 1.85 }}
                 fullWidth
-              />
-            </Box>
-            <label hidden htmlFor="password">
-              Password
-            </label>
-            <Box sx={{ mb: 2 }}>
-              <TextField
-                id="filled-password-input"
-                label="Password"
-                type="password"
-                autoComplete="current-password"
-                onChange={(e) => setLogInPassword(e.target.value)}
+                type="submit"
+              >
+                {loading ? 'Logging in...' : 'Log In'}
+              </Button>
+
+              <Button
+                variant="outlined"
+                sx={{ padding: 1.85 }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setForgotPasswordShow(true);
+                }}
                 fullWidth
-              />
-            </Box>
-            <Button
-              variant="outlined"
-              sx={{ mb: 2, padding: 1.85 }}
-              onClick={(e) => {
-                e.preventDefault();
-                logIn();
-              }}
-              fullWidth
-            >
-              Log in
-            </Button>
-            <Button
-              variant="outlined"
-              sx={{ padding: 1.85 }}
-              onClick={(e) => {
-                e.preventDefault();
-                setForgotPasswordShow(true);
-              }}
-              fullWidth
-            >
-              Forgot password
-            </Button>
+              >
+                Forgot password
+              </Button>
+            </Stack>
           </form>
+
+          {error ? (
+            <Alert severity="error" sx={{ padding: 1.85, mt: 2 }}>
+              Email and/or password is incorrect
+            </Alert>
+          ) : null}
+          {success ? (
+            <Alert severity="success" sx={{ padding: 1.85, mt: 2 }}>
+              Password reset email sent
+            </Alert>
+          ) : null}
         </Card>
       )}
 
@@ -116,45 +203,48 @@ export default function Login() {
             mt: 5,
           }}
         >
-          <form
-            onSubmit={async (e) => {
-              e.preventDefault();
-              await resetPassword(auth, resetPasswordEmail);
-              e.target.reset();
-              setForgotPasswordShow(false);
-            }}
-          >
+          <form onSubmit={formikForgotPassword.handleSubmit}>
             <Typography component="h1" variant="h5" sx={{ mb: 3 }}>
               Reset password
             </Typography>
 
-            <label hidden htmlFor="resetPasswordEmail">
+            <label hidden htmlFor="emailForgot">
               Email
             </label>
-            <Box sx={{ mb: 2 }}>
+            <Box>
               <TextField
-                variant="outlined"
-                id="resetPasswordEmail"
-                name="resetPasswordEmail"
-                label="Email"
-                type="email"
-                autoComplete="current-email"
-                onChange={(e) => setResetPasswordEmail(e.target.value)}
                 fullWidth
+                id="emailForgot"
+                name="emailForgot"
+                label="Email"
+                value={formikForgotPassword.values.emailForgot}
+                onChange={(e) => {
+                  formikForgotPassword.handleChange(e);
+                  setErrorForgot(false);
+                }}
+                error={
+                  formikForgotPassword.touched.emailForgot &&
+                  Boolean(formikForgotPassword.errors.emailForgot)
+                }
+                helperText={
+                  formikForgotPassword.touched.emailForgot &&
+                  formikForgotPassword.errors.emailForgot
+                }
               />
             </Box>
             <Button
               variant="outlined"
-              sx={{ mb: 2, padding: 1.85 }}
+              sx={{ mb: 2, padding: 1.85, mt: 2 }}
               type="submit"
               fullWidth
             >
-              Send password reset email
+              {loadingForgot
+                ? 'Sending password reset email...'
+                : 'Send password reset email'}
             </Button>
             <Button
               variant="outlined"
               sx={{ padding: 1.85 }}
-              type="submit"
               fullWidth
               onClick={(e) => {
                 e.preventDefault();
@@ -164,6 +254,11 @@ export default function Login() {
               Back to log in
             </Button>
           </form>
+          {errorForgot ? (
+            <Alert severity="error" sx={{ padding: 1.85, mt: 2 }}>
+              Email is incorrect
+            </Alert>
+          ) : null}
         </Card>
       )}
     </Container>

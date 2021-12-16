@@ -1,6 +1,9 @@
 import { auth } from '../../firebase';
 import { createUserWithEmailAndPassword } from '@firebase/auth';
 import { useState } from 'react';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import 'yup-phone';
 import {
   Card,
   TextField,
@@ -12,33 +15,77 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
+  Stack,
+  FormHelperText,
 } from '@mui/material';
 
-export default function SignUpComponent({ user }) {
-  const [signUpEmail, setSignUpEmail] = useState('');
-  const [signUpPassword, setSignUpPassword] = useState('');
-  const [type, setType] = useState('');
-  const [orgName, setOrgName] = useState('');
-  const [contactEmail, setContactEmail] = useState('');
-  const [contactName, setContactName] = useState('');
-  const [contactNumber, setContactNumber] = useState('');
+const phoneRegex = new RegExp(/^\d+$/);
+
+const validationSchema = yup.object({
+  orgType: yup
+    .string()
+    .oneOf(['School', 'Retirement Home'])
+    .required('Organisation type is required'),
+  orgName: yup
+    .string('Enter your organisation name')
+    .required('Organisation name is required'),
+  contactName: yup
+    .string('Enter your contact name')
+    .required('Contact name is required'),
+  contactEmail: yup
+    .string('Enter your contact email')
+    .email('Enter a valid email')
+    .required('Email is required'),
+  contactNumber: yup
+    .string('Please enter your phone number')
+    .matches(phoneRegex, 'Phone number is not valid')
+    .required('Phone number is required'),
+  email: yup
+    .string('Enter your email')
+    .email('Enter a valid email')
+    .required('Email is required'),
+  password: yup
+    .string('Enter your password')
+    .min(6, 'Password should be of minimum 6 characters length')
+    .required('Password is required'),
+});
+
+export default function SignUpComponent() {
+  const [loading, setLoading] = useState(false);
+
+  const formik = useFormik({
+    initialValues: {
+      orgType: '',
+      orgName: '',
+      contactName: '',
+      contactEmail: '',
+      contactNumber: '',
+      email: '',
+      password: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: () => {
+      setLoading(true);
+      signUp();
+    },
+  });
 
   async function signUp() {
     try {
       const user = await createUserWithEmailAndPassword(
         auth,
-        signUpEmail,
-        signUpPassword
+        formik.values.email,
+        formik.values.password
       );
 
       const data = {
         UID: user.user.uid,
-        'Login Email': signUpEmail,
-        'Organisation Type': type,
-        'Organisation Name': orgName,
-        'Primary Contact Email': contactEmail,
-        'Primary Contact Name': contactName,
-        'Primary Contact Phone': contactNumber,
+        'Login Email': formik.values.email,
+        'Organisation Type': formik.values.orgType,
+        'Organisation Name': formik.values.orgName,
+        'Primary Contact Email': formik.values.contactEmail,
+        'Primary Contact Name': formik.values.contactName,
+        'Primary Contact Phone': formik.values.contactNumber,
       };
 
       await fetch('/api/signUp', {
@@ -47,12 +94,9 @@ export default function SignUpComponent({ user }) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data));
+      }).then((response) => response.json());
     } catch (error) {
-      console.log(error);
-      alert('sorry we could not sign you up');
+      return console.log(error);
     }
   }
 
@@ -63,133 +107,174 @@ export default function SignUpComponent({ user }) {
           sx={{
             minWidth: 275,
             marginTop: 8,
+            marginBottom: 8,
             padding: 5,
             borderRadius: 3,
-
             mt: 5,
           }}
         >
-          <form>
-            <Typography component="h1" variant="h5" sx={{ mb: 3 }}>
-              Sign up
-            </Typography>
+          <form onSubmit={formik.handleSubmit}>
+            <Stack spacing={3}>
+              <Typography component="h1" variant="h5" sx={{ mb: 3 }}>
+                Sign up
+              </Typography>
 
-            <Box sx={{ mb: 2 }}>
-              <FormControl fullWidth>
-                <InputLabel
-                  hidden
-                  id="organisation-type"
-                  htmlFor="Organisation Type"
+              <Box>
+                <FormControl
+                  fullWidth
+                  helperText={formik.touched.orgType && formik.errors.orgType}
+                  error={
+                    formik.touched.orgType && Boolean(formik.errors.orgType)
+                  }
                 >
-                  Organisation Type
-                </InputLabel>
-                <Select
-                  labelId="organisation-type-label"
-                  id="organisation-type"
-                  value={type}
-                  label="Organisation Type"
-                  onChange={(e) => setType(e.target.value)}
-                >
-                  <MenuItem value={'School'}>School</MenuItem>
-                  <MenuItem value={'Retirement Home'}>Retirement Home</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
+                  <InputLabel required hidden htmlFor="Organisation Type">
+                    Organisation Type
+                  </InputLabel>
+                  <Select
+                    fullWidth
+                    id="orgType"
+                    name="orgType"
+                    label="Organisation Type"
+                    value={formik.values.orgType}
+                    onChange={formik.handleChange}
+                  >
+                    <MenuItem value={'School'}>School</MenuItem>
+                    <MenuItem value={'Retirement Home'}>
+                      Retirement Home
+                    </MenuItem>
+                  </Select>
+                  <FormHelperText>
+                    {formik.touched.orgType && formik.errors.orgType}
+                  </FormHelperText>
+                </FormControl>
+              </Box>
 
-            <Box sx={{ mb: 2 }}>
-              <label hidden htmlFor="Organisation Name">
-                Organisation Name
-              </label>
-              <TextField
-                variant="outlined"
-                id="filled-organisation-name-input"
-                label="Organisation Name"
-                autoComplete="current-organisation-name"
-                onChange={(e) => setOrgName(e.target.value)}
-                fullWidth
-              />
-            </Box>
+              <Box>
+                <label hidden htmlFor="Organisation Name">
+                  Organisation Name
+                </label>
+                <TextField
+                  fullWidth
+                  id="orgName"
+                  name="orgName"
+                  label="Organisation Name"
+                  value={formik.values.orgName}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.orgName && Boolean(formik.errors.orgName)
+                  }
+                  helperText={formik.touched.orgName && formik.errors.orgName}
+                />
+              </Box>
 
-            <Box sx={{ mb: 2 }}>
-              <label hidden htmlFor="Primary Contact Name">
-                Primary Contact Name
-              </label>
-              <TextField
-                variant="outlined"
-                id="filled-primary-contact-name-input"
-                label="Primary Contact Name"
-                autoComplete="current-primary-contact-name"
-                onChange={(e) => setContactName(e.target.value)}
-                fullWidth
-              />
-            </Box>
+              <Box>
+                <label hidden htmlFor="Contact Name">
+                  Primary Contact Name
+                </label>
+                <TextField
+                  fullWidth
+                  id="contactName"
+                  name="contactName"
+                  label="Contact Name"
+                  value={formik.values.contactName}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.contactName &&
+                    Boolean(formik.errors.contactName)
+                  }
+                  helperText={
+                    formik.touched.contactName && formik.errors.contactName
+                  }
+                />
+              </Box>
 
-            <Box sx={{ mb: 2 }}>
-              <label hidden htmlFor="Organisation Address">
-                Primary Contact Email
-              </label>
-              <TextField
-                variant="outlined"
-                id="filled-organisation-email-input"
-                label="Primary Contact Email"
-                autoComplete="current-organisation-email"
-                onChange={(e) => setContactEmail(e.target.value)}
-                fullWidth
-              />
-            </Box>
+              <Box>
+                <label hidden htmlFor="Contact Email">
+                  Primary Contact Email
+                </label>
+                <TextField
+                  fullWidth
+                  id="contactEmail"
+                  name="contactEmail"
+                  label="Contact Email"
+                  value={formik.values.contactEmail}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.contactEmail &&
+                    Boolean(formik.errors.contactEmail)
+                  }
+                  helperText={
+                    formik.touched.contactEmail && formik.errors.contactEmail
+                  }
+                />
+              </Box>
 
-            <Box sx={{ mb: 2 }}>
-              <label hidden htmlFor="Primary Contact Number">
-                Primary Contact Number
-              </label>
-              <TextField
-                variant="outlined"
-                id="filled-primary-contact-number-input"
-                label="Primary Contact Number"
-                autoComplete="current-primary-contact-number"
-                onChange={(e) => setContactNumber(e.target.value)}
-                fullWidth
-              />
-            </Box>
+              <Box>
+                <label hidden htmlFor="Contact Number">
+                  Primary Contact Number
+                </label>
+                <TextField
+                  fullWidth
+                  id="contactNumber"
+                  name="contactNumber"
+                  label="Contact Number"
+                  value={formik.values.contactNumber}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.contactNumber &&
+                    Boolean(formik.errors.contactNumber)
+                  }
+                  helperText={
+                    formik.touched.contactNumber && formik.errors.contactNumber
+                  }
+                />
+              </Box>
 
-            <Box sx={{ mb: 2 }}>
-              <label hidden htmlFor="email">
-                Login Email
-              </label>
-              <TextField
+              <Box>
+                <label hidden htmlFor="email">
+                  Login Email
+                </label>
+                <TextField
+                  fullWidth
+                  id="email"
+                  name="email"
+                  label="Email"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  error={formik.touched.email && Boolean(formik.errors.email)}
+                  helperText={formik.touched.email && formik.errors.email}
+                />
+              </Box>
+
+              <Box>
+                <label hidden htmlFor="password">
+                  Password
+                </label>
+                <TextField
+                  fullWidth
+                  id="password"
+                  name="password"
+                  label="Password"
+                  type="password"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.password && Boolean(formik.errors.password)
+                  }
+                  helperText={formik.touched.password && formik.errors.password}
+                />
+              </Box>
+
+              <Button
+                fullWidth
                 variant="outlined"
-                id="filled-email-input"
-                label="Login Email"
-                type="email"
-                autoComplete="current-email"
-                onChange={(e) => setSignUpEmail(e.target.value)}
-                fullWidth
-              />
-            </Box>
-            <Box sx={{ mb: 2 }}>
-              <label hidden htmlFor="password">
-                Password
-              </label>
-              <TextField
-                id="filled-password-input"
-                label="Password"
-                type="password"
-                autoComplete="current-password"
-                onChange={(e) => setSignUpPassword(e.target.value)}
-                fullWidth
-              />
-            </Box>
-            <Button
-              variant="outlined"
-              sx={{ padding: 1.85 }}
-              onClick={(e) => {
-                e.preventDefault();
-                signUp();
-              }}
-              fullWidth
-            >
-              Sign up
-            </Button>
+                sx={{ padding: 1.85 }}
+                type="submit"
+                disabled={loading}
+              >
+                {loading ? 'Signing up...' : 'Sign Up'}
+              </Button>
+            </Stack>
           </form>
         </Card>
       </Container>
