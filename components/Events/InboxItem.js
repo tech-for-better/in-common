@@ -74,18 +74,18 @@ export default function InboxItem({ record }) {
                 </MenuItem>
               ))}
             </Select>
-            <Button
-              sx={{ padding: 1.85 }}
-              variant="outlined"
-              onClick={(e) => {
-                console.log('running confirm');
-                addConfirm();
-                window.location.reload(false);
-              }}
-            >
-              Confirm
-            </Button>
           </FormControl>
+          <Button
+            sx={{ padding: 1.85 }}
+            variant="outlined"
+            onClick={(e) => {
+              console.log('running confirm');
+              addConfirm();
+              window.location.reload(false);
+            }}
+          >
+            Confirm
+          </Button>
         </Box>
       </Card>
     </Container>

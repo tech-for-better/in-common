@@ -116,6 +116,7 @@ export default function Login() {
                 <TextField
                   fullWidth
                   id="email"
+                  type="email"
                   name="email"
                   label="Email"
                   value={formikLogin.values.email}
