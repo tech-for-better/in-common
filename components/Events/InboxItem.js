@@ -98,7 +98,13 @@ export default function InboxItem({ record }) {
             </Stack>
           </FormControl>
           <Button
-            sx={{ padding: 1.85, borderColor: '#7C83FD', color: '#3181f5'  }}
+            fullWidth
+            sx={{
+              mt: 3,
+              padding: 1.85,
+              borderColor: '#7C83FD',
+              color: '#3181f5',
+            }}
             type="submit"
             variant="outlined"
             onClick={(e) => {

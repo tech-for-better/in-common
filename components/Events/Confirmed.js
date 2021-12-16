@@ -85,7 +85,7 @@ export default function Confirmed({ arr }) {
               <br />
               <Typography variant="body1">
                 <DateRangeIcon fontSize="md" sx={{ top: 2, mr: 1 }} />
-                Your suggested these dates and times:
+                Confirmed date
               </Typography>
               <Box sx={{ minWidth: 120 }}>
                 <Card
