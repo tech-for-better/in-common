@@ -1,14 +1,14 @@
 import { base } from '../../lib/init-airtable';
 
 export default function handler(req, res) {
-  const { recordId, confirmedDate } = req.body;
+  const { recordId, confirmedDate, status } = req.body;
 
   base('Events').update(
     [
       {
         id: recordId,
         fields: {
-          Status: 'Confirmed',
+          Status: status,
           'Confirmed Date': confirmedDate,
         },
       },
