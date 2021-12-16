@@ -22,4 +22,21 @@ describe('User can create an event', () => {
     cy.contains('Create Event').click();
     cy.url().should('include', '/create-event');
   });
+
+  it('should fill the form and submit the event', () => {
+    cy.visit('/create-event');
+    cy.get('#activity-select-label').parent().click();
+    cy.findByRole('option', { name: /Intergenerational Event/i }).click();
+    cy.contains('Next').click();
+    cy.get('#size-select-label').parent().click();
+    cy.findByRole('option', { name: /1 - 5/i }).click();
+    cy.contains('Next').click();
+    cy.contains('Add Date').click();
+    cy.contains('Next').click();
+    cy.get('#notes-label').type('Cypress test');
+    cy.get('[type=submit]').click();
+    cy.contains('Sending...');
+    cy.wait(1000);
+    cy.get('h6').contains('Event Request Sent!');
+  });
 });
