@@ -180,6 +180,7 @@ export default function SignUpComponent({ user }) {
               />
             </Box>
             <Button
+              type="submit"
               variant="outlined"
               sx={{ padding: 1.85 }}
               onClick={(e) => {

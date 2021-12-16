@@ -82,6 +82,7 @@ export default function Login() {
               />
             </Box>
             <Button
+              type="submit"
               variant="outlined"
               sx={{ mb: 2, padding: 1.85 }}
               onClick={(e) => {

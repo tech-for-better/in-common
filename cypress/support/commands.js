@@ -23,3 +23,30 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+import '@testing-library/cypress/add-commands';
+
+Cypress.config({
+  experimentalSessionSupport: true,
+});
+
+Cypress.Commands.add('login', (email, password) => {
+  cy.session([email, password], () => {
+    cy.visit('/');
+    cy.get('[type=email]').type(email);
+    cy.get('[type=password]').type(password);
+    cy.get('[type=submit]').click();
+    cy.url().should('contain', '/events');
+  });
+});
+
+// test authentication with Firebase
+// import { auth } from '../../firebase';
+// import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
+
+// Cypress.Commands.add('login', (email, password) => {
+//   return signInWithEmailAndPassword(auth, email, password);
+// });
+
+// Cypress.Commands.add('logout', () => {
+//   return signOut();
+// });
