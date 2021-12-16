@@ -62,6 +62,7 @@ export default function EventSummary({
           borderRadius: 3,
           mt: 5,
         }}
+        variant="outlined"
       >
         <HeadCreateEvent />
         <Stack spacing={3}>

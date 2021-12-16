@@ -41,6 +41,7 @@ export default function EventActivity({
           borderRadius: 3,
           mt: 5,
         }}
+        variant="outlined"
       >
         <HeadCreateEvent />
         <Stack spacing={3}>
