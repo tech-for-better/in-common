@@ -60,16 +60,14 @@ export default function EventsPage({ user, error, loading, root }) {
         {user ? (
           <Container component="main" maxWidth="xl">
             <Grid container spacing={0}>
-              <Grid item xs={12} md={12} lg={4}>
+              <Grid item xs={12} md={12} lg={4} sx={{ marginBottom: 8 }}>
                 <Inbox arr={inbox} />
               </Grid>
-              <Grid item xs={12} md={12} lg={4}>
-                {/* <Outbox arr={outbox} /> */}
-                <Inbox arr={inbox} />
+              <Grid item xs={12} md={12} lg={4} sx={{ marginBottom: 8 }}>
+                <Outbox arr={outbox} />
               </Grid>
-              <Grid item xs={12} md={12} lg={4}>
-                {/* <Confirmed arr={confirmed} /> */}
-                <Inbox arr={inbox} />
+              <Grid item xs={12} md={12} lg={4} sx={{ marginBottom: 8 }}>
+                <Confirmed arr={confirmed} />
               </Grid>
             </Grid>
           </Container>
