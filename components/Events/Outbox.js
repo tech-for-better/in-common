@@ -1,4 +1,4 @@
-import { Container, Box, Card, Typography } from '@mui/material';
+import { Container, Box, Card, Typography, Button } from '@mui/material';
 import moment from 'moment';
 import MailIcon from '@mui/icons-material/Mail';
 import LocalActivityIcon from '@mui/icons-material/LocalActivity';
@@ -9,6 +9,22 @@ import { red } from '@mui/material/colors';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 
 export default function Outbox({ arr }) {
+  async function decline(id) {
+    const data = {
+      recordId: id,
+      confirmedDate: '1111-01-01T11:11:00.000Z',
+      status: 'Cancelled',
+    };
+
+    await fetch('/api/confirmEventDate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+  }
+
   return (
     <div>
       <Container maxWidth="xs">
@@ -105,6 +121,16 @@ export default function Outbox({ arr }) {
                   </Card>
                 ))}
               </Box>
+              <Button
+                sx={{ padding: 1.85, borderColor: '#7C83FD', color: '#3181f5' }}
+                variant="outlined"
+                onClick={(e) => {
+                  decline(record.id);
+                  window.location.reload(false);
+                }}
+              >
+                Cancel
+              </Button>
             </Card>
           </Container>
         ))
