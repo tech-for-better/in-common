@@ -10,6 +10,8 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
+import HeadCreateEvent from './HeadCreateEvent';
+
 
 import { useState, useEffect } from 'react';
 
@@ -42,6 +44,7 @@ export default function EventLocation({
             mt: 5,
           }}
         >
+          <HeadCreateEvent />
           <Stack spacing={3}>
             <Typography variant="h8">{`Step ${stage} of ${stages}`}</Typography>
             <Typography variant="h6">Event Location</Typography>

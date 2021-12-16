@@ -4,6 +4,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
 import moment from 'moment';
+import HeadCreateEvent from './HeadCreateEvent';
 
 import { useState, useEffect } from 'react';
 
@@ -58,6 +59,7 @@ export default function EventDate({
           mt: 5,
         }}
       >
+        <HeadCreateEvent />
         <Stack spacing={3}>
           <Typography variant="h8">{`Step ${stage} of ${stages}`}</Typography>
           <Typography variant="h6">Event Date</Typography>

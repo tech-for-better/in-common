@@ -7,6 +7,7 @@ import {
   TextField,
 } from '@mui/material';
 import moment from 'moment';
+import HeadCreateEvent from './HeadCreateEvent';
 
 import { useState } from 'react';
 
@@ -62,6 +63,7 @@ export default function EventSummary({
           mt: 5,
         }}
       >
+        <HeadCreateEvent />
         <Stack spacing={3}>
           <Typography variant="h8">{`Step ${stage} of ${stages}`}</Typography>
           <Typography variant="h6">Event Summary</Typography>
