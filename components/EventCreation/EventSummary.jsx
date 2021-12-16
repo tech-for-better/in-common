@@ -62,6 +62,7 @@ export default function EventSummary({
           borderRadius: 3,
           mt: 5,
         }}
+        variant="outlined"
       >
         <HeadCreateEvent />
         <Stack spacing={3}>
@@ -82,6 +83,7 @@ export default function EventSummary({
             onChange={handleChange}
           />
           <Button
+            type="submit"
             sx={{ padding: 1.85 }}
             variant="outlined"
             onClick={async (e) => {

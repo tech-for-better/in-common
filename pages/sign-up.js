@@ -15,6 +15,7 @@ export default function Signup({ user }) {
               name="viewport"
               content="initial-scale=1.0, width=device-width"
             />
+            <meta name="robots" content="noindex"></meta>
           </Head>
           <SignUpComponent user={user} />
         </>

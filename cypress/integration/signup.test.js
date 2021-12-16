@@ -8,10 +8,10 @@ describe('The SignUp Page', () => {
     cy.findByRole('option', { name: /School/i }).click();
     cy.get('#filled-organisation-name-input').type('School Cypress');
     cy.get('#filled-primary-contact-name-input').type('Miss Cypress');
-    cy.get('#filled-organisation-email-input').type(email);
+    cy.get('#filled-organisation-email-input').type('cypress@test.test');
     cy.get('#filled-primary-contact-number-input').type('0123456780');
-    cy.get('#filled-email-input').type(email);
-    cy.get('#filled-password-input').type(password);
+    cy.get('#filled-email-input').type('cypress@test.test');
+    cy.get('#filled-password-input').type('123456');
     cy.get('[type=submit]').click();
     cy.wait(1000);
     cy.get('h1').contains('SUCCESS!');

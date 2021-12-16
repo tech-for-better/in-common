@@ -102,6 +102,7 @@ export default function Login() {
             borderRadius: 3,
             mt: 5,
           }}
+          variant="outlined"
         >
           <form onSubmit={formikLogin.handleSubmit}>
             <Stack spacing={3}>
@@ -116,6 +117,7 @@ export default function Login() {
                 <TextField
                   fullWidth
                   id="email"
+                  type="email"
                   name="email"
                   label="Email"
                   value={formikLogin.values.email}
@@ -202,6 +204,7 @@ export default function Login() {
             borderRadius: 3,
             mt: 5,
           }}
+          variant="outlined"
         >
           <form onSubmit={formikForgotPassword.handleSubmit}>
             <Typography component="h1" variant="h5" sx={{ mb: 3 }}>
