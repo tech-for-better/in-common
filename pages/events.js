@@ -15,7 +15,6 @@ export default function EventsPage({ user, error, loading, root }) {
 
   const pastIds = [];
   async function pastEventsUpdateStatus(arr) {
-    console.log('updating Airtable with past', arr);
     const data = {
       recordIds: arr,
     };
@@ -97,7 +96,7 @@ export default function EventsPage({ user, error, loading, root }) {
             <h2>Confirmed Events</h2>
             <Confirmed arr={confirmed} />
 
-            <h2>Past Events</h2>
+            <h2>Past Plans</h2>
             <Confirmed arr={past} />
           </div>
         ) : (
