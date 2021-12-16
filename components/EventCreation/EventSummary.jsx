@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import moment from 'moment';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export default function EventSummary({
   stage,
@@ -94,8 +94,7 @@ export default function EventSummary({
             onClick={(e) => {
               e.preventDefault();
               addEvent();
-              console.log('submit');
-              console.log(user.uid);
+              setStage('submitted');
             }}
           >
             {loading ? 'Sending...' : 'Send Event Request'}
