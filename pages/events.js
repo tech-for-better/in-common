@@ -4,6 +4,7 @@ import Inbox from '../components/Events/Inbox';
 import Outbox from '../components/Events/Outbox';
 import Confirmed from '../components/Events/Confirmed';
 import Loading from '../components/Loading/Loading';
+import Head from 'next/head';
 
 export default function EventsPage({ user, error, loading, root }) {
   const [inbox, setInbox] = useState([]);
@@ -54,6 +55,13 @@ export default function EventsPage({ user, error, loading, root }) {
       <>
         {user ? (
           <div>
+            <Head>
+              <title>Manage Events</title>
+              <meta
+                name="viewport"
+                content="initial-scale=1.0, width=device-width"
+              />
+            </Head>
             <h1>All Events</h1>
 
             <h2>Inbox</h2>
