@@ -1,6 +1,9 @@
 import { auth } from '../../firebase';
 import { createUserWithEmailAndPassword } from '@firebase/auth';
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import 'yup-phone';
 import {
   Card,
   TextField,
@@ -12,61 +15,77 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
-  Alert,
   Stack,
+  FormHelperText,
 } from '@mui/material';
 
-import Error from '../Alert/Error';
+const phoneRegex = new RegExp(/^\d+$/);
+
+const validationSchema = yup.object({
+  orgType: yup
+    .string()
+    .oneOf(['School', 'Retirement Home'])
+    .required('Organisation type is required'),
+  orgName: yup
+    .string('Enter your organisation name')
+    .required('Organisation name is required'),
+  contactName: yup
+    .string('Enter your contact name')
+    .required('Contact name is required'),
+  contactEmail: yup
+    .string('Enter your contact email')
+    .email('Enter a valid email')
+    .required('Email is required'),
+  contactNumber: yup
+    .string('Please enter your phone number')
+    .matches(phoneRegex, 'Phone number is not valid')
+    .required('Phone number is required'),
+  email: yup
+    .string('Enter your email')
+    .email('Enter a valid email')
+    .required('Email is required'),
+  password: yup
+    .string('Enter your password')
+    .min(6, 'Password should be of minimum 6 characters length')
+    .required('Password is required'),
+});
 
 export default function SignUpComponent() {
-  const [signUpEmail, setSignUpEmail] = useState('');
-  const [signUpPassword, setSignUpPassword] = useState('');
-  const [orgType, setOrgType] = useState('');
-  const [orgName, setOrgName] = useState('');
-  const [contactEmail, setContactEmail] = useState('');
-  const [contactName, setContactName] = useState('');
-  const [contactNumber, setContactNumber] = useState('');
-  const [counter, setCounter] = useState(false);
-  const [error, setError] = useState(true);
-  const isMounted = useRef(false);
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const [errorMessage, setErrorMessage] = useState({
-    EMAIL: false,
-    PASSWORD: false,
-    ORG_TYPE: false,
-    ORG_NAME: false,
-    CONTACT_EMAIL: false,
-    CONTACT_NAME: false,
-    CONTACT_NUMBER: false,
+  const formik = useFormik({
+    initialValues: {
+      orgType: '',
+      orgName: '',
+      contactName: '',
+      contactEmail: '',
+      contactNumber: '',
+      email: '',
+      password: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: () => {
+      setLoading(true);
+      signUp();
+    },
   });
-
-  useEffect(() => {
-    if (isMounted.current) {
-      if (Object.values(errorMessage).every((item) => item === false)) {
-        setError(false);
-      }
-    } else {
-      isMounted.current = true;
-    }
-  }, [errorMessage]);
 
   async function signUp() {
     try {
       const user = await createUserWithEmailAndPassword(
         auth,
-        signUpEmail,
-        signUpPassword
+        formik.values.email,
+        formik.values.password
       );
 
       const data = {
         UID: user.user.uid,
-        'Login Email': signUpEmail,
-        'Organisation Type': orgType,
-        'Organisation Name': orgName,
-        'Primary Contact Email': contactEmail,
-        'Primary Contact Name': contactName,
-        'Primary Contact Phone': contactNumber,
+        'Login Email': formik.values.email,
+        'Organisation Type': formik.values.orgType,
+        'Organisation Name': formik.values.orgName,
+        'Primary Contact Email': formik.values.contactEmail,
+        'Primary Contact Name': formik.values.contactName,
+        'Primary Contact Phone': formik.values.contactNumber,
       };
 
       await fetch('/api/signUp', {
@@ -75,66 +94,9 @@ export default function SignUpComponent() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data));
+      }).then((response) => response.json());
     } catch (error) {
       return console.log(error);
-    }
-  }
-
-  function checkErrors() {
-    setCounter((count) => (count += 1));
-    const emailRegex = new RegExp('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,63}$');
-    const phoneRegex = new RegExp(/^\d+$/);
-
-    if (orgType.length < 1) {
-      setError(true);
-      setErrorMessage((errorObject) => {
-        return { ...errorObject, ORG_TYPE: true };
-      });
-    }
-
-    if (orgName.length < 1) {
-      setError(true);
-      setErrorMessage((errorObject) => {
-        return { ...errorObject, ORG_NAME: true };
-      });
-    }
-
-    if (contactName.length < 1) {
-      setError(true);
-      setErrorMessage((errorObject) => {
-        return { ...errorObject, CONTACT_NAME: true };
-      });
-    }
-
-    if (!emailRegex.test(contactEmail)) {
-      setError(true);
-      setErrorMessage((errorObject) => {
-        return { ...errorObject, CONTACT_EMAIL: true };
-      });
-    }
-
-    if (!phoneRegex.test(contactNumber)) {
-      setError(true);
-      setErrorMessage((errorObject) => {
-        return { ...errorObject, CONTACT_NUMBER: true };
-      });
-    }
-
-    if (!emailRegex.test(signUpEmail)) {
-      setError(true);
-      setErrorMessage((errorObject) => {
-        return { ...errorObject, EMAIL: true };
-      });
-    }
-
-    if (signUpPassword.length < 6) {
-      setError(true);
-      setErrorMessage((errorObject) => {
-        return { ...errorObject, PASSWORD: true };
-      });
     }
   }
 
@@ -151,45 +113,40 @@ export default function SignUpComponent() {
             mt: 5,
           }}
         >
-          <form>
+          <form onSubmit={formik.handleSubmit}>
             <Stack spacing={3}>
               <Typography component="h1" variant="h5" sx={{ mb: 3 }}>
                 Sign up
               </Typography>
 
               <Box>
-                <FormControl fullWidth>
-                  <InputLabel
-                    required
-                    hidden
-                    id="organisation-type"
-                    htmlFor="Organisation Type"
-                  >
+                <FormControl
+                  fullWidth
+                  helperText={formik.touched.orgType && formik.errors.orgType}
+                  error={
+                    formik.touched.orgType && Boolean(formik.errors.orgType)
+                  }
+                >
+                  <InputLabel required hidden htmlFor="Organisation Type">
                     Organisation Type
                   </InputLabel>
                   <Select
-                    required
-                    error={errorMessage.ORG_TYPE ? true : false}
-                    labelId="organisation-type-label"
-                    id="organisation-type"
-                    value={orgType}
+                    fullWidth
+                    id="orgType"
+                    name="orgType"
                     label="Organisation Type"
-                    onChange={(e) => {
-                      setOrgType(e.target.value);
-                      setErrorMessage((errorObject) => {
-                        return { ...errorObject, ORG_TYPE: false };
-                      });
-                    }}
+                    value={formik.values.orgType}
+                    onChange={formik.handleChange}
                   >
                     <MenuItem value={'School'}>School</MenuItem>
                     <MenuItem value={'Retirement Home'}>
                       Retirement Home
                     </MenuItem>
                   </Select>
+                  <FormHelperText>
+                    {formik.touched.orgType && formik.errors.orgType}
+                  </FormHelperText>
                 </FormControl>
-                {errorMessage.ORG_TYPE ? (
-                  <Error>Please select an organisation type</Error>
-                ) : null}
               </Box>
 
               <Box>
@@ -197,95 +154,80 @@ export default function SignUpComponent() {
                   Organisation Name
                 </label>
                 <TextField
-                  error={errorMessage.ORG_NAME ? true : false}
-                  required
-                  variant="outlined"
-                  id="organisation-name-input"
-                  label="Organisation Name"
-                  autoComplete="current-organisation-name"
-                  onChange={(e) => {
-                    setOrgName(e.target.value);
-                    setErrorMessage((errorObject) => {
-                      return { ...errorObject, ORG_NAME: false };
-                    });
-                  }}
                   fullWidth
+                  id="orgName"
+                  name="orgName"
+                  label="Organisation Name"
+                  value={formik.values.orgName}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.orgName && Boolean(formik.errors.orgName)
+                  }
+                  helperText={formik.touched.orgName && formik.errors.orgName}
                 />
-                {errorMessage.ORG_NAME ? (
-                  <Error>Please enter an organisation name</Error>
-                ) : null}
               </Box>
 
               <Box>
-                <label hidden htmlFor="Primary Contact Name">
+                <label hidden htmlFor="Contact Name">
                   Primary Contact Name
                 </label>
                 <TextField
-                  required
-                  error={errorMessage.CONTACT_NAME ? true : false}
-                  variant="outlined"
-                  id="primary-contact-name-input"
-                  label="Primary Contact Name"
-                  autoComplete="current-primary-contact-name"
-                  onChange={(e) => {
-                    setContactName(e.target.value);
-                    setErrorMessage((errorObject) => {
-                      return { ...errorObject, CONTACT_NAME: false };
-                    });
-                  }}
                   fullWidth
+                  id="contactName"
+                  name="contactName"
+                  label="Contact Name"
+                  value={formik.values.contactName}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.contactName &&
+                    Boolean(formik.errors.contactName)
+                  }
+                  helperText={
+                    formik.touched.contactName && formik.errors.contactName
+                  }
                 />
-                {errorMessage.CONTACT_NAME ? (
-                  <Error>Please enter a contact name</Error>
-                ) : null}
               </Box>
 
               <Box>
-                <label hidden htmlFor="Organisation Address">
+                <label hidden htmlFor="Contact Email">
                   Primary Contact Email
                 </label>
                 <TextField
-                  error={errorMessage.CONTACT_EMAIL ? true : false}
-                  required
-                  variant="outlined"
-                  id="organisation-email-input"
-                  label="Primary Contact Email"
-                  autoComplete="current-organisation-email"
-                  onChange={(e) => {
-                    setContactEmail(e.target.value);
-                    setErrorMessage((errorObject) => {
-                      return { ...errorObject, CONTACT_EMAIL: false };
-                    });
-                  }}
                   fullWidth
+                  id="contactEmail"
+                  name="contactEmail"
+                  label="Contact Email"
+                  value={formik.values.contactEmail}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.contactEmail &&
+                    Boolean(formik.errors.contactEmail)
+                  }
+                  helperText={
+                    formik.touched.contactEmail && formik.errors.contactEmail
+                  }
                 />
-                {errorMessage.CONTACT_EMAIL ? (
-                  <Error>Email is not valid</Error>
-                ) : null}
               </Box>
 
               <Box>
-                <label hidden htmlFor="Primary Contact Number">
+                <label hidden htmlFor="Contact Number">
                   Primary Contact Number
                 </label>
                 <TextField
-                  required
-                  error={errorMessage.CONTACT_NUMBER ? true : false}
-                  variant="outlined"
-                  id="primary-contact-number-input"
-                  label="Primary Contact Number"
-                  autoComplete="current-primary-contact-number"
-                  onChange={(e) => {
-                    setContactNumber(e.target.value);
-                    setErrorMessage((errorObject) => {
-                      return { ...errorObject, CONTACT_NUMBER: false };
-                    });
-                  }}
                   fullWidth
+                  id="contactNumber"
+                  name="contactNumber"
+                  label="Contact Number"
+                  value={formik.values.contactNumber}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.contactNumber &&
+                    Boolean(formik.errors.contactNumber)
+                  }
+                  helperText={
+                    formik.touched.contactNumber && formik.errors.contactNumber
+                  }
                 />
-                {errorMessage.CONTACT_NUMBER ? (
-                  <Error>Phone number is not valid</Error>
-                ) : null}
               </Box>
 
               <Box>
@@ -293,24 +235,15 @@ export default function SignUpComponent() {
                   Login Email
                 </label>
                 <TextField
-                  required
-                  error={errorMessage.EMAIL ? true : false}
-                  variant="outlined"
-                  id="email-input"
-                  label="Login Email"
-                  type="email"
-                  autoComplete="current-email"
                   fullWidth
-                  onChange={(e) => {
-                    setSignUpEmail(e.target.value);
-                    setErrorMessage((errorObject) => {
-                      return { ...errorObject, EMAIL: false };
-                    });
-                  }}
+                  id="email"
+                  name="email"
+                  label="Email"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  error={formik.touched.email && Boolean(formik.errors.email)}
+                  helperText={formik.touched.email && formik.errors.email}
                 />
-                {errorMessage.EMAIL ? (
-                  <Error>Login email is not valid </Error>
-                ) : null}
               </Box>
 
               <Box>
@@ -318,37 +251,28 @@ export default function SignUpComponent() {
                   Password
                 </label>
                 <TextField
-                  required
-                  error={errorMessage.PASSWORD ? true : false}
-                  id="password-input"
+                  fullWidth
+                  id="password"
+                  name="password"
                   label="Password"
                   type="password"
-                  autoComplete="current-password"
-                  fullWidth
-                  onChange={(e) => {
-                    setSignUpPassword(e.target.value);
-                    setErrorMessage((errorObject) => {
-                      return { ...errorObject, PASSWORD: false };
-                    });
-                  }}
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.password && Boolean(formik.errors.password)
+                  }
+                  helperText={formik.touched.password && formik.errors.password}
                 />
-                {errorMessage.PASSWORD ? (
-                  <Error>Password needs to be at least 6 characters</Error>
-                ) : null}
               </Box>
 
               <Button
                 fullWidth
                 variant="outlined"
                 sx={{ padding: 1.85 }}
-                onClick={(e) => {
-                  e.preventDefault();
-                  checkErrors();
-                  if (!error) return console.log('YAY');
-                  if (error) return console.log({ errorMessage });
-                }}
+                type="submit"
+                disabled={loading}
               >
-                SIGN UP
+                {loading ? 'Signing up...' : 'Sign Up'}
               </Button>
             </Stack>
           </form>
