@@ -176,7 +176,9 @@ export default function SignUpComponent() {
                     label="Organisation Type"
                     onChange={(e) => {
                       setOrgType(e.target.value);
-                      errorMessage.ORG_TYPE = false;
+                      setErrorMessage((errorObject) => {
+                        return { ...errorObject, ORG_TYPE: false };
+                      });
                     }}
                   >
                     <MenuItem value={'School'}>School</MenuItem>
@@ -203,7 +205,9 @@ export default function SignUpComponent() {
                   autoComplete="current-organisation-name"
                   onChange={(e) => {
                     setOrgName(e.target.value);
-                    errorMessage.ORG_NAME = false;
+                    setErrorMessage((errorObject) => {
+                      return { ...errorObject, ORG_NAME: false };
+                    });
                   }}
                   fullWidth
                 />
@@ -225,7 +229,9 @@ export default function SignUpComponent() {
                   autoComplete="current-primary-contact-name"
                   onChange={(e) => {
                     setContactName(e.target.value);
-                    errorMessage.CONTACT_NAME = false;
+                    setErrorMessage((errorObject) => {
+                      return { ...errorObject, CONTACT_NAME: false };
+                    });
                   }}
                   fullWidth
                 />
@@ -247,7 +253,9 @@ export default function SignUpComponent() {
                   autoComplete="current-organisation-email"
                   onChange={(e) => {
                     setContactEmail(e.target.value);
-                    errorMessage.CONTACT_EMAIL = false;
+                    setErrorMessage((errorObject) => {
+                      return { ...errorObject, CONTACT_EMAIL: false };
+                    });
                   }}
                   fullWidth
                 />
@@ -269,7 +277,9 @@ export default function SignUpComponent() {
                   autoComplete="current-primary-contact-number"
                   onChange={(e) => {
                     setContactNumber(e.target.value);
-                    errorMessage.CONTACT_NUMBER = false;
+                    setErrorMessage((errorObject) => {
+                      return { ...errorObject, CONTACT_NUMBER: false };
+                    });
                   }}
                   fullWidth
                 />
@@ -293,7 +303,9 @@ export default function SignUpComponent() {
                   fullWidth
                   onChange={(e) => {
                     setSignUpEmail(e.target.value);
-                    errorMessage.EMAIL = false;
+                    setErrorMessage((errorObject) => {
+                      return { ...errorObject, EMAIL: false };
+                    });
                   }}
                 />
                 {errorMessage.EMAIL ? (
@@ -315,7 +327,9 @@ export default function SignUpComponent() {
                   fullWidth
                   onChange={(e) => {
                     setSignUpPassword(e.target.value);
-                    errorMessage.PASSWORD = false;
+                    setErrorMessage((errorObject) => {
+                      return { ...errorObject, PASSWORD: false };
+                    });
                   }}
                 />
                 {errorMessage.PASSWORD ? (
