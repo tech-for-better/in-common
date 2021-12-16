@@ -116,7 +116,11 @@ export default function SignUpComponent() {
         >
           <form onSubmit={formik.handleSubmit}>
             <Stack spacing={3}>
-              <Typography component="h1" variant="h5" sx={{ mb: 3 }}>
+              <Typography
+                component="h1"
+                variant="h5"
+                sx={{ mb: 1, textAlign: 'center' }}
+              >
                 Sign up
               </Typography>
 
@@ -269,7 +273,7 @@ export default function SignUpComponent() {
               <Button
                 fullWidth
                 variant="outlined"
-                sx={{ padding: 1.85 }}
+                sx={{ padding: 1.85, borderRadius: 2 }}
                 type="submit"
                 disabled={loading}
               >

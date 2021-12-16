@@ -117,8 +117,7 @@ export default function InboxItem({ record }) {
           <Button
             fullWidth
             sx={{
-
-              borderRadius: 3,
+              borderRadius: 2,
               padding: 1.85,
               borderColor: '#7C83FD',
               color: '#7C83FD',
@@ -136,7 +135,7 @@ export default function InboxItem({ record }) {
           <Button
             fullWidth
             sx={{
-              borderRadius: 3,
+              borderRadius: 2,
               padding: 1.85,
               borderColor: '#7C83FD',
               color: '#7C83FD',

@@ -102,9 +102,7 @@ export default function Confirmed({ arr }) {
               <br />
               <Typography variant="body1">
                 <DateRangeIcon fontSize="md" sx={{ top: 2, mr: 1 }} />
-
                 Confirmed date
-
               </Typography>
               <Box sx={{ minWidth: 120 }}>
                 <Card
@@ -129,7 +127,7 @@ export default function Confirmed({ arr }) {
                   padding: 1.85,
                   borderColor: '#026969',
                   color: '#026969',
-                  borderRadius: 3,
+                  borderRadius: 2,
                   mt: 3,
                 }}
                 variant="outlined"

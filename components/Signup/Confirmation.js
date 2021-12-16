@@ -1,31 +1,26 @@
-import { Container, Box, Alert } from '@mui/material';
-import { auth } from '../../firebase';
-import { signOut } from '@firebase/auth';
+import { Container, Card, Stack, Typography } from '@mui/material';
 
-export default function Confirmation({ user }) {
-  async function logOut() {
-    try {
-      await signOut(auth);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
+export default function Confirmation() {
   return (
     <Container component="main" maxWidth="xs">
-      <Alert severity="success">
-        {' '}
-        <h1>SUCCESS!</h1>
-        <h4>Please wait for a confirmation email</h4>
-      </Alert>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          logOut();
+      <Card
+        sx={{
+          minWidth: 275,
+          padding: 5,
+          borderRadius: 3,
+          mt: 5,
         }}
+        variant="outlined"
       >
-        log out
-      </button>
+        <Stack spacing={3}>
+          <Typography variant="h6" sx={{ textAlign: 'center' }}>
+            Sign-up Received
+          </Typography>
+          <Typography variant="body1" sx={{ textAlign: 'center' }}>
+            We will verify your account very soon!
+          </Typography>
+        </Stack>
+      </Card>
     </Container>
   );
 }

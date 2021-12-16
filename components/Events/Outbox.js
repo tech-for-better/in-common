@@ -115,6 +115,7 @@ export default function Outbox({ arr }) {
                       mt: 3,
                       borderColor: red[500],
                       borderRadius: 10,
+                      color: red[500],
                     }}
                   >
                     <p>{moment(date).format('Do MMMM YYYY, h:mma')}</p>
@@ -128,7 +129,7 @@ export default function Outbox({ arr }) {
                   borderColor: red[500],
                   color: red[500],
                   mt: 3,
-                  borderRadius: 3,
+                  borderRadius: 2,
                 }}
                 variant="outlined"
                 onClick={(e) => {
