@@ -117,6 +117,7 @@ export default function InboxItem({ record }) {
           <Button
             fullWidth
             sx={{
+
               borderRadius: 3,
               padding: 1.85,
               borderColor: '#7C83FD',
