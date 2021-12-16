@@ -62,7 +62,7 @@ export default function InboxItem({ record }) {
           padding: 5,
           borderRadius: 3,
           mt: 3,
-          borderColor: '#8e4bfe',
+          borderColor: '#7C83FD',
         }}
         variant="outlined"
       >
@@ -104,7 +104,7 @@ export default function InboxItem({ record }) {
                 onChange={(e) => {
                   setConfirmedDate(e.target.value);
                 }}
-                sx={{ borderColor: '#8e4bfe', color: '#8e4bfe' }}
+                sx={{ borderColor: '#7C83FD', color: '#7C83FD' }}
               >
                 {JSON.parse(record.fields['Suggested Dates']).map((date) => (
                   <MenuItem key={date} value={date}>
@@ -112,28 +112,29 @@ export default function InboxItem({ record }) {
                   </MenuItem>
                 ))}
               </Select>
-              <Button
-                sx={{ padding: 1.85, borderColor: '#8e4bfe', color: '#8e4bfe' }}
-                variant="outlined"
-                onClick={(e) => {
-                  addConfirm();
-                  window.location.reload(false);
-                }}
-              >
-                Confirm
-              </Button>
-              <Button
-                sx={{ padding: 1.85, borderColor: '#8e4bfe', color: '#8e4bfe' }}
-                variant="outlined"
-                onClick={(e) => {
-                  decline();
-                  window.location.reload(false);
-                }}
-              >
-                Decline Invitation
-              </Button>
             </Stack>
           </FormControl>
+          <Button
+            sx={{ padding: 1.85, borderColor: '#7C83FD', color: '#3181f5' }}
+            type="submit"
+            variant="outlined"
+            onClick={(e) => {
+              addConfirm();
+              window.location.reload(false);
+            }}
+          >
+            Confirm
+          </Button>
+          <Button
+            sx={{ padding: 1.85, borderColor: '#7C83FD', color: '#3181f5' }}
+            variant="outlined"
+            onClick={(e) => {
+              decline();
+              window.location.reload(false);
+            }}
+          >
+            Decline
+          </Button>
         </Box>
       </Card>
     </Container>

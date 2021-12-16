@@ -4,13 +4,20 @@ import Inbox from '../components/Events/Inbox';
 import Outbox from '../components/Events/Outbox';
 import Confirmed from '../components/Events/Confirmed';
 import Loading from '../components/Loading/Loading';
+<<<<<<< HEAD
 import moment from 'moment';
 import Head from 'next/head';
+=======
+>>>>>>> main
 import { Card, Container, CardHeader } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+<<<<<<< HEAD
+=======
+import Head from 'next/head';
+>>>>>>> main
 
 export default function EventsPage({ user, error, loading, root }) {
   const [inbox, setInbox] = useState([]);
@@ -80,7 +87,7 @@ export default function EventsPage({ user, error, loading, root }) {
     return (
       <>
         {user ? (
-          <div>
+         <>
             <Head>
               <title>Manage Events</title>
               <meta
@@ -88,22 +95,20 @@ export default function EventsPage({ user, error, loading, root }) {
                 content="initial-scale=1.0, width=device-width"
               />
             </Head>
-            <Container component="main" maxWidth="xl">
-              <Grid container spacing={0}>
-                <Grid item xs={12} md={12} lg={4}>
-                  <Inbox arr={inbox} />
-                </Grid>
-                <Grid item xs={12} md={12} lg={4}>
-                  {/* <Outbox arr={outbox} /> */}
-                  <Inbox arr={outbox} />
-                </Grid>
-                <Grid item xs={12} md={12} lg={4}>
-                  {/* <Confirmed arr={confirmed} /> */}
-                  <Inbox arr={confirmed} />
-                </Grid>
+          <Container component="main" maxWidth="xl">
+            <Grid container spacing={0}>
+              <Grid item xs={12} md={12} lg={4} sx={{ marginBottom: 8 }}>
+                <Inbox arr={inbox} />
               </Grid>
-            </Container>
-          </div>
+              <Grid item xs={12} md={12} lg={4} sx={{ marginBottom: 8 }}>
+                <Outbox arr={outbox} />
+              </Grid>
+              <Grid item xs={12} md={12} lg={4} sx={{ marginBottom: 8 }}>
+                <Confirmed arr={confirmed} />
+              </Grid>
+            </Grid>
+          </Container>
+  	    </>
         ) : (
           <Login />
         )}
@@ -111,5 +116,5 @@ export default function EventsPage({ user, error, loading, root }) {
     );
   }
 
-  return <Login root={root} />;
+  return <Login/>;
 }

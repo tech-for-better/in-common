@@ -83,6 +83,7 @@ export default function EventSummary({
             onChange={handleChange}
           />
           <Button
+            type="submit"
             sx={{ padding: 1.85 }}
             variant="outlined"
             onClick={async (e) => {
