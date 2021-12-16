@@ -35,7 +35,7 @@ const validationSchema = yup.object({
   contactEmail: yup
     .string('Enter your contact email')
     .email('Enter a valid email')
-    .required('Email is required'),
+    .required('Contact email is required'),
   contactNumber: yup
     .string('Please enter your phone number')
     .matches(phoneRegex, 'Phone number is not valid')
@@ -43,7 +43,7 @@ const validationSchema = yup.object({
   email: yup
     .string('Enter your email')
     .email('Enter a valid email')
-    .required('Email is required'),
+    .required('Login email is required'),
   password: yup
     .string('Enter your password')
     .min(6, 'Password should be of minimum 6 characters length')
@@ -239,7 +239,7 @@ export default function SignUpComponent() {
                   fullWidth
                   id="email"
                   name="email"
-                  label="Email"
+                  label="Login Email"
                   value={formik.values.email}
                   onChange={formik.handleChange}
                   error={formik.touched.email && Boolean(formik.errors.email)}

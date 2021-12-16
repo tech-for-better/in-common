@@ -13,14 +13,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { signOut } from '@firebase/auth';
 import { useRouter } from 'next/router';
 
-async function logOut() {
-  try {
-    await signOut(auth);
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 const StyledMenu = styled((props) => (
   <Menu
     elevation={0}
@@ -66,6 +58,15 @@ const StyledMenu = styled((props) => (
 
 export default function MenuDropDown() {
   const router = useRouter();
+  async function logOut() {
+    try {
+      await signOut(auth);
+      router.push('/');
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -124,7 +125,11 @@ export default function MenuDropDown() {
           Manage Events
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem onClick={() => {
+          handleClose;
+          router.push('/help-page');
+        }}
+          disableRipple>
           <HelpOutlineIcon />
           Help
         </MenuItem>

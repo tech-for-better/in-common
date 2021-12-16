@@ -7,8 +7,9 @@ import {
   TextField,
 } from '@mui/material';
 import moment from 'moment';
+import HeadCreateEvent from './HeadCreateEvent';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export default function EventSummary({
   stage,
@@ -25,40 +26,31 @@ export default function EventSummary({
   const [loading, setLoading] = useState(false);
 
   async function addEvent() {
-    try {
-      const airtableUser = await fetch(`/api/userByUid?uid=${user.uid}`)
-        .then((data) => data.json())
-        .then((json) => json.airtableuser);
+    const airtableUser = await fetch(`/api/userByUid?uid=${user.uid}`)
+      .then((data) => data.json())
+      .then((json) => json.airtableuser);
 
-      console.log(airtableUser);
+    console.log(airtableUser);
 
-      const data = {
-        Activity: newEvent.activity,
-        Status: 'Sent',
-        'Group Size': newEvent.size,
-        Notes: newEvent.notes,
-        'Suggested Dates': JSON.stringify(newEvent.date),
-        'Sender UID': user.uid,
-        'Sender Organisation Name': airtableUser['Organisation Name'],
-        'Recipient UID': airtableUser['Partner UID'],
-        'Recipient Organisation Name':
-          airtableUser['Partner Organisation Name'],
-      };
+    const data = {
+      Activity: newEvent.activity,
+      Status: 'Sent',
+      'Group Size': newEvent.size,
+      Notes: newEvent.notes,
+      'Suggested Dates': JSON.stringify(newEvent.date),
+      'Sender UID': user.uid,
+      'Sender Organisation Name': airtableUser['Organisation Name'],
+      'Recipient UID': airtableUser['Partner UID'],
+      'Recipient Organisation Name': airtableUser['Partner Organisation Name'],
+    };
 
-      await fetch('/api/createEvent', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .then(setLoading(true));
-    } catch (error) {
-      console.log(error);
-      alert('We could not send your event');
-    }
+    await fetch('/api/createEvent', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }).then(setLoading(true));
   }
 
   return (
@@ -72,6 +64,7 @@ export default function EventSummary({
         }}
         variant="outlined"
       >
+        <HeadCreateEvent />
         <Stack spacing={3}>
           <Typography variant="h8">{`Step ${stage} of ${stages}`}</Typography>
           <Typography variant="h6">Event Summary</Typography>
@@ -90,13 +83,13 @@ export default function EventSummary({
             onChange={handleChange}
           />
           <Button
+            type="submit"
             sx={{ padding: 1.85 }}
             variant="outlined"
-            onClick={(e) => {
+            onClick={async (e) => {
               e.preventDefault();
-              addEvent();
-              console.log('submit');
-              console.log(user.uid);
+              await addEvent();
+              setStage('submitted');
             }}
           >
             {loading ? 'Sending...' : 'Send Event Request'}

@@ -11,6 +11,7 @@ import {
   Typography,
 } from '@mui/material';
 import { useState, useEffect } from 'react';
+import HeadCreateEvent from './HeadCreateEvent';
 
 export default function EventSize({
   stage,
@@ -40,6 +41,7 @@ export default function EventSize({
         }}
         variant="outlined"
       >
+        <HeadCreateEvent />
         <Stack spacing={3}>
           <Typography variant="h8">{`Step ${stage} of ${stages}`}</Typography>
           <Typography variant="h6">Group size</Typography>

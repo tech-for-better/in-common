@@ -7,6 +7,6 @@ export default function handler(req, res) {
     if (err) {
       console.error(err);
     }
-    res.status(200);
+    res.status(200).json(records);
   });
 }

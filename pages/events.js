@@ -9,6 +9,7 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import Head from 'next/head';
 
 export default function EventsPage({ user, error, loading, root }) {
   const [inbox, setInbox] = useState([]);
@@ -58,6 +59,14 @@ export default function EventsPage({ user, error, loading, root }) {
     return (
       <>
         {user ? (
+         <>
+            <Head>
+              <title>Manage Events</title>
+              <meta
+                name="viewport"
+                content="initial-scale=1.0, width=device-width"
+              />
+            </Head>
           <Container component="main" maxWidth="xl">
             <Grid container spacing={0}>
               <Grid item xs={12} md={12} lg={4} sx={{ marginBottom: 8 }}>
@@ -71,6 +80,7 @@ export default function EventsPage({ user, error, loading, root }) {
               </Grid>
             </Grid>
           </Container>
+  	    </>
         ) : (
           <Login />
         )}
@@ -78,5 +88,5 @@ export default function EventsPage({ user, error, loading, root }) {
     );
   }
 
-  return <Login root={root} />;
+  return <Login/>;
 }
