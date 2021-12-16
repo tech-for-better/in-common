@@ -41,6 +41,7 @@ export default function EventActivity({
           borderRadius: 3,
           mt: 5,
         }}
+        variant="outlined"
       >
         <Stack spacing={3}>
           <Typography variant="h8">{`Step ${stage} of ${stages}`}</Typography>

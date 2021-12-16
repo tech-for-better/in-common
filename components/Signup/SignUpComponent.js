@@ -112,6 +112,7 @@ export default function SignUpComponent() {
             borderRadius: 3,
             mt: 5,
           }}
+          variant="outlined"
         >
           <form onSubmit={formik.handleSubmit}>
             <Stack spacing={3}>
