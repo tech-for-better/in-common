@@ -11,7 +11,6 @@ export default function EventsPage({ user, error, loading, root }) {
   const [inbox, setInbox] = useState([]);
   const [outbox, setOutbox] = useState([]);
   const [confirmed, setConfirmed] = useState([]);
-  const [past, setPast] = useState([]);
 
   const pastIds = [];
   async function pastEventsUpdateStatus(arr) {
@@ -37,8 +36,7 @@ export default function EventsPage({ user, error, loading, root }) {
             const futureDates = JSON.parse(
               item.fields['Suggested Dates']
             ).filter((date) => moment(date) > moment());
-            if (futureDates.length === 0) {
-              setPast((past) => [...past, item]);
+            if (futureDates.length === 0 && !item.fields['Confirmed Date']) {
               pastIds.push(item.id);
             } else if (
               item.fields['Recipient UID'] === user.uid &&
@@ -51,9 +49,9 @@ export default function EventsPage({ user, error, loading, root }) {
             ) {
               setOutbox((outbox) => [...outbox, item]);
             } else if (
-              (item.fields['Recipient UID'] === user.uid ||
-                item.fields['Sender UID'] === user.uid) &&
-              item.fields['Status'] === 'Confirmed'
+              item.fields['Status'] === 'Confirmed' ||
+              (item.fields['Status'] === 'Past' &&
+                item.fields['Confirmed Date'])
             ) {
               setConfirmed((confirmed) => [...confirmed, item]);
             }
@@ -95,9 +93,6 @@ export default function EventsPage({ user, error, loading, root }) {
 
             <h2>Confirmed Events</h2>
             <Confirmed arr={confirmed} />
-
-            <h2>Past Plans</h2>
-            <Confirmed arr={past} />
           </div>
         ) : (
           <Login />
