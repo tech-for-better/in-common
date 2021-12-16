@@ -6,13 +6,14 @@ import {
   Typography,
   IconButton,
   Box,
+  Button,
   Icon,
 } from '@mui/material';
 import Link from 'next/link';
 
 export default function Help({ user }) {
   return (
-    <Container component="main">
+    <Container component="main" maxWidth="xs">
       <Card
         sx={{
           display: 'flex',
@@ -21,46 +22,49 @@ export default function Help({ user }) {
           marginTop: 8,
           marginBottom: 8,
           padding: 5,
+          paddingTop: 3,
           borderRadius: 3,
           mt: 5,
           width: 4 / 4,
           flexDirection: 'column',
           flex: 1,
-          backgroundColor: '#EBF9FF',
         }}
+        variant="outlined"
       >
         <Box>
           <Box
             sx={{
-              mt: 3,
               justifyContent: 'center',
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
+              mb: 3,
             }}
-          >
-            <h2>
-              For best support please click the link below to contact Incommon
-            </h2>
-          </Box>
-          <Box
-            sx={{
-              mt: 2,
-              justifyContent: 'center',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <IconButton style={{ color: '#f44336' }}>
-              <Link href="https://incommon.org.uk/get-involved"> Contact</Link>
-            </IconButton>
-          </Box>
+          ></Box>
         </Box>
-        <h4> Addresses:</h4>
+        <Typography variant="h8">Postal Address:</Typography>
         <Box>
-          <p>InCommon 125 - 127 Mare Street London E8 3SJ</p>
+          <p>
+            InCommon 125 - 127
+            <br /> Mare Street <br /> London <br /> E8 3SJ
+          </p>
         </Box>
+        <Box
+          sx={{
+            justifyContent: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            mb: 3,
+          }}
+        >
+          <Typography variant="h8">
+            For support please click the link below to contact InCommon
+          </Typography>
+        </Box>
+        <Button fullWidth variant="outlined">
+          <Link href="https://incommon.org.uk/get-involved"> Contact</Link>
+        </Button>
       </Card>{' '}
     </Container>
   );

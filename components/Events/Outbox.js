@@ -122,7 +122,14 @@ export default function Outbox({ arr }) {
                 ))}
               </Box>
               <Button
-                sx={{ padding: 1.85, borderColor: '#7C83FD', color: '#3181f5' }}
+                fullWidth
+                sx={{
+                  padding: 1.85,
+                  borderColor: red[500],
+                  color: red[500],
+                  mt: 3,
+                  borderRadius: 3,
+                }}
                 variant="outlined"
                 onClick={(e) => {
                   decline(record.id);

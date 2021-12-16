@@ -12,6 +12,7 @@ export default function EventSubmitted({}) {
           borderRadius: 3,
           mt: 5,
         }}
+        variant="outlined"
       >
         <Stack spacing={3}>
           <Typography variant="h6">Event Request Sent!</Typography>

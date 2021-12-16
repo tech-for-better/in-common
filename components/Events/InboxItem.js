@@ -115,7 +115,14 @@ export default function InboxItem({ record }) {
             </Stack>
           </FormControl>
           <Button
-            sx={{ padding: 1.85, borderColor: '#7C83FD', color: '#3181f5' }}
+            fullWidth
+            sx={{
+              borderRadius: 3,
+              padding: 1.85,
+              borderColor: '#7C83FD',
+              color: '#7C83FD',
+              mt: 3,
+            }}
             type="submit"
             variant="outlined"
             onClick={(e) => {
@@ -126,7 +133,14 @@ export default function InboxItem({ record }) {
             Confirm
           </Button>
           <Button
-            sx={{ padding: 1.85, borderColor: '#7C83FD', color: '#3181f5' }}
+            fullWidth
+            sx={{
+              borderRadius: 3,
+              padding: 1.85,
+              borderColor: '#7C83FD',
+              color: '#7C83FD',
+              mt: 3,
+            }}
             variant="outlined"
             onClick={(e) => {
               decline();

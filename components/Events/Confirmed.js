@@ -121,7 +121,14 @@ export default function Confirmed({ arr }) {
                 </Card>
               </Box>
               <Button
-                sx={{ padding: 1.85, borderColor: '#7C83FD', color: '#3181f5' }}
+                fullWidth
+                sx={{
+                  padding: 1.85,
+                  borderColor: '#026969',
+                  color: '#026969',
+                  borderRadius: 3,
+                  mt: 3,
+                }}
                 variant="outlined"
                 onClick={(e) => {
                   decline(record.id);
