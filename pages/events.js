@@ -4,11 +4,29 @@ import Inbox from '../components/Events/Inbox';
 import Outbox from '../components/Events/Outbox';
 import Confirmed from '../components/Events/Confirmed';
 import Loading from '../components/Loading/Loading';
+import { getDate, getTime } from 'date-fns';
+import moment from 'moment';
 
 export default function EventsPage({ user, error, loading, root }) {
   const [inbox, setInbox] = useState([]);
   const [outbox, setOutbox] = useState([]);
   const [confirmed, setConfirmed] = useState([]);
+  const [past, setPast] = useState([]);
+
+  const pastIds = [];
+  async function pastEventsUpdateStatus(arr) {
+    console.log('updating Airtable with past', arr);
+    const data = {
+      recordIds: arr,
+    };
+    await fetch('/api/pastEventsUpdateStatus', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+  }
 
   useEffect(() => {
     if (user) {
@@ -17,7 +35,13 @@ export default function EventsPage({ user, error, loading, root }) {
         .then((json) => json.eventlist)
         .then((eventlist) => {
           eventlist.map((item) => {
-            if (
+            const futureDates = JSON.parse(
+              item.fields['Suggested Dates']
+            ).filter((date) => moment(date) > moment());
+            if (futureDates.length === 0) {
+              setPast((past) => [...past, item]);
+              pastIds.push(item.id);
+            } else if (
               item.fields['Recipient UID'] === user.uid &&
               item.fields['Status'] === 'Sent'
             ) {
@@ -35,7 +59,8 @@ export default function EventsPage({ user, error, loading, root }) {
               setConfirmed((confirmed) => [...confirmed, item]);
             }
           });
-        });
+        })
+        .then(() => pastEventsUpdateStatus(pastIds));
     }
   }, [user]);
 
@@ -64,6 +89,9 @@ export default function EventsPage({ user, error, loading, root }) {
 
             <h2>Confirmed Events</h2>
             <Confirmed arr={confirmed} />
+
+            <h2>Past Events</h2>
+            <Confirmed arr={past} />
           </div>
         ) : (
           <Login />
