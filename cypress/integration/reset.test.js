@@ -16,7 +16,7 @@ describe('User should send password reset email', () => {
   it('should open a card and reset password', () => {
     cy.visit('/');
     cy.contains('Forgot password').click();
-    cy.get('[type=email]').type(email);
+    cy.get('#emailForgot').type(email);
     cy.contains('Send password reset email').click();
   });
 });

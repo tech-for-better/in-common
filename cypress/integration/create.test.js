@@ -1,10 +1,10 @@
 const authUser = require('../fixtures/auth-user.json');
 
 describe('User can create an event', () => {
-  // const { email, password } = authUser;
-  // beforeEach(() => {
-  //   cy.login(email, password);
-  // });
+  const { email, password } = authUser;
+  beforeEach(() => {
+    cy.login(email, password);
+  });
 
   it('should logging in and redirect to events page', () => {
     cy.visit('/');
