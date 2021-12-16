@@ -3,9 +3,11 @@ import Loading from '../components/Loading/Loading';
 import Login from '../components/Login/Login';
 import { useRouter } from 'next/router';
 
-export default function Index({ user, error, loading, root }) {
-  const router = useRouter();
 
+export default function Index({ user, error, loading }) {
+
+  const router = useRouter();
+  
   if (loading) {
     return <Loading />;
   }
@@ -21,5 +23,5 @@ export default function Index({ user, error, loading, root }) {
     return <></>;
   }
 
-  return <Login root={root} />;
+  return <Login />;
 }
