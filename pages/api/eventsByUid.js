@@ -6,6 +6,7 @@ export default function handler(req, res) {
   base('Events')
     .select({
       filterByFormula: `OR({Sender UID} = "${uid}", {Recipient UID} = "${uid}")`,
+      sort: [{ field: 'Suggested Dates', direction: 'asc' }],
     })
     .firstPage((err, records) => {
       if (err) return console.log('Airtable error :', err);

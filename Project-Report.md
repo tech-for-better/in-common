@@ -143,6 +143,24 @@ Tech Spikes
 
   const tableSchedule = base("📆 Schedule");
   ```
+  
+ ### Cypress
+- JavaScript End to End Testing Framework 
+- [installing-cypress](https://docs.cypress.io/guides/getting-started/installing-cypress#System-requirements)
+
+- Within support -> commands.js is the place where we can add new features in Cypress
+- When testing an app that requires authentication, it's common to create a login helper function to log in to your app
+- To access the app, you need to call cy.login() to log in before each test. Usually, this is done in a beforeEach hook.
+- While this is a best practice, the process of logging in can be slow, people sometimes attempt to workaround by logging in just once per file in a before hook, or by using some Cypress.Cookies API to persist cookies across tests. But, having tests rely on the state of previous tests is not a best practice, and should be avoided.
+- The new cy.session() command solves this problem by caching and restoring cookies after a login.
+- The steps that your login code takes to create the session will only be performed once when it's called the first time
+- You can easily update your cy.login() custom command or login helper function to use cy.session().
+- Cypress clears the page after cy.session() is called, so you will always need to call first cy.visit().
+- The session API is currently experimental and can be enabled by setting the experimentalSessionSupport flag to true in the Cypress config or by using Cypress.config() at the top of a spec file.
+
+- Add the [@testing-library/cypress](https://testing-library.com/docs/cypress-testing-library/intro/) to your setup and use its methods like findByRole, findByLabelText, findByText, findByTestId, and others to find the DOM elements.
+- [Testing the Material-UI ‘Select’ component with Cypress and the React-Testing-Library](https://medium.com/@kevpkra/testing-material-ui-components-with-cypress-and-the-react-testing-library-349bedb12ccf)
+
 
 ## **Project outcomes**
 
@@ -190,7 +208,10 @@ Tech Spikes
 ### **Test**
 
 - How did you verify your project worked correctly?
-  > Identify and create test scenarios which satisfy the project specification (S6)
+  - Manual testing, we checked all the actions/flows on our app to verify that they work correctly.
+  - We used End-To-End Tests(Cypress). Our tests simulates the real user scenario and we tested as many functional parts of the technology stack used in the app as possible.
+  - These tests were best for applying constant stress to our app and, these tests helped us to ensure quality when the whole application stack is present.
+
 - Did writing automated tests catch any bugs?
   > Analyse unit testing results and review the outcomes, correcting errors. (S4)
 

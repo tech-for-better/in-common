@@ -25,6 +25,23 @@ export default function InboxItem({ record }) {
     const data = {
       recordId: record.id,
       confirmedDate,
+      status: 'Confirmed',
+    };
+
+    await fetch('/api/confirmEventDate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+  }
+
+  async function decline() {
+    const data = {
+      recordId: record.id,
+      confirmedDate: '1111-01-01T11:11:00.000Z',
+      status: 'Cancelled',
     };
 
     await fetch('/api/confirmEventDate', {
@@ -100,20 +117,38 @@ export default function InboxItem({ record }) {
           <Button
             fullWidth
             sx={{
-              mt: 3,
+
+              borderRadius: 3,
               padding: 1.85,
               borderColor: '#7C83FD',
-              color: '#3181f5',
+              color: '#7C83FD',
+              mt: 3,
             }}
             type="submit"
             variant="outlined"
             onClick={(e) => {
-              console.log('running confirm');
               addConfirm();
               window.location.reload(false);
             }}
           >
             Confirm
+          </Button>
+          <Button
+            fullWidth
+            sx={{
+              borderRadius: 3,
+              padding: 1.85,
+              borderColor: '#7C83FD',
+              color: '#7C83FD',
+              mt: 3,
+            }}
+            variant="outlined"
+            onClick={(e) => {
+              decline();
+              window.location.reload(false);
+            }}
+          >
+            Decline
           </Button>
         </Box>
       </Card>
