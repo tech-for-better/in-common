@@ -70,14 +70,6 @@ export default function EventActivity({
           >
             Next
           </Button>
-          <Button
-            sx={{ padding: 1.85 }}
-            variant="outlined"
-            onClick={() => setStage(stage - 1)}
-            startIcon={<NavigateBefore />}
-          >
-            Back
-          </Button>
         </Stack>
       </Card>
     </Container>
