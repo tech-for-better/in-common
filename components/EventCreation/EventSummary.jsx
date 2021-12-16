@@ -53,7 +53,8 @@ export default function EventSummary({
         body: JSON.stringify(data),
       })
         .then((response) => response.json())
-        .then((data) => console.log(data)).then(setLoading(true))
+        .then((data) => console.log(data))
+        .then(setLoading(true));
     } catch (error) {
       console.log(error);
       alert('We could not send your event');
@@ -73,7 +74,7 @@ export default function EventSummary({
         <Stack spacing={3}>
           <Typography variant="h8">{`Step ${stage} of ${stages}`}</Typography>
           <Typography variant="h6">Event Summary</Typography>
-          <p>{`${newEvent.activity} at ${newEvent.location}`}</p>
+          <p>{`${newEvent.activity}`}</p>
           <p>Group size: {newEvent.size} people</p>
           <p>Proposed dates:</p>
           {newEvent.date.map((date, i) => (

@@ -1,9 +1,13 @@
 import * as React from 'react';
 import Loading from '../components/Loading/Loading';
 import Login from '../components/Login/Login';
-import Events from '../components/Events/Events';
+import { useRouter } from 'next/router';
+
 
 export default function Index({ user, error, loading }) {
+
+  const router = useRouter();
+  
   if (loading) {
     return <Loading />;
   }
@@ -15,7 +19,8 @@ export default function Index({ user, error, loading }) {
     );
   }
   if (user) {
-    return <Events user={user} />;
+    router.push('/events');
+    return <></>;
   }
 
   return <Login />;
