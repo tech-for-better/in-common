@@ -12,8 +12,6 @@ import {
 } from '@mui/material';
 import { useState, useEffect } from 'react';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
-import NavigateBefore from '@mui/icons-material/NavigateBefore';
 
 export default function EventActivity({
   stage,
