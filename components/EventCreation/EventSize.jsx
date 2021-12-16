@@ -12,6 +12,8 @@ import {
 } from '@mui/material';
 import { useState, useEffect } from 'react';
 import HeadCreateEvent from './HeadCreateEvent';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 
 export default function EventSize({
   stage,
@@ -49,6 +51,7 @@ export default function EventSize({
             <FormControl fullWidth required>
               <InputLabel id="size-select-label">Number of people</InputLabel>
               <Select
+                sx={{ borderRadius: 2 }}
                 labelId="size-select-label"
                 id="size-select"
                 value={newEvent.size}
@@ -68,16 +71,18 @@ export default function EventSize({
           <Button
             fullWidth
             variant="outlined"
-            sx={{ padding: 1.85 }}
+            sx={{ padding: 1.85, borderRadius: 2 }}
             onClick={() => setStage(stage + 1)}
             disabled={disabled}
+            endIcon={<NavigateNextIcon />}
           >
             Next
           </Button>
           <Button
-            sx={{ padding: 1.85 }}
+            sx={{ padding: 1.85, borderRadius: 2 }}
             variant="outlined"
             onClick={() => setStage(stage - 1)}
+            startIcon={<NavigateBeforeIcon />}
           >
             Back
           </Button>

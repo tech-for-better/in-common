@@ -62,7 +62,7 @@ export default function Help({ user }) {
             For support please click the link below to contact InCommon
           </Typography>
         </Box>
-        <Button fullWidth variant="outlined">
+        <Button fullWidth variant="outlined" sx={{ borderRadius: 2 }}>
           <Link href="https://incommon.org.uk/get-involved"> Contact</Link>
         </Button>
       </Card>{' '}

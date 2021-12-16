@@ -5,6 +5,8 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
 import moment from 'moment';
 import HeadCreateEvent from './HeadCreateEvent';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 
 import { useState, useEffect } from 'react';
 
@@ -90,25 +92,29 @@ export default function EventDate({
           </LocalizationProvider>
 
           <Button
-            sx={{ padding: 1.85 }}
+            sx={{ padding: 1.85, borderRadius: 2 }}
             variant="contained"
             onClick={() => addDate()}
+            elevation={0}
           >
             Add Date
           </Button>
 
           <Button
-            sx={{ padding: 1.85 }}
+            sx={{ padding: 1.85, borderRadius: 2 }}
             variant="outlined"
+            ele
             disabled={disabled}
             onClick={() => setStage(stage + 1)}
+            endIcon={<NavigateNextIcon />}
           >
             Next
           </Button>
           <Button
-            sx={{ padding: 1.85 }}
+            sx={{ padding: 1.85, borderRadius: 2 }}
             variant="outlined"
             onClick={() => setStage(stage - 1)}
+            startIcon={<NavigateBeforeIcon />}
           >
             Back
           </Button>

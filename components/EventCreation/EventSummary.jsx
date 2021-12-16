@@ -8,6 +8,7 @@ import {
 } from '@mui/material';
 import moment from 'moment';
 import HeadCreateEvent from './HeadCreateEvent';
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 
 import { useState } from 'react';
 
@@ -81,10 +82,11 @@ export default function EventSummary({
             multiline
             rows={6}
             onChange={handleChange}
+            sx={{ borderRadius: 3 }}
           />
           <Button
             type="submit"
-            sx={{ padding: 1.85 }}
+            sx={{ padding: 1.85, borderRadius: 2 }}
             variant="outlined"
             onClick={async (e) => {
               e.preventDefault();
@@ -95,9 +97,10 @@ export default function EventSummary({
             {loading ? 'Sending...' : 'Send Event Request'}
           </Button>
           <Button
-            sx={{ padding: 1.85 }}
+            sx={{ padding: 1.85, borderRadius: 2 }}
             variant="outlined"
             onClick={() => setStage(stage - 1)}
+            startIcon={<NavigateBeforeIcon />}
           >
             Back
           </Button>

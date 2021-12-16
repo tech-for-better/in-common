@@ -14,7 +14,6 @@ import { useState, useEffect } from 'react';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import HeadCreateEvent from './HeadCreateEvent';
 
-
 export default function EventActivity({
   stage,
   setStage,
@@ -51,6 +50,7 @@ export default function EventActivity({
             <FormControl fullWidth required>
               <InputLabel id="activity-select-label">Activity</InputLabel>
               <Select
+                sx={{ borderRadius: 2 }}
                 labelId="activity-select-label"
                 id="activity-select"
                 value={newEvent.activity}
@@ -64,7 +64,7 @@ export default function EventActivity({
             </FormControl>
           </Box>
           <Button
-            sx={{ padding: 1.85 }}
+            sx={{ padding: 1.85, borderRadius: 2 }}
             variant="outlined"
             onClick={() => setStage(stage + 1)}
             disabled={disabled}

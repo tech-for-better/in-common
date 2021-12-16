@@ -106,7 +106,11 @@ export default function Login() {
         >
           <form onSubmit={formikLogin.handleSubmit}>
             <Stack spacing={3}>
-              <Typography component="h1" variant="h5">
+              <Typography
+                component="h1"
+                variant="h5"
+                sx={{ textAlign: 'center' }}
+              >
                 Log in
               </Typography>
 
@@ -162,7 +166,7 @@ export default function Login() {
               </Box>
               <Button
                 variant="outlined"
-                sx={{ padding: 1.85 }}
+                sx={{ padding: 1.85, borderRadius: 2 }}
                 fullWidth
                 type="submit"
               >
@@ -171,7 +175,7 @@ export default function Login() {
 
               <Button
                 variant="outlined"
-                sx={{ padding: 1.85 }}
+                sx={{ padding: 1.85, borderRadius: 2 }}
                 onClick={(e) => {
                   e.preventDefault();
                   setForgotPasswordShow(true);
@@ -237,7 +241,7 @@ export default function Login() {
             </Box>
             <Button
               variant="outlined"
-              sx={{ mb: 2, padding: 1.85, mt: 2 }}
+              sx={{ mb: 2, padding: 1.85, mt: 2, borderRadius: 2 }}
               type="submit"
               fullWidth
             >
@@ -247,7 +251,7 @@ export default function Login() {
             </Button>
             <Button
               variant="outlined"
-              sx={{ padding: 1.85 }}
+              sx={{ padding: 1.85, borderRadius: 2 }}
               fullWidth
               onClick={(e) => {
                 e.preventDefault();

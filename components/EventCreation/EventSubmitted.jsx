@@ -15,10 +15,12 @@ export default function EventSubmitted({}) {
         variant="outlined"
       >
         <Stack spacing={3}>
-          <Typography variant="h6">Event Request Sent!</Typography>
+          <Typography variant="h6" sx={{ textAlign: 'center' }}>
+            Event Request Sent!
+          </Typography>
 
           <Button
-            sx={{ padding: 1.85 }}
+            sx={{ padding: 1.85, borderRadius: 2 }}
             variant="outlined"
             onClick={(e) => {
               e.preventDefault();
