@@ -124,7 +124,11 @@ export default function MenuDropDown() {
           Manage Events
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem onClick={() => {
+          handleClose;
+          router.push('/help-page');
+        }}
+          disableRipple>
           <HelpOutlineIcon />
           Help
         </MenuItem>

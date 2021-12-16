@@ -6,6 +6,7 @@ import {
   Typography,
   IconButton,
   Box,
+  Icon,
 } from '@mui/material';
 import Link from 'next/link';
 export default function Help({ user }) {
@@ -26,17 +27,38 @@ export default function Help({ user }) {
           flex: 1,
         }}
       >
-        {' '}
-        <h1 style={{ color: '#f44336' }}> Addresses:</h1>
         <Box>
-          <Box>
-            {' '}
-            <h4>InCommon 125 - 127 Mare Street London E8 3SJ</h4>{' '}
+          <Box
+            sx={{
+              mt: 3,
+              justifyContent: 'center',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <h2>
+              For best support please click the link below to contact Incommon
+            </h2>
+          </Box>
+          <Box
+            sx={{
+              mt: 3,
+              justifyContent: 'center',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <IconButton style={{ color: '#f44336' }}>
+              <Link href="https://incommon.org.uk/get-involved"> Contact</Link>
+            </IconButton>
           </Box>
         </Box>
-        <IconButton>
-          <Link href="https://incommon.org.uk/get-involved"> Contact</Link>
-        </IconButton>
+        <h3> Addresses:</h3>
+        <Box>
+          <h4>InCommon 125 - 127 Mare Street London E8 3SJ</h4>
+        </Box>
       </Card>{' '}
     </Container>
   );
