@@ -1,13 +1,4 @@
-import {
-  Container,
-  Box,
-  Alert,
-  Card,
-  InputLabel,
-  FormControl,
-  MenuItem,
-  Select,
-} from '@mui/material';
+import { Container, Card } from '@mui/material';
 
 export default function Events({ arr }) {
   // console.log(arr);

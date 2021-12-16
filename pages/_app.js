@@ -33,15 +33,6 @@ const theme = createTheme({
 
 function MyApp({ Component, pageProps }) {
   const [user, loading, error] = useAuthState(auth);
-  // const [approved, setApproved] = useState(false);
-
-  // useEffect(() => {
-  //   if (user) {
-  //     fetch(`/api/approvalByUid?uid=${user.uid}`)
-  //       .then((data) => data.json())
-  //       .then((json) => setApproved(json.approval));
-  //   }
-  // }, [user]);
 
   return (
     <ThemeProvider theme={theme}>
