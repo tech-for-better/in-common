@@ -9,6 +9,7 @@ import {
   Icon,
 } from '@mui/material';
 import Link from 'next/link';
+
 export default function Help({ user }) {
   return (
     <Container component="main">
@@ -25,6 +26,7 @@ export default function Help({ user }) {
           width: 4 / 4,
           flexDirection: 'column',
           flex: 1,
+          backgroundColor: '#EBF9FF',
         }}
       >
         <Box>
@@ -43,7 +45,7 @@ export default function Help({ user }) {
           </Box>
           <Box
             sx={{
-              mt: 3,
+              mt: 2,
               justifyContent: 'center',
               display: 'flex',
               justifyContent: 'center',
@@ -55,9 +57,9 @@ export default function Help({ user }) {
             </IconButton>
           </Box>
         </Box>
-        <h3> Addresses:</h3>
+        <h4> Addresses:</h4>
         <Box>
-          <h4>InCommon 125 - 127 Mare Street London E8 3SJ</h4>
+          <p>InCommon 125 - 127 Mare Street London E8 3SJ</p>
         </Box>
       </Card>{' '}
     </Container>
