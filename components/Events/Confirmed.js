@@ -1,4 +1,4 @@
-import { Container, Card, Typography, Box } from '@mui/material';
+import { Container, Card, Typography, Box, Button } from '@mui/material';
 import moment from 'moment';
 import MailIcon from '@mui/icons-material/Mail';
 import LocalActivityIcon from '@mui/icons-material/LocalActivity';
@@ -7,6 +7,22 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 
 export default function Confirmed({ arr }) {
+  async function decline(id) {
+    const data = {
+      recordId: id,
+      confirmedDate: '1111-01-01T11:11:00.000Z',
+      status: 'Cancelled',
+    };
+
+    await fetch('/api/confirmEventDate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+  }
+
   return (
     <div>
       <Container maxWidth="xs">
@@ -85,7 +101,7 @@ export default function Confirmed({ arr }) {
               <br />
               <Typography variant="body1">
                 <DateRangeIcon fontSize="md" sx={{ top: 2, mr: 1 }} />
-                Your suggested these dates and times:
+                Your agreed date and time:
               </Typography>
               <Box sx={{ minWidth: 120 }}>
                 <Card
@@ -104,6 +120,16 @@ export default function Confirmed({ arr }) {
                   )}
                 </Card>
               </Box>
+              <Button
+                sx={{ padding: 1.85, borderColor: '#7C83FD', color: '#3181f5' }}
+                variant="outlined"
+                onClick={(e) => {
+                  decline(record.id);
+                  window.location.reload(false);
+                }}
+              >
+                Cancel
+              </Button>
             </Card>
           </Container>
         ))
