@@ -81,7 +81,8 @@ export default function Confirmed({ arr }) {
               <Typography variant="body1">
                 <MailIcon fontSize="md" sx={{ top: 2, mr: 1 }} />
                 <b>Event with -</b>{' '}
-                {record.fields['Recipient Organisation Name']}
+                {record.fields['Recipient Organisation Name']} &{' '}
+                {record.fields['Sender Organisation Name']}
               </Typography>
               <br />
               <Typography variant="body1">
