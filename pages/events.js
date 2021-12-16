@@ -6,6 +6,11 @@ import Confirmed from '../components/Events/Confirmed';
 import Loading from '../components/Loading/Loading';
 import moment from 'moment';
 import Head from 'next/head';
+import { Card, Container, CardHeader } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
 
 export default function EventsPage({ user, error, loading, root }) {
   const [inbox, setInbox] = useState([]);
@@ -83,16 +88,21 @@ export default function EventsPage({ user, error, loading, root }) {
                 content="initial-scale=1.0, width=device-width"
               />
             </Head>
-            <h1>All Events</h1>
-
-            <h2>Inbox</h2>
-            <Inbox arr={inbox} />
-
-            <h2>Outbox</h2>
-            <Outbox arr={outbox} />
-
-            <h2>Confirmed Events</h2>
-            <Confirmed arr={confirmed} />
+            <Container component="main" maxWidth="xl">
+              <Grid container spacing={0}>
+                <Grid item xs={12} md={12} lg={4}>
+                  <Inbox arr={inbox} />
+                </Grid>
+                <Grid item xs={12} md={12} lg={4}>
+                  {/* <Outbox arr={outbox} /> */}
+                  <Inbox arr={outbox} />
+                </Grid>
+                <Grid item xs={12} md={12} lg={4}>
+                  {/* <Confirmed arr={confirmed} /> */}
+                  <Inbox arr={confirmed} />
+                </Grid>
+              </Grid>
+            </Container>
           </div>
         ) : (
           <Login />
