@@ -11,12 +11,12 @@ We are building a `web-app` for **InCommon**, an organisation that helps connect
 - [Design](#design)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
-    - [Dependencies](#dependencies)
+  - [Dependencies](#dependencies)
 - [Database Schema](#database-schema)
-    - [Airtable: Database & Admin Control](#airtable-database--admin-control)
-      - [Accounts](#accounts)
-      - [Activity Ideas](#activity-ideas)
-      - [Events](#events)
+  - [Airtable: Database & Admin Control](#airtable-database--admin-control)
+    - [Accounts](#accounts)
+    - [Activity Ideas](#activity-ideas)
+    - [Events](#events)
 - [Installation](#installation)
 - [Key Learnings](#key-learnings)
 - [Additional Features](#additional-features)
@@ -115,6 +115,16 @@ NEXT_PUBLIC_AIRTABLE_BASE_ID= Airtable Base ID
 - Run `npm run dev` to run the app
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+# Run Cypress tests
+
+- Run `npm run test` in your terminal, and you should see the Cypress app start up.
+- By default Cypress looks in the cypress/integration/ directory for test files. It will run anything inside this folder.
+- You should see this files show up in the Cypress app under “Integration tests”.
+- You can click the file name to run it with Cypress. This should open up a browser with a “test sidebar” on the left.
+- In the cypress/fixture/ directory you can find the auth-user.json file, this file contains the email and password we are using for testing.
+- In the cypress/support/ directory you can find the commands.js file, this file contains the Cypress configs,the helper functions. We have 2 login function, one for 'test authentication with Firebase' and one for using the UI to log in a dummy user. We are using the UI to test the log in functionality but you can use the Firebase function by uncommenting the code.
+- We recommend to logout after each test.
 
 # Key Learnings
 
