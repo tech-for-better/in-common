@@ -1,7 +1,5 @@
 import '../styles/globals.css';
-import { useState, useEffect } from 'react';
 import { auth } from '../firebase';
-import { onAuthStateChanged } from '@firebase/auth';
 import { Router } from 'next/router';
 import Header from '../components/Header/Header';
 import '/styles/nprogress.css';
