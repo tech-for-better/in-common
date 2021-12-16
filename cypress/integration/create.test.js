@@ -38,5 +38,7 @@ describe('User can create an event', () => {
     cy.contains('Sending...');
     cy.wait(1000);
     cy.get('h6').contains('Event Request Sent!');
+    cy.contains('Return to Events').click();
+    cy.visit('/events');
   });
 });
