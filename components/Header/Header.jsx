@@ -1,5 +1,5 @@
 import { Box } from '@mui/system';
-import { Button } from '@mui/material';
+
 import MenuDropDown from '../Menu/MenuDropDown';
 import Image from 'next/image';
 import Logo from '../../public/InCommon_Logo.png';
@@ -19,7 +19,7 @@ export default function Header({ user }) {
         <Image src={Logo} alt="InCommon Logo" objectFit={'contain'} />
       </Box>
       {user ? <MenuDropDown /> : <Box sx={{ width: 74 }} />}
-      {/* <MenuDropDown /> */}
+
     </Box>
   );
 }
