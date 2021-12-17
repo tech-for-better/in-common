@@ -19,6 +19,7 @@ We are building a `web-app` for **InCommon**, an organisation that helps connect
     - [Activity Ideas](#activity-ideas)
     - [Events](#events)
 - [Installation](#installation)
+- [Run Cypress tests](# Run-Cypress-tests)
 - [Key Learnings](#key-learnings)
   - [Deploy on Vercel](#deploy-on-vercel)
   - [Learn More](#learn-more)
@@ -114,7 +115,7 @@ What can you do?
 
 [(Back to top)](#table-of-contents)
 
-[(Back to top)](#table-of-contents)
+
 
 To use this project please follow the steps below
 
@@ -133,6 +134,7 @@ NEXT_PUBLIC_AIRTABLE_BASE_ID= Airtable Base ID
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 # Run Cypress tests
+[(Back to top)](#table-of-contents)
 
 - Run `npm run test` in your terminal, and you should see the Cypress app start up.
 - By default Cypress looks in the cypress/integration/ directory for test files. It will run anything inside this folder.
@@ -171,20 +173,4 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-<!-- ## Getting Started
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages. -->
