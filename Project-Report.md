@@ -143,9 +143,10 @@ Tech Spikes
 
   const tableSchedule = base("📆 Schedule");
   ```
-  
- ### Cypress
-- JavaScript End to End Testing Framework 
+
+### Cypress
+
+- JavaScript End to End Testing Framework
 - [installing-cypress](https://docs.cypress.io/guides/getting-started/installing-cypress#System-requirements)
 
 - Within support -> commands.js is the place where we can add new features in Cypress
@@ -160,7 +161,6 @@ Tech Spikes
 
 - Add the [@testing-library/cypress](https://testing-library.com/docs/cypress-testing-library/intro/) to your setup and use its methods like findByRole, findByLabelText, findByText, findByTestId, and others to find the DOM elements.
 - [Testing the Material-UI ‘Select’ component with Cypress and the React-Testing-Library](https://medium.com/@kevpkra/testing-material-ui-components-with-cypress-and-the-react-testing-library-349bedb12ccf)
-
 
 ## **Project outcomes**
 
@@ -208,6 +208,7 @@ Tech Spikes
 ### **Test**
 
 - How did you verify your project worked correctly?
+
   - Manual testing, we checked all the actions/flows on our app to verify that they work correctly.
   - We used End-To-End Tests(Cypress). Our tests simulates the real user scenario and we tested as many functional parts of the technology stack used in the app as possible.
   - These tests were best for applying constant stress to our app and, these tests helped us to ensure quality when the whole application stack is present.
@@ -225,6 +226,22 @@ Tech Spikes
 
 - Is it easy for someone make changes to the codebase?
 - Could a new person quickly be onboarded to contribute?
+
+- InCommon already use AirTable in their company, so accessing and managing the data is something they are already able to do. Deleting, updating or creating records is also something they are used to doing.
+
+### **Future Features**
+
+#### Moderate Effort
+
+- Add comment boxes when a user confirms or cancels an event
+- Add comment box "Message from inCommon", which they write via Airtable
+- Distinguish Past Events: attended, cancelled, never confirmed
+- Link to Feedback Form for Past attended Events
+
+#### More Effort
+
+- Automated Emails to users & inCommon when events get added or edited
+- Improve Loading Time
 
 ---
 
