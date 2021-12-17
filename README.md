@@ -1,3 +1,4 @@
+
 # In-Common
 
 We are building a `web-app` for **InCommon**, an organisation that helps connect groups of young people with their older neighbours in retirement homes to learn and build friendships together.
@@ -19,8 +20,6 @@ We are building a `web-app` for **InCommon**, an organisation that helps connect
     - [Events](#events)
 - [Installation](#installation)
 - [Key Learnings](#key-learnings)
-- [Additional Features](#additional-features)
-- [Further Information](#further-information)
   - [Deploy on Vercel](#deploy-on-vercel)
   - [Learn More](#learn-more)
 
@@ -53,11 +52,28 @@ Design included but not limited to:
 
 ![](https://i.imgur.com/tE8kGHe.gif)
 
+
+### Research and Usability testing
+
+- Interviews with Users were completed in 30 minute sessions with two members of the development team and one Product Owner present. The questions were asked by one member of the development team while the other took notes.
+- Questions were non-leading with the aim of gaining as much insight as possible.
+- We had a product owner meetings at the end of each week
+- We provided daily updates of our progress to the Product Owners
+- Usability testing with 5 users
+
+
 # Features
 
 [(Back to top)](#table-of-contents)
 
 What can you do?
+- Able to register as school/residential home 
+- Create events linked to Airtable
+- See list of current events 
+-  reset password 
+- Help page for contacting In-Common 
+- removing event and confirmation  
+
 
 # Tech Stack
 
@@ -130,19 +146,19 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 [(Back to top)](#table-of-contents)
 
--
+- Using Airtable
+- Making login Approval linked with the Airtable API
+- Material UI 
+- Initial Sprint planning 
+- Finding it hard to take breaks 
+- Vercel deployment issues 
+- Deleting or editing  
+- API keys being visible (Issue resolved) :+1: 
 
-# Additional Features
-
-[(Back to top)](#table-of-contents)
-
-# Further Information
-
-[(Back to top)](#table-of-contents)
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+ Deployment of the project to Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
