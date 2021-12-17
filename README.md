@@ -19,7 +19,7 @@ We are building a `web-app` for **InCommon**, an organisation that helps connect
     - [Activity Ideas](#activity-ideas)
     - [Events](#events)
 - [Installation](#installation)
-- [Run Cypress tests](# Run-Cypress-tests)
+- [Run Cypress tests](#Run-Cypress-tests)
 - [Key Learnings](#key-learnings)
   - [Deploy on Vercel](#deploy-on-vercel)
   - [Learn More](#learn-more)
